@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean player1 = false;
 
     long timeInMiliseconds = 0L;
-    long timeSwapBuff = 0L;
+    long timeSwapBuff = 20*60*1000L;
     long updatedTime = 0L;
 
     @Override
@@ -30,8 +30,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         timerValue = (TextView) findViewById(R.id.timerValue);
-
-
+        
     }
 
     private Runnable updateTimerThread = new Runnable() {
@@ -40,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
             timeInMiliseconds = SystemClock.uptimeMillis() - startTime;
 
-            updatedTime = timeSwapBuff + timeInMiliseconds;
+            updatedTime = timeSwapBuff - timeInMiliseconds;
 
             int secs = (int) (updatedTime / 1000);
             int mins = secs / 60;
@@ -61,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
         else  {
             player1 = !player1;
-            timeSwapBuff += timeInMiliseconds;
+            timeSwapBuff -= timeInMiliseconds;
             customHandler.removeCallbacks(updateTimerThread);
         }
     }
