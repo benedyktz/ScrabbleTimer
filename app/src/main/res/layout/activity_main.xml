@@ -16,4 +16,16 @@
         android:id="@+id/timerValue"
         android:onClick="startStop"/>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/timerVal"
+        android:textAlignment="center"
+        android:textSize="80dp"
+        android:background="#B2DFDB"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/timerValue2"
+        android:onClick="startStop2"/>
+
 </RelativeLayout>
