@@ -40,27 +40,17 @@ public class Field {
         }
     };
 
-    public void start(View view) {
+    public void start() {
         startTime = SystemClock.uptimeMillis();
         customHandler.postDelayed(updateTimerThread, 0);
-        view.setBackgroundColor(Color.parseColor("#B2DFDB"));
+        timerValue.setBackgroundColor(Color.parseColor("#B2DFDB"));
         running = true;
     }
 
-    public void stop(View view) {
+    public void stop() {
         timeSwapBuff -= timeInMiliseconds;
         customHandler.removeCallbacks(updateTimerThread);
-        view.setBackgroundColor(Color.parseColor("#00695C"));
+        timerValue.setBackgroundColor(Color.parseColor("#00695C"));
         running = false;
-    }
-    public void onClick(View view) {
-
-        if(!running) {
-            start(view);
-        }
-
-        else  {
-            stop(view);
-        }
     }
 }
