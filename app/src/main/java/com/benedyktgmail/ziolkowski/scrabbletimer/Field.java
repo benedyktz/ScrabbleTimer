@@ -44,22 +44,22 @@ public class Field {
         startTime = SystemClock.uptimeMillis();
         customHandler.postDelayed(updateTimerThread, 0);
         view.setBackgroundColor(Color.parseColor("#B2DFDB"));
+        running = true;
     }
 
     public void stop(View view) {
         timeSwapBuff -= timeInMiliseconds;
         customHandler.removeCallbacks(updateTimerThread);
         view.setBackgroundColor(Color.parseColor("#00695C"));
+        running = false;
     }
-    public void startStop(View view) {
+    public void onClick(View view) {
 
         if(!running) {
-            running = !running;
             start(view);
         }
 
         else  {
-            running = !running;
             stop(view);
         }
     }

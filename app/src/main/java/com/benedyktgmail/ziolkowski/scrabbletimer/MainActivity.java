@@ -24,10 +24,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void startStop(View view){
-        player1.startStop(view);
+
+        player1.onClick(view);
     }
     public void startStop2(View view){
-        player2.startStop(view);
+
+        player2.onClick(view);
+    }
+
+    public void change(View view) {
+
+        if(player1.running == true){
+            player1.stop(view);
+            player2.start(view);
+        }
+        else {
+            player2.stop(view);
+            player1.start(view);
+        }
     }
 
 
