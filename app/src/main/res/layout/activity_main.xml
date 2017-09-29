@@ -11,7 +11,7 @@
         android:text="@string/timerVal"
         android:textAlignment="center"
         android:textSize="80dp"
-        android:background="#80DEEA"
+        android:background="#B2DFDB"
         android:layout_centerHorizontal="true"
         android:id="@+id/timerValue"
         android:onClick="startStop"/>

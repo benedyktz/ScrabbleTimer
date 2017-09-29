@@ -1,5 +1,6 @@
 package com.benedyktgmail.ziolkowski.scrabbletimer;
 
+import android.graphics.Color;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         timerValue = (TextView) findViewById(R.id.timerValue);
-        
+
     }
 
     private Runnable updateTimerThread = new Runnable() {
@@ -56,12 +57,14 @@ public class MainActivity extends AppCompatActivity {
             player1 = !player1;
             startTime = SystemClock.uptimeMillis();
             customHandler.postDelayed(updateTimerThread, 0);
+            view.setBackgroundColor(Color.parseColor("#B2DFDB"));
         }
 
         else  {
             player1 = !player1;
             timeSwapBuff -= timeInMiliseconds;
             customHandler.removeCallbacks(updateTimerThread);
+            view.setBackgroundColor(Color.parseColor("#00695C"));
         }
     }
 
