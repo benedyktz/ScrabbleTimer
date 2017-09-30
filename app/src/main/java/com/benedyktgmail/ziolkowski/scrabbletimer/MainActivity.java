@@ -6,11 +6,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
 
-
+    List<Field> players = new ArrayList<Field>();
     Field player1 = new Field();
     Field player2 = new Field();
 
@@ -21,26 +23,31 @@ public class MainActivity extends AppCompatActivity {
 
         player1.timerValue = (TextView) findViewById(R.id.timerValue);
         player2.timerValue = (TextView) findViewById(R.id.timerValue2);
-        player1.running = true; // when player1 click his field, time start in player's 2 field
-
+        players.add(player1);
+        players.add(player2);
+        for (Field player: players) {
+            player.running = true;
+        }
     }
+
+
 
     public void change(View view) {
 
-        if(player1.timerValue.getId() == view.getId()) {
-            if(player1.running == true){
-                player1.stop();
-                player2.start();
+        if(players.get(0).timerValue.getId() == view.getId()) {
+            if(players.get(0).running == true){
+                players.get(0).stop();
+                players.get(1).start();
             }
         }
 
-        if(player2.timerValue.getId() == view.getId()) {
-            if(player2.running == true){
-                player2.stop();
-                player1.start();
+        if(players.get(1).timerValue.getId() == view.getId()) {
+            if(players.get(1).running == true){
+                players.get(1).stop();
+                players.get(0).start();
             }
         }
 
     }
-    
+
 }
