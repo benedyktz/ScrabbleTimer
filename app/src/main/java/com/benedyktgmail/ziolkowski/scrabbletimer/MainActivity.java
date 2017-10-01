@@ -18,6 +18,8 @@ public class MainActivity extends AppCompatActivity {
     Field player3 = new Field();
     Field player4 = new Field();
 
+    boolean gameStarted = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,25 +42,32 @@ public class MainActivity extends AppCompatActivity {
 
     public void change(View view) {
 
-        if (i == 3) {
+        if(gameStarted){
+            if (i == 3) {
+                if(players.get(i).timerValue.getId() == view.getId()) {
+                    if(players.get(i).running == true){
+                        players.get(i).stop();
+                        players.get(0).start();
+                    }
+                    i=0;
+                }
+            }
+
             if(players.get(i).timerValue.getId() == view.getId()) {
                 if(players.get(i).running == true){
                     players.get(i).stop();
-                    players.get(0).start();
+                    players.get(i+1).start();
+                    i++;
                 }
-                i=0;
             }
         }
-
-        if(players.get(i).timerValue.getId() == view.getId()) {
-            if(players.get(i).running == true){
-                players.get(i).stop();
-                players.get(i+1).start();
-                i++;
-            }
-        }
-
-
     }
+
+    public void gameStart(View view) {
+        gameStarted = true;
+        players.get(0).start();
+    }
+
+
 
 }
