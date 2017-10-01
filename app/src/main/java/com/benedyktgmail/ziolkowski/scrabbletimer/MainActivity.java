@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     Field player4 = new Field();
 
     boolean gameStarted = false;
+    boolean gamePaused = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,10 +65,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void gameStart(View view) {
-        gameStarted = true;
-        players.get(0).start();
+        if(!gameStarted && !gamePaused) {
+            gameStarted = true;
+            players.get(0).start();
+        }
     }
 
+    public void gamePause (View view) {
+        if(!gamePaused) {
+            gameStarted = false;
+            gamePaused = true;
+            for (Field player: players) {
+                player.stop();
+                player.running = false;
+            }
+        }
+        else{
+            gameStarted = true;
+            gamePaused = false;
+            players.get(i).start();
+            players.get(i).running = true;
+        }
 
+    }
 
 }
