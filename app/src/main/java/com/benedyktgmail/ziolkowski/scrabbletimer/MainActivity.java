@@ -2,7 +2,6 @@ package com.benedyktgmail.ziolkowski.scrabbletimer;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -12,7 +11,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    List<Field> players = new ArrayList<Field>();
+    List<Field> players = new ArrayList<>();
     Field player1 = new Field();
     Field player2 = new Field();
     Field player3 = new Field();
@@ -73,11 +72,13 @@ public class MainActivity extends AppCompatActivity {
 
     public void gamePause (View view) {
         if(!gamePaused) {
-            gameStarted = false;
-            gamePaused = true;
-            for (Field player: players) {
-                player.stop();
-                player.running = false;
+            if (gameStarted) {
+                gameStarted = false;
+                gamePaused = true;
+                for (Field player : players) {
+                    player.stop();
+                    player.running = false;
+                }
             }
         }
         else{
@@ -86,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
             players.get(i).start();
             players.get(i).running = true;
         }
-
     }
 
 }
