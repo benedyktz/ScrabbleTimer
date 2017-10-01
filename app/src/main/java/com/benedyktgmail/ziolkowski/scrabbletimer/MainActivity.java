@@ -46,8 +46,8 @@ public class MainActivity extends AppCompatActivity {
                     players.get(i).stop();
                     players.get(0).start();
                 }
+                i=0;
             }
-            i=0;
         }
 
         if(players.get(i).timerValue.getId() == view.getId()) {
