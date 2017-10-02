@@ -1,6 +1,7 @@
 package com.benedyktgmail.ziolkowski.scrabbletimer;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,7 +9,6 @@ import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +17,8 @@ import java.util.List;
  * status bar and navigation/system bar) with user interaction.
  */
 public class Timer extends AppCompatActivity {
+
+    private int defaultMinutes = 20;
 
     List<Field> players = new ArrayList<>();
     Field player1 = new Field();
@@ -91,6 +93,10 @@ public class Timer extends AppCompatActivity {
 
         setContentView(R.layout.activity_timer);
 
+        Intent intent = getIntent();
+
+        int minutes = intent.getIntExtra("MINUTES", defaultMinutes);
+
         mContentView = findViewById(R.id.fullscreen_content);
 
 
@@ -116,6 +122,7 @@ public class Timer extends AppCompatActivity {
         players.add(player4);
         for (Field player: players) {
             player.running = true;
+            player.setMinutes(minutes);
         }
     }
 

@@ -3,6 +3,7 @@ package com.benedyktgmail.ziolkowski.scrabbletimer;
 import android.graphics.Color;
 import android.os.Handler;
 import android.os.SystemClock;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -20,7 +21,7 @@ public class Field {
     public boolean running = false;
 
     long timeInMiliseconds = 0L;
-    long timeSwapBuff = 20*60*1000L;
+    long timeSwapBuff;
     long updatedTime = 0L;
 
     public Runnable updateTimerThread = new Runnable() {
@@ -45,6 +46,7 @@ public class Field {
         customHandler.postDelayed(updateTimerThread, 0);
         timerValue.setBackgroundColor(Color.parseColor("#B2DFDB"));
         running = true;
+        Log.d("aaa", "" + timeSwapBuff);
     }
 
     public void stop() {
@@ -52,5 +54,9 @@ public class Field {
         customHandler.removeCallbacks(updateTimerThread);
         timerValue.setBackgroundColor(Color.parseColor("#00695C"));
         running = false;
+    }
+
+    public void setMinutes(int minutes){
+        timeSwapBuff = minutes * 60 * 1000L;
     }
 }
