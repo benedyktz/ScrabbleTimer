@@ -121,6 +121,7 @@ public class Timer extends AppCompatActivity {
         players.add(player3);
         players.add(player4);
         for (Field player: players) {
+            player.timerValue.setText(minutes+":00");
             player.running = true;
             player.setMinutes(minutes);
         }
