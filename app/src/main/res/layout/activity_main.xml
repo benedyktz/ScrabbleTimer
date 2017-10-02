@@ -64,4 +64,15 @@
         android:layout_centerVertical="true"
         android:onClick="gamePause"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text="start_game"
+        android:layout_centerVertical="true"
+        android:textSize="20dp"
+        android:background="#eeeeee"
+        android:padding="10dp"
+        android:id="@+id/start"/>
+
 </RelativeLayout>
