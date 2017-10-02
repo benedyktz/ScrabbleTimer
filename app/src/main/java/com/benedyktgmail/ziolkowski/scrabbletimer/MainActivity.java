@@ -32,13 +32,14 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
 
-                    minutes = Integer.parseInt("" + minutesEditText.getText());
+                    minutes = Integer.parseInt("0" + minutesEditText.getText());
 
                     // Create a new intent to open the {@link Timer}
                     Intent timerIntent = new Intent(MainActivity.this, Timer.class);
                     timerIntent.putExtra("MINUTES", minutes);
                     // Start the new activity
-                    startActivity(timerIntent);
+                    if(minutes>0 && minutes < 240)
+                        startActivity(timerIntent);
                 }
             });
         }
