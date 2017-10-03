@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Vibrator;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -151,7 +152,6 @@ public class Timer extends AppCompatActivity {
         continueButton = (Button) findViewById(R.id.continueButton);
         continueButton.setVisibility(View.GONE);
         vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-
     }
 
     @Override
@@ -195,7 +195,6 @@ public class Timer extends AppCompatActivity {
                         players.get(0).start();
                         i=0;
                     }
-                    //vibe.vibrate(100);
                 }
             }
 
@@ -205,9 +204,18 @@ public class Timer extends AppCompatActivity {
                     players.get(i+1).start();
                     i++;
                 }
-                //vibe.vibrate(100);
             }
         }
+        if(MainActivity.soundOn){
+            MediaPlayer mp = MediaPlayer.create(this, R.raw.switch_sound);
+            mp.start();
+        }
+
+        if(MainActivity.vibeOn){
+            vibe.vibrate(100);
+        }
+
+
     }
 
     public void gameStart(View view) {

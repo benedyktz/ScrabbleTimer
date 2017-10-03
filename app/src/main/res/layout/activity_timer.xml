@@ -76,11 +76,16 @@
                 android:onClick="gameContinue"
                 android:id="@+id/continueButton"/>
 
-            <Button
+            <!--<Button-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="PAUSE"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:onClick="gamePause"/>-->
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="PAUSE"
-                android:layout_centerVertical="true"
+                android:src="@drawable/ic_pause_black_24dp"
                 android:onClick="gamePause"/>
             <Button
                 android:layout_width="wrap_content"
