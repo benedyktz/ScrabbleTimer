@@ -3,6 +3,7 @@ package com.benedyktgmail.ziolkowski.scrabbletimer;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Vibrator;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -251,12 +252,17 @@ public class Timer extends AppCompatActivity {
                 for (Field player : players) {
                     player.stop();
                 }
+                players.get(i).timerValue.setBackgroundColor(Color.parseColor("#ae6b12"));
             }
         }
         else{
             gamePaused = false;
             players.get(i).start();
             players.get(i).running = true;
+            if(players.get(i).hasTimeLeft)
+                players.get(i).timerValue.setBackgroundColor(Color.parseColor("#B2DFDB"));
+            else
+                players.get(i).timerValue.setBackgroundColor(Color.parseColor("#00695C"));
         }
         Log.d("gamePaused", "" + gamePaused);
     }

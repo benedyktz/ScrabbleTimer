@@ -18,33 +18,46 @@
         android:id="@+id/fullscreen_content">
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3">
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:text="@string/timerVal"
                 android:textAlignment="center"
                 android:textSize="60dp"
                 android:background="#00695C"
                 android:id="@+id/timerValue"
-                android:onClick="change"/>
+                android:onClick="change"
+                android:layout_weight="5"
+                android:gravity="center"
+                android:rotation="180"/>
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:text="@string/timerVal"
                 android:textAlignment="center"
                 android:textSize="60dp"
                 android:background="#00695C"
                 android:layout_alignParentRight="true"
                 android:id="@+id/timerValue2"
-                android:onClick="change"/>
+                android:onClick="change"
+                android:layout_weight="5"
+                android:gravity="center"
+                android:rotation="180"/>
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center">
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -80,23 +93,32 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="5"
+                android:layout_height="match_parent"
                 android:text="@string/timerVal"
                 android:textAlignment="center"
                 android:textSize="60dp"
                 android:background="#00695C"
                 android:layout_alignParentBottom="true"
                 android:id="@+id/timerValue4"
-                android:onClick="change"/>
+                android:onClick="change"
+                android:gravity="center"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"/>
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="5"
+                android:layout_height="match_parent"
                 android:text="@string/timerVal"
                 android:textAlignment="center"
                 android:textSize="60dp"
@@ -104,9 +126,10 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
                 android:id="@+id/timerValue3"
-                android:onClick="change"/>
+                android:onClick="change"
+                android:gravity="center"/>
+
         </LinearLayout>
     </LinearLayout>
-
 
 </FrameLayout>
