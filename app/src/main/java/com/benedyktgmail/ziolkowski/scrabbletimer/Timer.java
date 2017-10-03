@@ -134,7 +134,7 @@ public class Timer extends AppCompatActivity {
         players.add(player3);
         players.add(player4);
         for (Field player: players) {
-            player.timerValue.setText(minutes+":"+seconds);
+            player.timerValue.setText(String.format("%02d", minutes) + ":" + String.format("%02d", seconds));
             player.running = true;
             player.setMinutes(minutes);
             player.setSeconds(seconds);
@@ -250,7 +250,6 @@ public class Timer extends AppCompatActivity {
                 gamePaused = true;
                 for (Field player : players) {
                     player.stop();
-                    player.running = false;
                 }
             }
         }
@@ -270,6 +269,9 @@ public class Timer extends AppCompatActivity {
                 Intent intent = new Intent(this, MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+                for (Field player : players) {
+                    player.stop();
+                }
                 return;
             }
 
@@ -291,6 +293,9 @@ public class Timer extends AppCompatActivity {
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
             super.onBackPressed();
+            for (Field player : players) {
+                player.stop();
+            }
             return;
         }
 

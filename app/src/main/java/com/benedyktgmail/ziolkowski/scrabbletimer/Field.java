@@ -34,12 +34,12 @@ public class Field {
 
             updatedTime = timeSwapBuff - timeInMiliseconds;
 
-            if(hasTimeLeft){
+            if(hasTimeLeft && running){
                 if(updatedTime > 0){
                     int secs = (int) (updatedTime / 1000);
                     int mins = secs / 60;
                     secs = secs % 60;
-                    timerValue.setText("" + mins + ":"
+                    timerValue.setText("" + String.format("%02d", mins) + ":"
                             + String.format("%02d", secs));
                     customHandler.postDelayed(this, 1000);
                 }
