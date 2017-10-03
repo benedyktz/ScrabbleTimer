@@ -9,91 +9,104 @@
          is needed to present your content, e.g. VideoView, SurfaceView,
          TextureView, etc. -->
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         tools:context="com.benedyktgmail.ziolkowski.scrabbletimer.MainActivity"
         android:id="@+id/fullscreen_content">
 
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/timerVal"
-            android:textAlignment="center"
-            android:textSize="60dp"
-            android:background="#00695C"
-            android:id="@+id/timerValue"
-            android:onClick="change"/>
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/timerVal"
+                android:textAlignment="center"
+                android:textSize="60dp"
+                android:background="#00695C"
+                android:id="@+id/timerValue"
+                android:onClick="change"/>
 
-        <TextView
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/timerVal"
+                android:textAlignment="center"
+                android:textSize="60dp"
+                android:background="#00695C"
+                android:layout_alignParentRight="true"
+                android:id="@+id/timerValue2"
+                android:onClick="change"/>
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/timerVal"
-            android:textAlignment="center"
-            android:textSize="60dp"
-            android:background="#00695C"
-            android:layout_alignParentRight="true"
-            android:id="@+id/timerValue2"
-            android:onClick="change"/>
+            android:layout_height="wrap_content">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="START"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:onClick="gameStart"
+                android:id="@+id/startButton"/>
 
-        <TextView
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Continue"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:onClick="gameContinue"
+                android:id="@+id/continueButton"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PAUSE"
+                android:layout_centerVertical="true"
+                android:onClick="gamePause"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="RESET"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:onClick="reset"/>
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/timerVal"
-            android:textAlignment="center"
-            android:textSize="60dp"
-            android:background="#00695C"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:id="@+id/timerValue3"
-            android:onClick="change"/>
+            android:layout_height="wrap_content">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/timerVal"
+                android:textAlignment="center"
+                android:textSize="60dp"
+                android:background="#00695C"
+                android:layout_alignParentBottom="true"
+                android:id="@+id/timerValue4"
+                android:onClick="change"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/timerVal"
-            android:textAlignment="center"
-            android:textSize="60dp"
-            android:background="#00695C"
-            android:layout_alignParentBottom="true"
-            android:id="@+id/timerValue4"
-            android:onClick="change"/>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="START"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:onClick="gameStart"
-            android:id="@+id/startButton"/>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Continue"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:onClick="gameContinue"
-            android:id="@+id/continueButton"/>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="PAUSE"
-            android:layout_centerVertical="true"
-            android:onClick="gamePause"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="RESET"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:onClick="reset"/>
-
-    </RelativeLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/timerVal"
+                android:textAlignment="center"
+                android:textSize="60dp"
+                android:background="#00695C"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:id="@+id/timerValue3"
+                android:onClick="change"/>
+        </LinearLayout>
+    </LinearLayout>
 
 
 </FrameLayout>
