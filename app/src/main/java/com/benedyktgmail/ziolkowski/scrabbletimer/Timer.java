@@ -125,6 +125,7 @@ public class Timer extends AppCompatActivity {
             player.running = true;
             player.setMinutes(minutes);
         }
+        Field.timeUp = false;
     }
 
     @Override
@@ -185,6 +186,16 @@ public class Timer extends AppCompatActivity {
         if(!gameStarted && !gamePaused) {
             gameStarted = true;
             players.get(0).start();
+        }
+        if(Field.timeUp){
+            if(i<3){
+                players.get(i+1).start();
+            }
+            if(i == 3){
+                players.get(0).start();
+            }
+            Field.timeUp = false;
+            i++;
         }
     }
 

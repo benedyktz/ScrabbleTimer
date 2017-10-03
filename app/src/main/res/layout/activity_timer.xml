@@ -74,6 +74,13 @@
             android:text="PAUSE"
             android:layout_centerVertical="true"
             android:onClick="gamePause"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="RESET"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:onClick="gamePause"/>
 
     </RelativeLayout>
 

@@ -1,4 +1,4 @@
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+<resources>
     <string name="app_name">ScrabbleTimer</string>
     <string name="actionSettings">Settings</string>
     <string name="startButtonLabel">Start</string>
@@ -8,5 +8,5 @@
 
     <string name="askForMinutes">Minutes per player: </string>
 
-    <string name="timerVal">20:00</string>
+    <string name="timerVal">00:00</string>
 </resources>
