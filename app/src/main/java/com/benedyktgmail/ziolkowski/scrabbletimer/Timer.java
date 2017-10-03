@@ -1,7 +1,9 @@
 package com.benedyktgmail.ziolkowski.scrabbletimer;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Vibrator;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -31,6 +33,8 @@ public class Timer extends AppCompatActivity {
 
     boolean gameStarted = false;
     boolean gamePaused = false;
+
+    Vibrator vibe;
 
     /**
      * Whether or not the system UI should be auto-hidden after
@@ -131,6 +135,8 @@ public class Timer extends AppCompatActivity {
         Field.timeUp = false;
 
         startButton = (Button) findViewById(R.id.startButton);
+        vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+
     }
 
     @Override
@@ -172,8 +178,10 @@ public class Timer extends AppCompatActivity {
                     if(players.get(i).running){
                         players.get(i).stop();
                         players.get(0).start();
+
                     }
                     i=0;
+                    vibe.vibrate(100);
                 }
             }
 
@@ -182,6 +190,7 @@ public class Timer extends AppCompatActivity {
                     players.get(i).stop();
                     players.get(i+1).start();
                     i++;
+                    vibe.vibrate(100);
                 }
             }
         }
