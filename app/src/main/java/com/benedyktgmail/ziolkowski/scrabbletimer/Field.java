@@ -3,7 +3,6 @@ package com.benedyktgmail.ziolkowski.scrabbletimer;
 import android.graphics.Color;
 import android.os.Handler;
 import android.os.SystemClock;
-import android.view.View;
 import android.widget.TextView;
 
 public class Field {
@@ -16,7 +15,8 @@ public class Field {
 
     public boolean running = false;
     public boolean hasTimeLeft = true;
-    public static boolean timeUp = false;
+    public static boolean timeUpFlag = false;
+    public static int numberOfPlayersTimeUp = 0;
 
 
     long timeInMiliseconds = 0L;
@@ -44,9 +44,13 @@ public class Field {
                     stop();
                     timerValue.setText(R.string.timerVal);
                     timerValue.setTextColor(Color.parseColor("#D50000"));
-                    timeUp = true;
+                    timeUpFlag = true;
                     hasTimeLeft = false;
                     Timer.startButton.setText("Continue");
+                    numberOfPlayersTimeUp++;
+                }
+                if(numberOfPlayersTimeUp == 4){
+                    Timer.gameStarted = false;
                 }
             }
 
@@ -54,10 +58,12 @@ public class Field {
     };
 
     public void start() {
-        startTime = SystemClock.uptimeMillis();
-        customHandler.postDelayed(updateTimerThread, 0);
-        timerValue.setBackgroundColor(Color.parseColor("#B2DFDB"));
-        running = true;
+        if(hasTimeLeft){
+            startTime = SystemClock.uptimeMillis();
+            customHandler.postDelayed(updateTimerThread, 0);
+            timerValue.setBackgroundColor(Color.parseColor("#B2DFDB"));
+            running = true;
+        }
     }
 
     public void stop() {

@@ -31,7 +31,7 @@ public class Timer extends AppCompatActivity {
 
     public static Button startButton;
 
-    boolean gameStarted = false;
+    static boolean  gameStarted = false;
     boolean gamePaused = false;
 
     Vibrator vibe;
@@ -132,7 +132,7 @@ public class Timer extends AppCompatActivity {
             player.running = true;
             player.setMinutes(minutes);
         }
-        Field.timeUp = false;
+        Field.timeUpFlag = false;
 
         startButton = (Button) findViewById(R.id.startButton);
         vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
@@ -175,23 +175,22 @@ public class Timer extends AppCompatActivity {
         if(gameStarted){
             if (i == 3) {
                 if(players.get(i).timerValue.getId() == view.getId()) {
-                    if(players.get(i).running){
+                    if(players.get(i).running && players.get(i).hasTimeLeft){
                         players.get(i).stop();
                         players.get(0).start();
-
+                        i=0;
                     }
-                    i=0;
-                    vibe.vibrate(100);
+                    //vibe.vibrate(100);
                 }
             }
 
             if(players.get(i).timerValue.getId() == view.getId()) {
-                if(players.get(i).running){
+                if(players.get(i).running && players.get(i).hasTimeLeft){
                     players.get(i).stop();
                     players.get(i+1).start();
                     i++;
-                    vibe.vibrate(100);
                 }
+                //vibe.vibrate(100);
             }
         }
     }
@@ -201,7 +200,7 @@ public class Timer extends AppCompatActivity {
             gameStarted = true;
             players.get(0).start();
         }
-        if(Field.timeUp && gameStarted){
+        if(Field.timeUpFlag && gameStarted){
             boolean flag = true;
             while(flag && (i < 5)) {
                 if(i<3 && players.get(i+1).hasTimeLeft){
@@ -212,7 +211,7 @@ public class Timer extends AppCompatActivity {
                     players.get(0).start();
                     flag = false;
                 }
-                Field.timeUp = false;
+                Field.timeUpFlag = false;
                 i++;
             }
 
@@ -221,7 +220,7 @@ public class Timer extends AppCompatActivity {
 
     public void gamePause (View view) {
         if(!gamePaused) {
-            if (gameStarted && !Field.timeUp) {
+            if (gameStarted && !Field.timeUpFlag) {
                 gameStarted = false;
                 gamePaused = true;
                 for (Field player : players) {
@@ -230,7 +229,7 @@ public class Timer extends AppCompatActivity {
                 }
             }
         }
-        else{
+        else if(gameStarted){
             gameStarted = true;
             gamePaused = false;
             players.get(i).start();
