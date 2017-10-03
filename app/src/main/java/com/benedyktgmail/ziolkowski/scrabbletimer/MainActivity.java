@@ -31,8 +31,8 @@ public class MainActivity extends AppCompatActivity {
         minutesEditText = (EditText) findViewById(R.id.minutes);
         secondsEditText = (EditText) findViewById(R.id.seconds);
 
-        soundButton = (Button) findViewById(R.id.soundButtonTimer);
-        vibeButton = (Button) findViewById(R.id.vibeButtonTimer);
+        soundButton = (Button) findViewById(R.id.soundButton);
+        vibeButton = (Button) findViewById(R.id.vibeButton);
         soundOn = false;
         vibeOn = false;
 

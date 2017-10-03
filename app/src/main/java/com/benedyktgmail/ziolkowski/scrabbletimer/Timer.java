@@ -156,9 +156,10 @@ public class Timer extends AppCompatActivity {
         continueButton = (Button) findViewById(R.id.continueButton);
         continueButton.setVisibility(View.GONE);
         vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-
-        MainActivity.soundOn = false;
-        MainActivity.vibeOn = false;
+         if(MainActivity.vibeOn)
+             vibeButton.setTextColor(Color.parseColor("#00ff00"));
+        if(MainActivity.soundOn)
+            soundButton.setTextColor(Color.parseColor("#00ff00"));
     }
 
     @Override
@@ -352,6 +353,11 @@ public class Timer extends AppCompatActivity {
         if(MainActivity.soundOn){
             MediaPlayer mp = MediaPlayer.create(this, R.raw.switch_sound);
             mp.start();
+            mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                public void onCompletion(MediaPlayer mp) {
+                    mp.release();
+                }
+            });
         }
 
         if(MainActivity.vibeOn){
