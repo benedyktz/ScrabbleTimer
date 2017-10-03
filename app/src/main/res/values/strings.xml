@@ -9,4 +9,5 @@
     <string name="askForMinutes">Time per player: </string>
 
     <string name="timerVal">00:00</string>
+    <string name="startGame">START GAME</string>
 </resources>
