@@ -45,7 +45,6 @@
                 android:textAlignment="center"
                 android:textSize="60dp"
                 android:background="#00695C"
-                android:layout_alignParentRight="true"
                 android:id="@+id/timerValue2"
                 android:onClick="change"
                 android:layout_weight="5"
@@ -59,20 +58,16 @@
             android:layout_weight="1"
             android:gravity="center">
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:text="START"
-                android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true"
                 android:onClick="gameStart"
                 android:id="@+id/startButton"/>
 
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:text="Continue"
-                android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true"
                 android:onClick="gameContinue"
                 android:id="@+id/continueButton"/>
 
@@ -91,9 +86,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="RESET"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
                 android:onClick="reset"/>
+            <Button
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:text="vibes"
+                android:onClick="viberToggle"
+                android:id="@+id/vibeButtonTimer"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="sound"
+                android:onClick="soundToggle"
+                android:id="@+id/soundButtonTimer"/>
 
         </LinearLayout>
 
@@ -110,7 +115,6 @@
                 android:textAlignment="center"
                 android:textSize="60dp"
                 android:background="#00695C"
-                android:layout_alignParentBottom="true"
                 android:id="@+id/timerValue4"
                 android:onClick="change"
                 android:gravity="center"/>
@@ -128,8 +132,6 @@
                 android:textAlignment="center"
                 android:textSize="60dp"
                 android:background="#00695C"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
                 android:id="@+id/timerValue3"
                 android:onClick="change"
                 android:gravity="center"/>

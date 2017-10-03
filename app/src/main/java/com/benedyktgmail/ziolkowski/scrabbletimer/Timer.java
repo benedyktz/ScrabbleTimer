@@ -26,9 +26,6 @@ import java.util.List;
  */
 public class Timer extends AppCompatActivity {
 
-    private int defaultMinutes = 20;
-    private int defaultSeconds = 0;
-
     List<Field> players = new ArrayList<>();
     Field player1 = new Field();
     Field player2 = new Field();
@@ -37,6 +34,8 @@ public class Timer extends AppCompatActivity {
 
     public static Button startButton;
     public static Button continueButton;
+    Button soundButton;
+    Button vibeButton;
 
     static boolean  gameStarted = false;
     boolean gamePaused = false;
@@ -109,8 +108,13 @@ public class Timer extends AppCompatActivity {
 
         Intent intent = getIntent();
 
+        int defaultMinutes = 20;
+        int defaultSeconds = 0;
+
         int minutes = intent.getIntExtra("MINUTES", defaultMinutes);
         int seconds = intent.getIntExtra("SECONDS", defaultSeconds);
+        soundButton = (Button) findViewById(R.id.soundButtonTimer);
+        vibeButton = (Button) findViewById(R.id.vibeButtonTimer);
 
         mContentView = findViewById(R.id.fullscreen_content);
 
@@ -152,6 +156,9 @@ public class Timer extends AppCompatActivity {
         continueButton = (Button) findViewById(R.id.continueButton);
         continueButton.setVisibility(View.GONE);
         vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+
+        MainActivity.soundOn = false;
+        MainActivity.vibeOn = false;
     }
 
     @Override
@@ -194,6 +201,7 @@ public class Timer extends AppCompatActivity {
                         players.get(i).stop();
                         players.get(0).start();
                         i=0;
+                        vibeAndSound();
                     }
                 }
             }
@@ -203,19 +211,10 @@ public class Timer extends AppCompatActivity {
                     players.get(i).stop();
                     players.get(i+1).start();
                     i++;
+                    vibeAndSound();
                 }
             }
         }
-        if(MainActivity.soundOn){
-            MediaPlayer mp = MediaPlayer.create(this, R.raw.switch_sound);
-            mp.start();
-        }
-
-        if(MainActivity.vibeOn){
-            vibe.vibrate(100);
-        }
-
-
     }
 
     public void gameStart(View view) {
@@ -323,5 +322,40 @@ public class Timer extends AppCompatActivity {
                 doubleBackToExitPressedOnce=false;
             }
         }, 2000);
+    }
+
+    public void viberToggle (View view) {
+        if(MainActivity.vibeOn){
+            MainActivity.vibeOn = false;
+            vibeButton.setTextColor(Color.parseColor("#000000"));
+        }
+        else{
+            MainActivity.vibeOn = true;
+            vibeButton.setTextColor(Color.parseColor("#00ff00"));
+        }
+
+    }
+
+    public void soundToggle (View view) {
+        if(MainActivity.soundOn){
+            MainActivity.soundOn = false;
+            soundButton.setTextColor(Color.parseColor("#000000"));
+        }
+        else{
+            MainActivity.soundOn = true;
+            soundButton.setTextColor(Color.parseColor("#00ff00"));
+        }
+    }
+
+    private void vibeAndSound() {
+
+        if(MainActivity.soundOn){
+            MediaPlayer mp = MediaPlayer.create(this, R.raw.switch_sound);
+            mp.start();
+        }
+
+        if(MainActivity.vibeOn){
+            vibe.vibrate(100);
+        }
     }
 }
