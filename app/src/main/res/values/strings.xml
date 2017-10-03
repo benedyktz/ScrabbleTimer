@@ -6,7 +6,7 @@
 
     <string name="title_activity_timer">Timer</string>
 
-    <string name="askForMinutes">Minutes per player: </string>
+    <string name="askForMinutes">Time per player: </string>
 
     <string name="timerVal">00:00</string>
 </resources>

@@ -8,6 +8,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +23,7 @@ import java.util.List;
 public class Timer extends AppCompatActivity {
 
     private int defaultMinutes = 20;
+    private int defaultSeconds = 0;
 
     List<Field> players = new ArrayList<>();
     Field player1 = new Field();
@@ -104,6 +106,7 @@ public class Timer extends AppCompatActivity {
         Intent intent = getIntent();
 
         int minutes = intent.getIntExtra("MINUTES", defaultMinutes);
+        int seconds = intent.getIntExtra("SECONDS", defaultSeconds);
 
         mContentView = findViewById(R.id.fullscreen_content);
 
@@ -129,15 +132,19 @@ public class Timer extends AppCompatActivity {
         players.add(player3);
         players.add(player4);
         for (Field player: players) {
-            player.timerValue.setText(minutes+":00");
+            player.timerValue.setText(minutes+":"+seconds);
             player.running = true;
             player.setMinutes(minutes);
+            player.setSeconds(seconds);
         }
         Field.timeUpFlag = false;
+        Field.allTimesUp = false;
+        Field.numberOfPlayersTimeUp = 0;
         gameStarted = false;
         gamePaused = false;
 
         startButton = (Button) findViewById(R.id.startButton);
+        startButton.setVisibility(View.VISIBLE);
         continueButton = (Button) findViewById(R.id.continueButton);
         continueButton.setVisibility(View.GONE);
         vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
@@ -208,33 +215,36 @@ public class Timer extends AppCompatActivity {
     }
 
     public void gameContinue(View view) {
-        if(Field.timeUpFlag && gameStarted){
+        Log.d("i=", "" + i);
+        Log.d("gamePaused", "" + gamePaused);
+        Log.d("allTimesUp", "" + Field.allTimesUp);
+        Log.d("timeUpFlag", "" + Field.timeUpFlag);
+        if(!gamePaused && !Field.allTimesUp && !players.get(i).hasTimeLeft) {
             boolean flag = true;
-            while(flag && (i <= 3)) {
-                if(i<3 && players.get(i+1).hasTimeLeft){
-                    players.get(i+1).start();
+            while (flag && (i <= 3)) {
+                if (i < 3 && players.get(i + 1).hasTimeLeft && !players.get(i).hasTimeLeft) {
+                    players.get(i + 1).start();
                     flag = false;
+                    Field.timeUpFlag = false;
                 }
-                if(i == 3 && players.get(0).hasTimeLeft){
+                if (i == 3 && players.get(0).hasTimeLeft && !players.get(3).hasTimeLeft) {
                     players.get(0).start();
                     flag = false;
+                    Field.timeUpFlag = false;
                 }
-                Field.timeUpFlag = false;
-                if(i<3){
+                if (i < 3) {
                     i++;
-                }
-                else{
-                    i=0;
+                } else {
+                    i = 0;
                 }
             }
-
+            Log.d("AAA", "" + Field.numberOfPlayersTimeUp);
         }
     }
 
     public void gamePause (View view) {
         if(!gamePaused) {
-            if (gameStarted && !Field.timeUpFlag) {
-                gameStarted = false;
+            if (gameStarted && !Field.allTimesUp) {
                 gamePaused = true;
                 for (Field player : players) {
                     player.stop();
@@ -243,11 +253,11 @@ public class Timer extends AppCompatActivity {
             }
         }
         else{
-            gameStarted = true;
             gamePaused = false;
             players.get(i).start();
             players.get(i).running = true;
         }
+        Log.d("gamePaused", "" + gamePaused);
     }
 
 }
