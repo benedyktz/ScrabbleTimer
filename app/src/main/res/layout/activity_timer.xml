@@ -69,6 +69,16 @@
             android:layout_centerHorizontal="true"
             android:onClick="gameStart"
             android:id="@+id/startButton"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Continue"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:onClick="gameContinue"
+            android:id="@+id/continueButton"/>
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

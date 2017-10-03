@@ -3,6 +3,7 @@ package com.benedyktgmail.ziolkowski.scrabbletimer;
 import android.graphics.Color;
 import android.os.Handler;
 import android.os.SystemClock;
+import android.view.View;
 import android.widget.TextView;
 
 public class Field {
@@ -46,8 +47,9 @@ public class Field {
                     timerValue.setTextColor(Color.parseColor("#D50000"));
                     timeUpFlag = true;
                     hasTimeLeft = false;
-                    Timer.startButton.setText("Continue");
                     numberOfPlayersTimeUp++;
+                    Timer.startButton.setVisibility(View.GONE);
+                    Timer.continueButton.setVisibility(View.VISIBLE);
                 }
                 if(numberOfPlayersTimeUp == 4){
                     Timer.gameStarted = false;

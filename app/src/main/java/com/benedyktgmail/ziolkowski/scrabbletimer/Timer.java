@@ -30,6 +30,7 @@ public class Timer extends AppCompatActivity {
     Field player4 = new Field();
 
     public static Button startButton;
+    public static Button continueButton;
 
     static boolean  gameStarted = false;
     boolean gamePaused = false;
@@ -133,8 +134,12 @@ public class Timer extends AppCompatActivity {
             player.setMinutes(minutes);
         }
         Field.timeUpFlag = false;
+        gameStarted = false;
+        gamePaused = false;
 
         startButton = (Button) findViewById(R.id.startButton);
+        continueButton = (Button) findViewById(R.id.continueButton);
+        continueButton.setVisibility(View.GONE);
         vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
     }
@@ -200,9 +205,12 @@ public class Timer extends AppCompatActivity {
             gameStarted = true;
             players.get(0).start();
         }
+    }
+
+    public void gameContinue(View view) {
         if(Field.timeUpFlag && gameStarted){
             boolean flag = true;
-            while(flag && (i < 5)) {
+            while(flag && (i <= 3)) {
                 if(i<3 && players.get(i+1).hasTimeLeft){
                     players.get(i+1).start();
                     flag = false;
@@ -212,7 +220,12 @@ public class Timer extends AppCompatActivity {
                     flag = false;
                 }
                 Field.timeUpFlag = false;
-                i++;
+                if(i<3){
+                    i++;
+                }
+                else{
+                    i=0;
+                }
             }
 
         }
@@ -229,7 +242,7 @@ public class Timer extends AppCompatActivity {
                 }
             }
         }
-        else if(gameStarted){
+        else{
             gameStarted = true;
             gamePaused = false;
             players.get(i).start();
