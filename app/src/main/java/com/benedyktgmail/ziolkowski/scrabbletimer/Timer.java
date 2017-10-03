@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,8 @@ public class Timer extends AppCompatActivity {
     Field player2 = new Field();
     Field player3 = new Field();
     Field player4 = new Field();
+
+    public static Button startButton;
 
     boolean gameStarted = false;
     boolean gamePaused = false;
@@ -126,6 +129,8 @@ public class Timer extends AppCompatActivity {
             player.setMinutes(minutes);
         }
         Field.timeUp = false;
+
+        startButton = (Button) findViewById(R.id.startButton);
     }
 
     @Override
@@ -187,21 +192,27 @@ public class Timer extends AppCompatActivity {
             gameStarted = true;
             players.get(0).start();
         }
-        if(Field.timeUp){
-            if(i<3){
-                players.get(i+1).start();
+        if(Field.timeUp && gameStarted){
+            boolean flag = true;
+            while(flag && (i < 5)) {
+                if(i<3 && players.get(i+1).hasTimeLeft){
+                    players.get(i+1).start();
+                    flag = false;
+                }
+                if(i == 3 && players.get(0).hasTimeLeft){
+                    players.get(0).start();
+                    flag = false;
+                }
+                Field.timeUp = false;
+                i++;
             }
-            if(i == 3){
-                players.get(0).start();
-            }
-            Field.timeUp = false;
-            i++;
+
         }
     }
 
     public void gamePause (View view) {
         if(!gamePaused) {
-            if (gameStarted) {
+            if (gameStarted && !Field.timeUp) {
                 gameStarted = false;
                 gamePaused = true;
                 for (Field player : players) {
