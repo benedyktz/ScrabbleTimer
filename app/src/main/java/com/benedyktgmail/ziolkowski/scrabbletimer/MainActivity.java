@@ -13,9 +13,11 @@ public class MainActivity extends AppCompatActivity {
 
     int minutes;
     int seconds;
+    int addedSeconds;
 
     EditText minutesEditText;
     EditText secondsEditText;
+    EditText addedEditText;
 
     public static View soundButton;
     public static View vibeButton;
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
         minutesEditText = (EditText) findViewById(R.id.minutes);
         secondsEditText = (EditText) findViewById(R.id.seconds);
+        addedEditText = (EditText) findViewById(R.id.addSecondsEditText);
 
         twoPlayersButton = findViewById(R.id.twoPlayersButton);
         threePlayersButton = findViewById(R.id.threePlayersButton);
@@ -57,13 +60,15 @@ public class MainActivity extends AppCompatActivity {
 
                     minutes = Integer.parseInt("0" + minutesEditText.getText());
                     seconds = Integer.parseInt("0" + secondsEditText.getText());
+                    addedSeconds = Integer.parseInt("0" + addedEditText.getText());
 
                     // Create a new intent to open the {@link Timer}
                     Intent timerIntent = new Intent(MainActivity.this, Timer.class);
                     timerIntent.putExtra("MINUTES", minutes);
                     timerIntent.putExtra("SECONDS", seconds);
+                    timerIntent.putExtra("ADDED_SECONDS", addedSeconds);
                     // Start the new activity
-                    if((minutes>0 && minutes < 240 && seconds>=0 && seconds <60) || minutes==0 && seconds>0)
+                    if(((minutes>0 && minutes < 240 && seconds>=0 && seconds <60) || minutes==0 && seconds>0) && addedSeconds>=0)
                         startActivity(timerIntent);
                 }
             });

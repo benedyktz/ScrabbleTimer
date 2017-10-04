@@ -28,6 +28,7 @@ public class Timer extends AppCompatActivity {
     List<Field> players = new ArrayList<>();
     int numberOfPlayers = MainActivity.numberOfPlayers;
 
+    int addedSeconds;
 
     public static Button startButton;
     View soundButton;
@@ -39,6 +40,7 @@ public class Timer extends AppCompatActivity {
 
     static boolean  gameStarted = false;
     boolean gamePaused = false;
+    boolean gameStartedByField = false;
 
     Vibrator vibe;
 
@@ -133,9 +135,11 @@ public class Timer extends AppCompatActivity {
 
         int defaultMinutes = 20;
         int defaultSeconds = 0;
+        int defaultAdded = 0;
 
         int minutes = intent.getIntExtra("MINUTES", defaultMinutes);
         int seconds = intent.getIntExtra("SECONDS", defaultSeconds);
+        addedSeconds = intent.getIntExtra("ADDED_SECONDS", defaultAdded);
         soundButton = findViewById(R.id.soundButtonTimer);
         vibeButton = findViewById(R.id.vibeButtonTimer);
         pauseButton = findViewById(R.id.pauseButtonTimer);
@@ -218,7 +222,10 @@ public class Timer extends AppCompatActivity {
                     if (players.get(i).running && players.get(i).hasTimeLeft) {
                         players.get(i).stop();
                         players.get(0).start();
-                        players.get(i).addSeconds(10);
+                        if(!gameStartedByField){
+                            players.get(i).addSeconds(addedSeconds);
+                            gameStartedByField = false;
+                        }
                         i = 0;
                         vibeAndSound();
                     }
@@ -232,7 +239,12 @@ public class Timer extends AppCompatActivity {
                 if (players.get(i).running && players.get(i).hasTimeLeft) {
                     players.get(i).stop();
                     players.get(i + 1).start();
-                    players.get(i).addSeconds(10);
+                    if(!gameStartedByField){
+                        players.get(i).addSeconds(addedSeconds);
+                    }
+                    else{
+                        gameStartedByField = false;
+                    }
                     i++;
                     vibeAndSound();
                 }
@@ -407,6 +419,7 @@ public class Timer extends AppCompatActivity {
                 }
             }
             gameStarted = true;
+            gameStartedByField = true;
             startButton.setVisibility(View.GONE);
             change(view);
         }
