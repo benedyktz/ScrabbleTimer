@@ -57,59 +57,94 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:gravity="center">
-            <Button
-                android:layout_width="40dp"
-                android:layout_height="wrap_content"
-                android:text="START"
-                android:onClick="gameStart"
-                android:id="@+id/startButton"/>
-
             <LinearLayout
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:onClick="gamePause"
-                android:orientation="horizontal"
-                android:background="@drawable/radius_rectangle"
-                android:id="@+id/pauseButtonTimer"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
                 android:gravity="center">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_pause_black_24dp"
-                    android:contentDescription="pauseButton"/>
+
+                <LinearLayout
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="5dp"
+                    android:onClick="gamePause"
+                    android:orientation="horizontal"
+                    android:background="@drawable/radius_rectangle"
+                    android:id="@+id/pauseButtonTimer"
+                    android:gravity="center">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_pause_black_24dp"
+                        android:contentDescription="pauseButton"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:onClick="reset"
+                    android:orientation="horizontal"
+                    android:background="@drawable/radius_rectangle"
+                    android:id="@+id/resetButtonTimer"
+                    android:gravity="center"
+                    android:layout_margin="5dp">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_replay_black_24dp"
+                        android:contentDescription="pauseButton"/>
+                </LinearLayout>
             </LinearLayout>
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="RESET"
-                android:onClick="reset"/>
             <LinearLayout
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:onClick="soundToggle"
-                android:orientation="horizontal"
-                android:background="@drawable/radius_rectangle"
-                android:id="@+id/soundButtonTimer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:gravity="center">
-                <ImageView
+                <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_volume_up_black_24dp"/>
+                    android:textColor="@color/fieldBackground"
+                    android:text="START"
+                    android:onClick="gameStart"
+                    android:id="@+id/startButton"/>
             </LinearLayout>
 
+
             <LinearLayout
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:onClick="viberToggle"
-                android:orientation="horizontal"
-                android:background="@drawable/radius_rectangle"
-                android:id="@+id/vibeButtonTimer"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
                 android:gravity="center">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_vibration_black_24dp"/>
+                <LinearLayout
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:onClick="soundToggle"
+                    android:orientation="horizontal"
+                    android:background="@drawable/radius_rectangle"
+                    android:id="@+id/soundButtonTimer"
+                    android:gravity="center"
+                    android:layout_margin="5dp">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_volume_up_black_24dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:onClick="viberToggle"
+                    android:orientation="horizontal"
+                    android:background="@drawable/radius_rectangle"
+                    android:id="@+id/vibeButtonTimer"
+                    android:gravity="center"
+                    android:layout_margin="5dp">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_vibration_black_24dp"/>
+                </LinearLayout>
             </LinearLayout>
 
         </LinearLayout>

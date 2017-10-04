@@ -32,6 +32,7 @@ public class Timer extends AppCompatActivity {
     View soundButton;
     View vibeButton;
     View pauseButton;
+    View resetButton;
 //    View startButton;
 //    View resetButton;
 
@@ -137,6 +138,7 @@ public class Timer extends AppCompatActivity {
         soundButton = findViewById(R.id.soundButtonTimer);
         vibeButton = findViewById(R.id.vibeButtonTimer);
         pauseButton = findViewById(R.id.pauseButtonTimer);
+        resetButton = findViewById(R.id.resetButtonTimer);
 
         mContentView = findViewById(R.id.fullscreen_content);
 
@@ -243,6 +245,7 @@ public class Timer extends AppCompatActivity {
             gameStarted = true;
             players.get(0).start();
         }
+        startButton.setVisibility(View.GONE);
     }
 
     public void gameContinue() {
@@ -309,7 +312,7 @@ public class Timer extends AppCompatActivity {
             }
 
             this.doubleBackToSettingsPressedOnce = true;
-            Toast.makeText(this, "This will reset this timer. If you are sure, click SETTING twice", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "This will reset timer. If you are sure, click twice", Toast.LENGTH_SHORT).show();
 
             new Handler().postDelayed(new Runnable() {
 
