@@ -34,8 +34,8 @@ public class Timer extends AppCompatActivity {
 
     public static Button startButton;
     public static Button continueButton;
-    Button soundButton;
-    Button vibeButton;
+    View soundButton;
+    View vibeButton;
 
     static boolean  gameStarted = false;
     boolean gamePaused = false;
@@ -113,8 +113,8 @@ public class Timer extends AppCompatActivity {
 
         int minutes = intent.getIntExtra("MINUTES", defaultMinutes);
         int seconds = intent.getIntExtra("SECONDS", defaultSeconds);
-        soundButton = (Button) findViewById(R.id.soundButtonTimer);
-        vibeButton = (Button) findViewById(R.id.vibeButtonTimer);
+        soundButton = findViewById(R.id.soundButtonTimer);
+        vibeButton = findViewById(R.id.vibeButtonTimer);
 
         mContentView = findViewById(R.id.fullscreen_content);
 
@@ -157,9 +157,9 @@ public class Timer extends AppCompatActivity {
         continueButton.setVisibility(View.GONE);
         vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
          if(MainActivity.vibeOn)
-             vibeButton.setTextColor(Color.parseColor("#00ff00"));
+             soundButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
         if(MainActivity.soundOn)
-            soundButton.setTextColor(Color.parseColor("#00ff00"));
+            soundButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
     }
 
     @Override
@@ -328,11 +328,11 @@ public class Timer extends AppCompatActivity {
     public void viberToggle (View view) {
         if(MainActivity.vibeOn){
             MainActivity.vibeOn = false;
-            vibeButton.setTextColor(Color.parseColor("#000000"));
+            vibeButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle));
         }
         else{
             MainActivity.vibeOn = true;
-            vibeButton.setTextColor(Color.parseColor("#00ff00"));
+            vibeButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
         }
 
     }
@@ -340,11 +340,11 @@ public class Timer extends AppCompatActivity {
     public void soundToggle (View view) {
         if(MainActivity.soundOn){
             MainActivity.soundOn = false;
-            soundButton.setTextColor(Color.parseColor("#000000"));
+            soundButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle));
         }
         else{
             MainActivity.soundOn = true;
-            soundButton.setTextColor(Color.parseColor("#00ff00"));
+            soundButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
         }
     }
 

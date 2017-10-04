@@ -87,18 +87,33 @@
                 android:layout_height="wrap_content"
                 android:text="RESET"
                 android:onClick="reset"/>
-            <Button
+            <LinearLayout
                 android:layout_width="40dp"
-                android:layout_height="wrap_content"
-                android:text="vibes"
-                android:onClick="viberToggle"
-                android:id="@+id/vibeButtonTimer"/>
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="sound"
+                android:layout_height="40dp"
                 android:onClick="soundToggle"
-                android:id="@+id/soundButtonTimer"/>
+                android:orientation="horizontal"
+                android:background="@drawable/radius_rectangle"
+                android:id="@+id/soundButtonTimer"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_volume_up_black_24dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:onClick="viberToggle"
+                android:orientation="horizontal"
+                android:background="@drawable/radius_rectangle"
+                android:id="@+id/vibeButtonTimer"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_vibration_black_24dp"/>
+            </LinearLayout>
 
         </LinearLayout>
 
