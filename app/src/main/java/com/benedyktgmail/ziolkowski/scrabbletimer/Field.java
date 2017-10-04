@@ -49,7 +49,7 @@ public class Field {
                     secs = secs % 60;
                     timerValue.setText("" + String.format("%02d", mins) + ":"
                             + String.format("%02d", secs));
-                    customHandler.postDelayed(this, 1000);
+                    customHandler.postDelayed(this, 10);
                 }
                 else {
                     stop();
