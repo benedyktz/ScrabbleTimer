@@ -36,6 +36,9 @@ public class Timer extends AppCompatActivity {
     public static Button continueButton;
     View soundButton;
     View vibeButton;
+    View pauseButton;
+    View startButtonw;
+    View resetButton;
 
     static boolean  gameStarted = false;
     boolean gamePaused = false;
@@ -115,6 +118,7 @@ public class Timer extends AppCompatActivity {
         int seconds = intent.getIntExtra("SECONDS", defaultSeconds);
         soundButton = findViewById(R.id.soundButtonTimer);
         vibeButton = findViewById(R.id.vibeButtonTimer);
+        pauseButton = findViewById(R.id.pauseButtonTimer);
 
         mContentView = findViewById(R.id.fullscreen_content);
 
@@ -131,6 +135,10 @@ public class Timer extends AppCompatActivity {
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
 
+        Field.fieldColor = getResources().getColor(R.color.fieldBackground);
+        Field.fieldColorActive = getResources().getColor(R.color.fieldBackgroundActive);
+        Field.fieldTextActive = getResources().getColor(R.color.fieldTextActive);
+        Field.colorText = getResources().getColor(R.color.colorText);
         player1.timerValue = (TextView) findViewById(R.id.timerValue);
         player2.timerValue = (TextView) findViewById(R.id.timerValue2);
         player3.timerValue = (TextView) findViewById(R.id.timerValue3);
@@ -258,19 +266,22 @@ public class Timer extends AppCompatActivity {
                 for (Field player : players) {
                     player.stop();
                 }
-                players.get(i).timerValue.setBackgroundColor(Color.parseColor("#ae6b12"));
+                players.get(i).timerValue.setBackgroundColor(Field.fieldColor);
+                pauseButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
+                vibeAndSound();
             }
         }
         else{
             gamePaused = false;
             players.get(i).start();
             players.get(i).running = true;
+            pauseButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle));
+            vibeAndSound();
             if(players.get(i).hasTimeLeft)
-                players.get(i).timerValue.setBackgroundColor(Color.parseColor("#B2DFDB"));
+                players.get(i).timerValue.setBackgroundColor(Field.fieldColorActive);
             else
-                players.get(i).timerValue.setBackgroundColor(Color.parseColor("#00695C"));
+                players.get(i).timerValue.setBackgroundColor(Field.fieldColor);
         }
-        Log.d("gamePaused", "" + gamePaused);
     }
 
     boolean doubleBackToSettingsPressedOnce = false;

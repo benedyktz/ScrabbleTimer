@@ -1,8 +1,10 @@
 package com.benedyktgmail.ziolkowski.scrabbletimer;
 
+
 import android.graphics.Color;
 import android.os.Handler;
 import android.os.SystemClock;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -20,6 +22,10 @@ public class Field {
     public static boolean timeUpFlag = false;
     public static boolean allTimesUp = false;
     public static int numberOfPlayersTimeUp = 0;
+    public static int fieldColor = Color.parseColor("#333333");
+    public static int fieldColorActive = Color.parseColor("#eeeeee");
+    public static int fieldTextActive = Color.parseColor("#111111");
+    public static int colorText = Color.parseColor("#006600");
 
 
     long timeInMiliseconds = 0L;
@@ -46,19 +52,17 @@ public class Field {
                 else {
                     stop();
                     timerValue.setText(R.string.timerVal);
-                    timerValue.setTextColor(Color.parseColor("#D50000"));
+                    timerValue.setTextColor(fieldColor); //trzeba jakis czerwony kolor
                     timeUpFlag = true;
                     hasTimeLeft = false;
                     numberOfPlayersTimeUp++;
                     Timer.startButton.setVisibility(View.GONE);
                     Timer.continueButton.setVisibility(View.VISIBLE);
                 }
-                Log.d("numberofplayersTimeup", "" +numberOfPlayersTimeUp);
                 if(numberOfPlayersTimeUp == 4){
                     allTimesUp = true;
                 }
             }
-
         }
     };
 
@@ -66,15 +70,18 @@ public class Field {
         if(hasTimeLeft){
             startTime = SystemClock.uptimeMillis();
             customHandler.postDelayed(updateTimerThread, 0);
-            timerValue.setBackgroundColor(Color.parseColor("#B2DFDB"));
+            timerValue.setBackgroundColor(fieldColorActive);
+            timerValue.setTextColor(fieldTextActive);
             running = true;
         }
     }
 
+
     public void stop() {
         timeSwapBuff -= timeInMiliseconds;
         customHandler.removeCallbacks(updateTimerThread);
-        timerValue.setBackgroundColor(Color.parseColor("#00695C"));
+        timerValue.setBackgroundColor(fieldColor);
+        timerValue.setTextColor(colorText);
         running = false;
     }
 

@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
+    android:background="@color/background"
     tools:context="com.benedyktgmail.ziolkowski.scrabbletimer.Timer">
 
     <!-- The primary full-screen view. This can be replaced with whatever view
@@ -27,16 +27,16 @@
                 android:text="@string/timerVal"
                 android:textAlignment="center"
                 android:textSize="60dp"
-                android:background="#00695C"
+                android:background="@color/fieldBackground"
                 android:id="@+id/timerValue"
                 android:onClick="change"
                 android:layout_weight="5"
                 android:gravity="center"
                 android:rotation="180"/>
-            <View
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"/>
+            <!--<View-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_weight="1"/>-->
 
             <TextView
                 android:layout_width="0dp"
@@ -44,7 +44,7 @@
                 android:text="@string/timerVal"
                 android:textAlignment="center"
                 android:textSize="60dp"
-                android:background="#00695C"
+                android:background="@color/fieldBackground"
                 android:id="@+id/timerValue2"
                 android:onClick="change"
                 android:layout_weight="5"
@@ -70,18 +70,22 @@
                 android:text="Continue"
                 android:onClick="gameContinue"
                 android:id="@+id/continueButton"/>
+            <LinearLayout
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:onClick="soundToggle"
+                android:orientation="horizontal"
+                android:background="@drawable/radius_rectangle"
+                android:id="@+id/pauseButtonTimer"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_pause_black_24dp"
+                    android:onClick="gamePause"
+                    android:contentDescription="pauseButton"/>
+            </LinearLayout>
 
-            <!--<Button-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="PAUSE"-->
-                <!--android:layout_centerVertical="true"-->
-                <!--android:onClick="gamePause"/>-->
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_pause_black_24dp"
-                android:onClick="gamePause"/>
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -129,15 +133,15 @@
                 android:text="@string/timerVal"
                 android:textAlignment="center"
                 android:textSize="60dp"
-                android:background="#00695C"
+                android:background="@color/fieldBackground"
                 android:id="@+id/timerValue4"
                 android:onClick="change"
                 android:gravity="center"/>
 
-            <View
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"/>
+            <!--<View-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:layout_height="match_parent"/>-->
 
             <TextView
                 android:layout_width="0dp"
@@ -146,7 +150,7 @@
                 android:text="@string/timerVal"
                 android:textAlignment="center"
                 android:textSize="60dp"
-                android:background="#00695C"
+                android:background="@color/fieldBackground"
                 android:id="@+id/timerValue3"
                 android:onClick="change"
                 android:gravity="center"/>
