@@ -3,14 +3,12 @@ package com.benedyktgmail.ziolkowski.scrabbletimer;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Vibrator;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -27,18 +25,15 @@ import java.util.List;
 public class Timer extends AppCompatActivity {
 
     List<Field> players = new ArrayList<>();
-    Field player1 = new Field();
-    Field player2 = new Field();
-    Field player3 = new Field();
-    Field player4 = new Field();
+    int numberOfPlayers = MainActivity.numberOfPlayers;
+
 
     public static Button startButton;
-    public static Button continueButton;
     View soundButton;
     View vibeButton;
     View pauseButton;
-    View startButtonw;
-    View resetButton;
+//    View startButton;
+//    View resetButton;
 
     static boolean  gameStarted = false;
     boolean gamePaused = false;
@@ -107,7 +102,30 @@ public class Timer extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_timer);
+        for (int i=0; i<numberOfPlayers; i++){
+            players.add(new Field());
+        }
+
+        switch (numberOfPlayers) {
+            case 2:
+                setContentView(R.layout.activity_timer2);
+                players.get(0).timerValue = (TextView) findViewById(R.id.timerValue);
+                players.get(1).timerValue = (TextView) findViewById(R.id.timerValue2);
+                break;
+            case 3:
+                setContentView(R.layout.activity_timer3);
+                players.get(0).timerValue = (TextView) findViewById(R.id.timerValue);
+                players.get(1).timerValue = (TextView) findViewById(R.id.timerValue2);
+                players.get(2).timerValue = (TextView) findViewById(R.id.timerValue3);
+                break;
+            case 4: default:
+                setContentView(R.layout.activity_timer4);
+                players.get(0).timerValue = (TextView) findViewById(R.id.timerValue);
+                players.get(1).timerValue = (TextView) findViewById(R.id.timerValue2);
+                players.get(2).timerValue = (TextView) findViewById(R.id.timerValue3);
+                players.get(3).timerValue = (TextView) findViewById(R.id.timerValue4);
+                break;
+        }
 
         Intent intent = getIntent();
 
@@ -139,14 +157,6 @@ public class Timer extends AppCompatActivity {
         Field.fieldColorActive = getResources().getColor(R.color.fieldBackgroundActive);
         Field.fieldTextActive = getResources().getColor(R.color.fieldTextActive);
         Field.colorText = getResources().getColor(R.color.colorText);
-        player1.timerValue = (TextView) findViewById(R.id.timerValue);
-        player2.timerValue = (TextView) findViewById(R.id.timerValue2);
-        player3.timerValue = (TextView) findViewById(R.id.timerValue3);
-        player4.timerValue = (TextView) findViewById(R.id.timerValue4);
-        players.add(player1);
-        players.add(player2);
-        players.add(player3);
-        players.add(player4);
         for (Field player: players) {
             player.timerValue.setText(String.format("%02d", minutes) + ":" + String.format("%02d", seconds));
             player.running = true;
@@ -159,8 +169,6 @@ public class Timer extends AppCompatActivity {
 
         startButton = (Button) findViewById(R.id.startButton);
         startButton.setVisibility(View.VISIBLE);
-        continueButton = (Button) findViewById(R.id.continueButton);
-        continueButton.setVisibility(View.GONE);
         vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         if(MainActivity.vibeOn)
             vibeButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
@@ -202,13 +210,16 @@ public class Timer extends AppCompatActivity {
     public void change(View view) {
 
         if(gameStarted){
-            if (i == 3) {
+            if (i == numberOfPlayers - 1) {
                 if(players.get(i).timerValue.getId() == view.getId()) {
                     if(players.get(i).running && players.get(i).hasTimeLeft){
                         players.get(i).stop();
                         players.get(0).start();
                         i=0;
                         vibeAndSound();
+                    }
+                    if(!players.get(0).hasTimeLeft){
+                        gameContinue();
                     }
                 }
             }
@@ -219,6 +230,9 @@ public class Timer extends AppCompatActivity {
                     players.get(i+1).start();
                     i++;
                     vibeAndSound();
+                }
+                if(!players.get(i).hasTimeLeft){
+                    gameContinue();
                 }
             }
         }
@@ -231,31 +245,26 @@ public class Timer extends AppCompatActivity {
         }
     }
 
-    public void gameContinue(View view) {
-        Log.d("i=", "" + i);
-        Log.d("gamePaused", "" + gamePaused);
-        Log.d("allTimesUp", "" + Field.allTimesUp);
-        Log.d("timeUpFlag", "" + Field.timeUpFlag);
+    public void gameContinue() {
         if(!gamePaused && !Field.allTimesUp && !players.get(i).hasTimeLeft) {
             boolean flag = true;
-            while (flag && (i <= 3)) {
-                if (i < 3 && players.get(i + 1).hasTimeLeft && !players.get(i).hasTimeLeft) {
+            while (flag && (i <= numberOfPlayers - 1)) {
+                if (i < numberOfPlayers - 1 && players.get(i + 1).hasTimeLeft && !players.get(i).hasTimeLeft) {
                     players.get(i + 1).start();
                     flag = false;
                     Field.timeUpFlag = false;
                 }
-                if (i == 3 && players.get(0).hasTimeLeft && !players.get(3).hasTimeLeft) {
+                if (i == numberOfPlayers - 1 && players.get(0).hasTimeLeft && !players.get(numberOfPlayers - 1).hasTimeLeft) {
                     players.get(0).start();
                     flag = false;
                     Field.timeUpFlag = false;
                 }
-                if (i < 3) {
+                if (i < numberOfPlayers - 1) {
                     i++;
                 } else {
                     i = 0;
                 }
             }
-            Log.d("AAA", "" + Field.numberOfPlayersTimeUp);
         }
     }
 
@@ -379,4 +388,5 @@ public class Timer extends AppCompatActivity {
             vibe.vibrate(100);
         }
     }
+
 }

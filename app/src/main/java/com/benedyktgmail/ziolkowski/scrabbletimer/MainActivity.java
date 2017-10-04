@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static View soundButton;
     public static View vibeButton;
+    public static int numberOfPlayers = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

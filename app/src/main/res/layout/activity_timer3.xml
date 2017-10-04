@@ -1,0 +1,143 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context="com.benedyktgmail.ziolkowski.scrabbletimer.Timer">
+
+    <!-- The primary full-screen view. This can be replaced with whatever view
+         is needed to present your content, e.g. VideoView, SurfaceView,
+         TextureView, etc. -->
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="com.benedyktgmail.ziolkowski.scrabbletimer.MainActivity"
+        android:id="@+id/fullscreen_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="@string/timerVal"
+                android:textAlignment="center"
+                android:textSize="60dp"
+                android:background="@color/fieldBackground"
+                android:id="@+id/timerValue"
+                android:onClick="change"
+                android:layout_weight="5"
+                android:gravity="center"
+                android:rotation="180"/>
+            <!--<View-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_weight="1"/>-->
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="@string/timerVal"
+                android:textAlignment="center"
+                android:textSize="60dp"
+                android:background="@color/fieldBackground"
+                android:id="@+id/timerValue2"
+                android:onClick="change"
+                android:layout_weight="5"
+                android:gravity="center"
+                android:rotation="180"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center">
+            <Button
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:text="START"
+                android:onClick="gameStart"
+                android:id="@+id/startButton"/>
+
+            <LinearLayout
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:onClick="gamePause"
+                android:orientation="horizontal"
+                android:background="@drawable/radius_rectangle"
+                android:id="@+id/pauseButtonTimer"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_pause_black_24dp"
+                    android:contentDescription="pauseButton"/>
+            </LinearLayout>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="RESET"
+                android:onClick="reset"/>
+            <LinearLayout
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:onClick="soundToggle"
+                android:orientation="horizontal"
+                android:background="@drawable/radius_rectangle"
+                android:id="@+id/soundButtonTimer"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_volume_up_black_24dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:onClick="viberToggle"
+                android:orientation="horizontal"
+                android:background="@drawable/radius_rectangle"
+                android:id="@+id/vibeButtonTimer"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_vibration_black_24dp"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3">
+
+
+            <!--<View-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:layout_height="match_parent"/>-->
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="5"
+                android:layout_height="match_parent"
+                android:text="@string/timerVal"
+                android:textAlignment="center"
+                android:textSize="60dp"
+                android:background="@color/fieldBackground"
+                android:id="@+id/timerValue3"
+                android:onClick="change"
+                android:gravity="center"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>

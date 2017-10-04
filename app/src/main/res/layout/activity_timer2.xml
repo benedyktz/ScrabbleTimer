@@ -38,18 +38,6 @@
                 <!--android:layout_height="match_parent"-->
                 <!--android:layout_weight="1"/>-->
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:text="@string/timerVal"
-                android:textAlignment="center"
-                android:textSize="60dp"
-                android:background="@color/fieldBackground"
-                android:id="@+id/timerValue2"
-                android:onClick="change"
-                android:layout_weight="5"
-                android:gravity="center"
-                android:rotation="180"/>
         </LinearLayout>
 
         <LinearLayout
@@ -64,16 +52,10 @@
                 android:onClick="gameStart"
                 android:id="@+id/startButton"/>
 
-            <Button
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:text="Continue"
-                android:onClick="gameContinue"
-                android:id="@+id/continueButton"/>
             <LinearLayout
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:onClick="soundToggle"
+                android:onClick="gamePause"
                 android:orientation="horizontal"
                 android:background="@drawable/radius_rectangle"
                 android:id="@+id/pauseButtonTimer"
@@ -82,7 +64,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_pause_black_24dp"
-                    android:onClick="gamePause"
                     android:contentDescription="pauseButton"/>
             </LinearLayout>
 
@@ -128,31 +109,14 @@
 
             <TextView
                 android:layout_width="0dp"
-                android:layout_weight="5"
                 android:layout_height="match_parent"
                 android:text="@string/timerVal"
                 android:textAlignment="center"
                 android:textSize="60dp"
                 android:background="@color/fieldBackground"
-                android:id="@+id/timerValue4"
+                android:id="@+id/timerValue2"
                 android:onClick="change"
-                android:gravity="center"/>
-
-            <!--<View-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_weight="1"-->
-                <!--android:layout_height="match_parent"/>-->
-
-            <TextView
-                android:layout_width="0dp"
                 android:layout_weight="5"
-                android:layout_height="match_parent"
-                android:text="@string/timerVal"
-                android:textAlignment="center"
-                android:textSize="60dp"
-                android:background="@color/fieldBackground"
-                android:id="@+id/timerValue3"
-                android:onClick="change"
                 android:gravity="center"/>
 
         </LinearLayout>

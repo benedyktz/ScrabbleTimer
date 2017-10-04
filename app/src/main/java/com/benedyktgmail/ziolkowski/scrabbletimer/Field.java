@@ -4,7 +4,6 @@ package com.benedyktgmail.ziolkowski.scrabbletimer;
 import android.graphics.Color;
 import android.os.Handler;
 import android.os.SystemClock;
-import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -56,8 +55,7 @@ public class Field {
                     timeUpFlag = true;
                     hasTimeLeft = false;
                     numberOfPlayersTimeUp++;
-                    Timer.startButton.setVisibility(View.GONE);
-                    Timer.continueButton.setVisibility(View.VISIBLE);
+                    Log.d("timeLeftFieldThread", "goes");
                 }
                 if(numberOfPlayersTimeUp == 4){
                     allTimesUp = true;
