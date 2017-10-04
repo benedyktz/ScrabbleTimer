@@ -30,11 +30,11 @@ public class MainActivity extends AppCompatActivity {
 
         soundButton = findViewById(R.id.soundButton);
         if(soundOn)
-            soundButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle));
+            soundButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
 
         vibeButton = findViewById(R.id.vibeButton);
         if(vibeOn)
-            vibeButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle));
+            vibeButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
 
         // Find the View that shows the start button
         TextView start = (TextView) findViewById(R.id.start);
@@ -56,6 +56,24 @@ public class MainActivity extends AppCompatActivity {
                     // Start the new activity
                     if((minutes>0 && minutes < 240 && seconds>=0 && seconds <60) || minutes==0 && seconds>0)
                         startActivity(timerIntent);
+                }
+            });
+        }
+        // Find the View that shows the about button
+        TextView about = (TextView) findViewById(R.id.about);
+
+        // Set a click listener on that View
+        if(about != null){
+            about.setOnClickListener(new View.OnClickListener() {
+                // The code in this method will be executed when the start button is clicked on.
+                @Override
+                public void onClick(View view) {
+
+                // Create a new intent to open the {@link About}
+                Intent aboutIntent = new Intent(MainActivity.this, About.class);
+
+                // Start the new activity
+                    startActivity(aboutIntent);
                 }
             });
         }
