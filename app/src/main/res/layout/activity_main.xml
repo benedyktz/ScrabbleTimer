@@ -15,6 +15,71 @@
         android:src="@drawable/image"/>
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:gravity="center"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Number od players:" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:onClick="twoPlayers"
+                android:orientation="horizontal"
+                android:background="@drawable/radius_rectangle"
+                android:id="@+id/twoPlayersButton"
+                android:gravity="center">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2"
+                    android:gravity="center"
+                    android:textSize="34dp"
+                    android:textColor="#000000"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:onClick="threePlayers"
+                android:orientation="horizontal"
+                android:background="@drawable/radius_rectangle"
+                android:id="@+id/threePlayersButton"
+                android:gravity="center">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="3"
+                    android:gravity="center"
+                    android:textSize="34dp"
+                    android:textColor="#000000"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:onClick="fourPlayers"
+                android:orientation="horizontal"
+                android:background="@drawable/radius_rectangle"
+                android:id="@+id/fourPlayersButton"
+                android:gravity="center">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="4"
+                    android:gravity="center"
+                    android:textSize="34dp"
+                    android:textColor="#000000"/>
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="bottom"
@@ -61,6 +126,7 @@
         android:layout_weight="1"
         android:gravity="center"
         android:text="@string/startGame"
+        android:textColor="#000000"
         android:textSize="34sp"
         android:textAllCaps="true"
         android:background="#eeeeee"

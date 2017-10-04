@@ -19,6 +19,9 @@ public class MainActivity extends AppCompatActivity {
 
     public static View soundButton;
     public static View vibeButton;
+    public View twoPlayersButton;
+    public View threePlayersButton;
+    public View fourPlayersButton;
     public static int numberOfPlayers = 2;
 
     @Override
@@ -28,6 +31,11 @@ public class MainActivity extends AppCompatActivity {
 
         minutesEditText = (EditText) findViewById(R.id.minutes);
         secondsEditText = (EditText) findViewById(R.id.seconds);
+
+        twoPlayersButton = findViewById(R.id.twoPlayersButton);
+        threePlayersButton = findViewById(R.id.threePlayersButton);
+        fourPlayersButton = findViewById(R.id.fourPlayersButton);
+
 
         soundButton = findViewById(R.id.soundButton);
         if(soundOn)
@@ -80,6 +88,19 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onStart(){
+        super.onStart();
+        if(numberOfPlayers == 2)
+            twoPlayersButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
+
+        if(numberOfPlayers == 3)
+            threePlayersButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
+
+        if(numberOfPlayers == 4)
+            fourPlayersButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
+    }
+
     public static boolean vibeOn = false;
 
     public void viberToggle (View view) {
@@ -103,6 +124,30 @@ public class MainActivity extends AppCompatActivity {
         else{
             soundOn = true;
             soundButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
+        }
+    }
+    public void twoPlayers (View view){
+        if(numberOfPlayers != 2){
+            numberOfPlayers = 2;
+            twoPlayersButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
+            threePlayersButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle));
+            fourPlayersButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle));
+        }
+    }
+    public void threePlayers (View view){
+        if(numberOfPlayers != 3){
+            numberOfPlayers = 3;
+            twoPlayersButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle));
+            threePlayersButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
+            fourPlayersButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle));
+        }
+    }
+    public void fourPlayers (View view){
+        if(numberOfPlayers != 4){
+            numberOfPlayers = 4;
+            twoPlayersButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle));
+            threePlayersButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle));
+            fourPlayersButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
         }
     }
 }
