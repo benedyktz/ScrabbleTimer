@@ -29,7 +29,7 @@
                 android:textSize="60dp"
                 android:background="@color/fieldBackground"
                 android:id="@+id/timerValue"
-                android:onClick="change"
+                android:onClick="fieldClick"
                 android:layout_weight="5"
                 android:gravity="center"
                 android:rotation="180"/>
@@ -46,7 +46,7 @@
                 android:textSize="60dp"
                 android:background="@color/fieldBackground"
                 android:id="@+id/timerValue2"
-                android:onClick="change"
+                android:onClick="fieldClick"
                 android:layout_weight="5"
                 android:gravity="center"
                 android:rotation="180"/>
@@ -169,7 +169,7 @@
                 android:textSize="60dp"
                 android:background="@color/fieldBackground"
                 android:id="@+id/timerValue3"
-                android:onClick="change"
+                android:onClick="fieldClick"
                 android:gravity="center"/>
 
         </LinearLayout>

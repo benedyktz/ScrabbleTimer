@@ -9,6 +9,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -211,29 +212,31 @@ public class Timer extends AppCompatActivity {
 
     public void change(View view) {
 
-        if(gameStarted){
+        if (gameStarted) {
             if (i == numberOfPlayers - 1) {
-                if(players.get(i).timerValue.getId() == view.getId()) {
-                    if(players.get(i).running && players.get(i).hasTimeLeft){
+                if (players.get(i).timerValue.getId() == view.getId()) {
+                    if (players.get(i).running && players.get(i).hasTimeLeft) {
                         players.get(i).stop();
                         players.get(0).start();
-                        i=0;
+                        players.get(i).addSeconds(10);
+                        i = 0;
                         vibeAndSound();
                     }
-                    if(!players.get(0).hasTimeLeft){
+                    if (!players.get(0).hasTimeLeft) {
                         gameContinue();
                     }
                 }
             }
 
-            if(players.get(i).timerValue.getId() == view.getId()) {
-                if(players.get(i).running && players.get(i).hasTimeLeft){
+            if (players.get(i).timerValue.getId() == view.getId()) {
+                if (players.get(i).running && players.get(i).hasTimeLeft) {
                     players.get(i).stop();
-                    players.get(i+1).start();
+                    players.get(i + 1).start();
+                    players.get(i).addSeconds(10);
                     i++;
                     vibeAndSound();
                 }
-                if(!players.get(i).hasTimeLeft){
+                if (!players.get(i).hasTimeLeft) {
                     gameContinue();
                 }
             }
@@ -389,6 +392,23 @@ public class Timer extends AppCompatActivity {
 
         if(MainActivity.vibeOn){
             vibe.vibrate(100);
+        }
+    }
+
+    public void fieldClick (View view) {
+        if(gameStarted){
+            change(view);
+        }
+        else{
+            for(int j=0; j<numberOfPlayers; j++){
+                if(players.get(j).timerValue.getId() == view.getId()){
+                    i=j;
+                    Log.d("aaa", "" + i);
+                }
+            }
+            gameStarted = true;
+            startButton.setVisibility(View.GONE);
+            change(view);
         }
     }
 

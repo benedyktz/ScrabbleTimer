@@ -21,6 +21,7 @@ public class Field {
     public static boolean timeUpFlag = false;
     public static boolean allTimesUp = false;
     public static int numberOfPlayersTimeUp = 0;
+    public static int timeUpColor = Color.parseColor("#ff0000");
     public static int fieldColor = Color.parseColor("#333333");
     public static int fieldColorActive = Color.parseColor("#eeeeee");
     public static int fieldTextActive = Color.parseColor("#111111");
@@ -30,6 +31,8 @@ public class Field {
     long timeInMiliseconds = 0L;
     long timeSwapBuff;
     long updatedTime = 0L;
+
+    int secs, mins;
 
     public Runnable updateTimerThread = new Runnable() {
         @Override
@@ -41,8 +44,8 @@ public class Field {
 
             if(hasTimeLeft && running){
                 if(updatedTime > 0){
-                    int secs = (int) (updatedTime / 1000);
-                    int mins = secs / 60;
+                    secs = (int) (updatedTime / 1000);
+                    mins = secs / 60;
                     secs = secs % 60;
                     timerValue.setText("" + String.format("%02d", mins) + ":"
                             + String.format("%02d", secs));
@@ -51,13 +54,13 @@ public class Field {
                 else {
                     stop();
                     timerValue.setText(R.string.timerVal);
-                    timerValue.setTextColor(fieldColor); //trzeba jakis czerwony kolor
+                    timerValue.setTextColor(timeUpColor);
                     timeUpFlag = true;
                     hasTimeLeft = false;
                     numberOfPlayersTimeUp++;
                     Log.d("timeLeftFieldThread", "goes");
                 }
-                if(numberOfPlayersTimeUp == 4){
+                if(numberOfPlayersTimeUp == MainActivity.numberOfPlayers - 1){
                     allTimesUp = true;
                 }
             }
@@ -90,6 +93,17 @@ public class Field {
     public void setSeconds(int seconds) {
 
         timeSwapBuff = timeSwapBuff + seconds * 1000;
+    }
 
+    public void addSeconds(int seconds) {
+        if(Timer.gameStarted){
+            timeSwapBuff+=seconds*1000;
+            updatedTime = timeSwapBuff;
+            secs = (int) (updatedTime / 1000);
+            mins = secs / 60;
+            secs = secs % 60;
+            timerValue.setText("" + String.format("%02d", mins) + ":"
+                    + String.format("%02d", secs));
+        }
     }
 }
