@@ -71,21 +71,33 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="2">
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/vibeButton"
-            android:text="vibes"
-            android:textSize="34sp"
-            android:onClick="viberToggle"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <LinearLayout
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:onClick="soundToggle"
+            android:orientation="horizontal"
+            android:background="@drawable/radius_rectangle"
             android:id="@+id/soundButton"
-            android:text="sound"
-            android:textSize="34sp"
-            android:onClick="soundToggle"/>
+            android:gravity="center">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_volume_up_black_24dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:onClick="viberToggle"
+            android:orientation="horizontal"
+            android:background="@drawable/radius_rectangle"
+            android:id="@+id/vibeButton"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_vibration_black_24dp"/>
+        </LinearLayout>
 
     </LinearLayout>
 

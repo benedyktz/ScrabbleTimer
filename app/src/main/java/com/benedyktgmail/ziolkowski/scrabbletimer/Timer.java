@@ -148,16 +148,14 @@ public class Timer extends AppCompatActivity {
         Field.timeUpFlag = false;
         Field.allTimesUp = false;
         Field.numberOfPlayersTimeUp = 0;
-        gameStarted = false;
-        gamePaused = false;
 
         startButton = (Button) findViewById(R.id.startButton);
         startButton.setVisibility(View.VISIBLE);
         continueButton = (Button) findViewById(R.id.continueButton);
         continueButton.setVisibility(View.GONE);
         vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-         if(MainActivity.vibeOn)
-             soundButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
+        if(MainActivity.vibeOn)
+            vibeButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
         if(MainActivity.soundOn)
             soundButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
     }
@@ -286,6 +284,7 @@ public class Timer extends AppCompatActivity {
                 for (Field player : players) {
                     player.stop();
                 }
+                gameStarted = false;
                 return;
             }
 
@@ -310,6 +309,7 @@ public class Timer extends AppCompatActivity {
             for (Field player : players) {
                 player.stop();
             }
+            gameStarted = false;
             return;
         }
 
@@ -329,10 +329,12 @@ public class Timer extends AppCompatActivity {
         if(MainActivity.vibeOn){
             MainActivity.vibeOn = false;
             vibeButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle));
+            MainActivity.vibeButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle));
         }
         else{
             MainActivity.vibeOn = true;
             vibeButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
+            MainActivity.vibeButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
         }
 
     }
@@ -341,10 +343,12 @@ public class Timer extends AppCompatActivity {
         if(MainActivity.soundOn){
             MainActivity.soundOn = false;
             soundButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle));
+            MainActivity.soundButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle));
         }
         else{
             MainActivity.soundOn = true;
             soundButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
+            MainActivity.soundButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
         }
     }
 

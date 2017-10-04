@@ -1,12 +1,9 @@
 package com.benedyktgmail.ziolkowski.scrabbletimer;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -20,8 +17,8 @@ public class MainActivity extends AppCompatActivity {
     EditText minutesEditText;
     EditText secondsEditText;
 
-    Button soundButton;
-    Button vibeButton;
+    public static View soundButton;
+    public static View vibeButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,10 +28,13 @@ public class MainActivity extends AppCompatActivity {
         minutesEditText = (EditText) findViewById(R.id.minutes);
         secondsEditText = (EditText) findViewById(R.id.seconds);
 
-        soundButton = (Button) findViewById(R.id.soundButton);
-        vibeButton = (Button) findViewById(R.id.vibeButton);
-        soundOn = false;
-        vibeOn = false;
+        soundButton = findViewById(R.id.soundButton);
+        if(soundOn)
+            soundButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle));
+
+        vibeButton = findViewById(R.id.vibeButton);
+        if(vibeOn)
+            vibeButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle));
 
         // Find the View that shows the start button
         TextView start = (TextView) findViewById(R.id.start);
@@ -66,11 +66,11 @@ public class MainActivity extends AppCompatActivity {
     public void viberToggle (View view) {
         if(vibeOn){
             vibeOn = false;
-            vibeButton.setTextColor(Color.parseColor("#000000"));
+            vibeButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle));
         }
         else{
             vibeOn = true;
-            vibeButton.setTextColor(Color.parseColor("#00ff00"));
+            vibeButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
         }
 
     }
@@ -79,11 +79,11 @@ public class MainActivity extends AppCompatActivity {
     public void soundToggle (View view) {
         if(soundOn){
             soundOn = false;
-            soundButton.setTextColor(Color.parseColor("#000000"));
+            soundButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle));
         }
         else{
             soundOn = true;
-            soundButton.setTextColor(Color.parseColor("#00ff00"));
+            soundButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
         }
     }
 }
