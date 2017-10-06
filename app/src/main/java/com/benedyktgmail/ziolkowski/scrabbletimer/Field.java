@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
 
 public class Field {
@@ -60,7 +59,7 @@ public class Field {
                     numberOfPlayersTimeUp++;
                     Log.d("timeLeftFieldThread", "goes");
                 }
-                if(numberOfPlayersTimeUp == MainActivity.numberOfPlayers - 1){
+                if(numberOfPlayersTimeUp == Settings.numberOfPlayers - 1){
                     allTimesUp = true;
                 }
             }

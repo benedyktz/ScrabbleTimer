@@ -26,9 +26,10 @@ import java.util.List;
 public class Timer extends AppCompatActivity {
 
     List<Field> players = new ArrayList<>();
-    int numberOfPlayers = MainActivity.numberOfPlayers;
+    int numberOfPlayers = Settings.numberOfPlayers;
 
     int addedSeconds;
+
 
     public static Button startButton;
     View soundButton;
@@ -177,9 +178,9 @@ public class Timer extends AppCompatActivity {
         startButton = (Button) findViewById(R.id.startButton);
         startButton.setVisibility(View.VISIBLE);
         vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        if(MainActivity.vibeOn)
+        if(Settings.vibeOn)
             vibeButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
-        if(MainActivity.soundOn)
+        if(Settings.soundOn)
             soundButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
     }
 
@@ -316,7 +317,7 @@ public class Timer extends AppCompatActivity {
     public void reset(View view) {
 
             if (doubleBackToSettingsPressedOnce) {
-                Intent intent = new Intent(this, MainActivity.class);
+                Intent intent = new Intent(this, Settings.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 for (Field player : players) {
@@ -364,35 +365,31 @@ public class Timer extends AppCompatActivity {
     }
 
     public void viberToggle (View view) {
-        if(MainActivity.vibeOn){
-            MainActivity.vibeOn = false;
+        if(Settings.vibeOn){
+            Settings.vibeOn = false;
             vibeButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle));
-            MainActivity.vibeButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle));
         }
         else{
-            MainActivity.vibeOn = true;
+            Settings.vibeOn = true;
             vibeButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
-            MainActivity.vibeButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
         }
 
     }
 
     public void soundToggle (View view) {
-        if(MainActivity.soundOn){
-            MainActivity.soundOn = false;
+        if(Settings.soundOn){
+            Settings.soundOn = false;
             soundButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle));
-            MainActivity.soundButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle));
         }
         else{
-            MainActivity.soundOn = true;
+            Settings.soundOn = true;
             soundButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
-            MainActivity.soundButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
         }
     }
 
     private void vibeAndSound() {
 
-        if(MainActivity.soundOn){
+        if(Settings.soundOn){
             MediaPlayer mp = MediaPlayer.create(this, R.raw.switch_sound);
             mp.start();
             mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
@@ -402,7 +399,7 @@ public class Timer extends AppCompatActivity {
             });
         }
 
-        if(MainActivity.vibeOn){
+        if(Settings.vibeOn){
             vibe.vibrate(100);
         }
     }

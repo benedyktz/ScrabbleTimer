@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 
 
-public class MainActivity extends AppCompatActivity {
+public class Settings extends AppCompatActivity {
 
     int minutes;
     int seconds;
@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_settings);
 
         minutesEditText = (EditText) findViewById(R.id.minutes);
         secondsEditText = (EditText) findViewById(R.id.seconds);
@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
                     addedSeconds = Integer.parseInt("0" + addedEditText.getText());
 
                     // Create a new intent to open the {@link Timer}
-                    Intent timerIntent = new Intent(MainActivity.this, Timer.class);
+                    Intent timerIntent = new Intent(Settings.this, Timer.class);
                     timerIntent.putExtra("MINUTES", minutes);
                     timerIntent.putExtra("SECONDS", seconds);
                     timerIntent.putExtra("ADDED_SECONDS", addedSeconds);
@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onClick(View view) {
 
                 // Create a new intent to open the {@link About}
-                Intent aboutIntent = new Intent(MainActivity.this, About.class);
+                Intent aboutIntent = new Intent(Settings.this, About.class);
 
                 // Start the new activity
                     startActivity(aboutIntent);
