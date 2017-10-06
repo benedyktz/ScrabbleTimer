@@ -2,8 +2,10 @@ package com.benedyktgmail.ziolkowski.scrabbletimer;
 
 
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Handler;
 import android.os.SystemClock;
+import android.os.Vibrator;
 import android.util.Log;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -14,6 +16,8 @@ public class Field {
     public TextView playerName;
     public RelativeLayout field;
     public long startTime = 0L;
+    public static Vibrator vibe;
+    public static MediaPlayer soundPlayer;
 
     public Handler customHandler = new Handler();
 
@@ -60,7 +64,17 @@ public class Field {
                     timeUpFlag = true;
                     hasTimeLeft = false;
                     numberOfPlayersTimeUp++;
-                    Log.d("timeLeftFieldThread", "goes");
+                    if(Timer.settings.isVibeOn())
+                        vibe.vibrate(400);
+                    if(Timer.settings.isSoundOn()) {
+                        soundPlayer.start();
+                        soundPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                            public void onCompletion(MediaPlayer mp) {
+                                mp.release();
+                            }
+                        });
+                    }
+
                 }
                 if(numberOfPlayersTimeUp == SettingsActivity.numberOfPlayers - 1){
                     allTimesUp = true;

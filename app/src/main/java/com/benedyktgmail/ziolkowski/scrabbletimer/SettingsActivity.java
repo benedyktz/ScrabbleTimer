@@ -82,6 +82,8 @@ public class SettingsActivity extends AppCompatActivity {
             fourPlayersButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
     }
 
+
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();

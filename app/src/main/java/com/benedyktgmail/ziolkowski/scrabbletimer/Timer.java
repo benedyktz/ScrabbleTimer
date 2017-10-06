@@ -17,6 +17,15 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
+import java.io.StreamCorruptedException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -105,6 +114,9 @@ public class Timer extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d("a", "oncreate");
+        loadSettings();
+        loadSettings();
+        loadSettings();
         createGame();
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
@@ -117,16 +129,11 @@ public class Timer extends AppCompatActivity {
             SettingsActivity.fromSettingsFlag = false;
         }
     }
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.d("a", "onPause");
-    }
 
     @Override
     protected void onDestroy() {
+        saveSettings(settings);
         super.onDestroy();
-        Log.d("a", "ondestroy");
     }
 
 
@@ -257,6 +264,7 @@ public class Timer extends AppCompatActivity {
 
     public void settings(View view) {
 
+            saveSettings(settings);
             if (doubleBackToSettingsPressedOnce) {
                 Intent intent = new Intent(this, SettingsActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -351,6 +359,8 @@ public class Timer extends AppCompatActivity {
         }
     }
 
+
+
     private void vibeAndSound() {
 
         if(settings.isSoundOn()){
@@ -368,6 +378,7 @@ public class Timer extends AppCompatActivity {
         }
     }
 
+
     public void fieldClick (View view) {
 
         if(gameStarted){
@@ -383,6 +394,7 @@ public class Timer extends AppCompatActivity {
             gameStarted = true;
             gameStartedByField = true;
             change(view);
+            saveSettings(settings);
         }
     }
 
@@ -404,27 +416,38 @@ public class Timer extends AppCompatActivity {
         switch (settings.getNumberOfPlayers()) {
             case 2:
                 setContentView(R.layout.activity_timer2);
+                Field.vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                Field.soundPlayer = MediaPlayer.create(this, R.raw.time_up);
                 players.get(0).timerValue = (TextView) findViewById(R.id.timerValue);
                 players.get(1).timerValue = (TextView) findViewById(R.id.timerValue2);
                 players.get(0).playerName = (TextView) findViewById(R.id.playerName1);
                 players.get(1).playerName = (TextView) findViewById(R.id.playerName2);
+                players.get(0).playerName.setText(Timer.settings.getPlayer1());
+                players.get(1).playerName.setText(Timer.settings.getPlayer2());
                 players.get(0).field = (RelativeLayout) findViewById(R.id.field1);
                 players.get(1).field = (RelativeLayout) findViewById(R.id.field2);
                 break;
             case 3:
                 setContentView(R.layout.activity_timer3);
+                Field.vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                Field.soundPlayer = MediaPlayer.create(this, R.raw.time_up);
                 players.get(0).timerValue = (TextView) findViewById(R.id.timerValue);
                 players.get(1).timerValue = (TextView) findViewById(R.id.timerValue2);
                 players.get(2).timerValue = (TextView) findViewById(R.id.timerValue3);
                 players.get(0).playerName = (TextView) findViewById(R.id.playerName1);
                 players.get(1).playerName = (TextView) findViewById(R.id.playerName2);
                 players.get(2).playerName = (TextView) findViewById(R.id.playerName3);
+                players.get(0).playerName.setText(Timer.settings.getPlayer1());
+                players.get(1).playerName.setText(Timer.settings.getPlayer2());
+                players.get(2).playerName.setText(Timer.settings.getPlayer3());
                 players.get(0).field = (RelativeLayout) findViewById(R.id.field1);
                 players.get(1).field = (RelativeLayout) findViewById(R.id.field2);
                 players.get(2).field = (RelativeLayout) findViewById(R.id.field3);
                 break;
             case 4: default:
                 setContentView(R.layout.activity_timer4);
+                Field.vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                Field.soundPlayer = MediaPlayer.create(this, R.raw.time_up);
                 players.get(0).timerValue = (TextView) findViewById(R.id.timerValue);
                 players.get(1).timerValue = (TextView) findViewById(R.id.timerValue2);
                 players.get(2).timerValue = (TextView) findViewById(R.id.timerValue3);
@@ -433,6 +456,10 @@ public class Timer extends AppCompatActivity {
                 players.get(1).playerName = (TextView) findViewById(R.id.playerName2);
                 players.get(2).playerName = (TextView) findViewById(R.id.playerName3);
                 players.get(3).playerName = (TextView) findViewById(R.id.playerName4);
+                players.get(0).playerName.setText(Timer.settings.getPlayer1());
+                players.get(1).playerName.setText(Timer.settings.getPlayer2());
+                players.get(2).playerName.setText(Timer.settings.getPlayer3());
+                players.get(3).playerName.setText(Timer.settings.getPlayer4());
                 players.get(0).field = (RelativeLayout) findViewById(R.id.field1);
                 players.get(1).field = (RelativeLayout) findViewById(R.id.field2);
                 players.get(2).field = (RelativeLayout) findViewById(R.id.field3);
@@ -491,4 +518,35 @@ public class Timer extends AppCompatActivity {
         startActivity(aboutIntent);
     }
 
+    String fileName = "settings.s";
+
+    public void saveSettings(Settings settingsObject) {
+        ObjectOutput out;
+        try{
+            out = new ObjectOutputStream(new FileOutputStream(new File(getFilesDir(),"")+File.separator+fileName));
+            out.writeObject(settingsObject);
+            out.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadSettings() {
+        ObjectInputStream in;
+        try {
+            in = new ObjectInputStream(new FileInputStream(new File(getFilesDir(),"")+File.separator+fileName));
+            settings = (Settings) in.readObject();
+            in.close();
+        } catch (StreamCorruptedException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 }
