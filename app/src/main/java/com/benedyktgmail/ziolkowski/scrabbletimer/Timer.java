@@ -29,10 +29,7 @@ import java.io.StreamCorruptedException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * An example full-screen activity that shows and hides the system UI (i.e.
- * status bar and navigation/system bar) with user interaction.
- */
+
 public class Timer extends AppCompatActivity {
 
     List<Field> players = new ArrayList<>();
@@ -54,7 +51,7 @@ public class Timer extends AppCompatActivity {
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
      */
-    private static final boolean AUTO_HIDE = false;
+    private static final boolean AUTO_HIDE = true;
 
     /**
      * If {@link #AUTO_HIDE} is set, the number of milliseconds to wait after
@@ -204,9 +201,9 @@ public class Timer extends AppCompatActivity {
                     activePlayer++;
                     vibeAndSound();
                 }
-                if (!players.get(activePlayer).hasTimeLeft) {
-                    gameContinue();
-                }
+            }
+            if (!players.get(activePlayer).hasTimeLeft) {
+                gameContinue();
             }
         }
     }
@@ -241,8 +238,6 @@ public class Timer extends AppCompatActivity {
                 for (Field player : players) {
                     player.stop();
                 }
-                players.get(activePlayer).timerValue.setBackgroundColor(Field.fieldColor);
-                players.get(activePlayer).field.setBackgroundColor(Field.fieldColor);
                 pauseButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
                 vibeAndSound();
             }
@@ -265,7 +260,7 @@ public class Timer extends AppCompatActivity {
     public void settings(View view) {
 
             saveSettings(settings);
-            if (doubleBackToSettingsPressedOnce) {
+            if (doubleBackToSettingsPressedOnce || !gameStarted) {
                 Intent intent = new Intent(this, SettingsActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
@@ -501,6 +496,9 @@ public class Timer extends AppCompatActivity {
         }
         Field.timeUpFlag = false;
         Field.allTimesUp = false;
+        gamePaused = false;
+        gameStarted = false;
+        gameStartedByField = false;
         Field.numberOfPlayersTimeUp = 0;
 
         vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);

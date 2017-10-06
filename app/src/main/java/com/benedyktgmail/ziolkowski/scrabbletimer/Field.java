@@ -6,7 +6,6 @@ import android.media.MediaPlayer;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.os.Vibrator;
-import android.util.Log;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -68,15 +67,10 @@ public class Field {
                         vibe.vibrate(400);
                     if(Timer.settings.isSoundOn()) {
                         soundPlayer.start();
-                        soundPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                            public void onCompletion(MediaPlayer mp) {
-                                mp.release();
-                            }
-                        });
                     }
 
                 }
-                if(numberOfPlayersTimeUp == SettingsActivity.numberOfPlayers - 1){
+                if(numberOfPlayersTimeUp == Timer.settings.getNumberOfPlayers()){
                     allTimesUp = true;
                 }
             }
@@ -99,10 +93,12 @@ public class Field {
     public void stop() {
         timeSwapBuff -= timeInMiliseconds;
         customHandler.removeCallbacks(updateTimerThread);
-        field.setBackgroundColor(fieldColor);
-        timerValue.setBackgroundColor(fieldColor);
-        timerValue.setTextColor(colorText);
-        playerName.setTextColor(colorText);
+        if(!Timer.gamePaused){
+            field.setBackgroundColor(fieldColor);
+            timerValue.setBackgroundColor(fieldColor);
+            timerValue.setTextColor(colorText);
+            playerName.setTextColor(colorText);
+        }
         running = false;
     }
 
