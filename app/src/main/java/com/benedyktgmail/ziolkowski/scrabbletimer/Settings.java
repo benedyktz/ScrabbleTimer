@@ -1,158 +1,63 @@
 package com.benedyktgmail.ziolkowski.scrabbletimer;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.TextView;
+/**
+ * Created by Benedykt on 2017-10-06.
+ */
+public class Settings {
+    private boolean vibeOn = true;
+    private boolean soundOn = false;
+    private int minutes = 20;
+    private int seconds = 0;
+    private int addedSeconds = 0;
+    private int numberOfPlayers = 4;
 
-
-
-public class Settings extends AppCompatActivity {
-
-    int minutes;
-    int seconds;
-    int addedSeconds;
-
-    EditText minutesEditText;
-    EditText secondsEditText;
-    EditText addedEditText;
-
-    public static View soundButton;
-    public static View vibeButton;
-    public View twoPlayersButton;
-    public View threePlayersButton;
-    public View fourPlayersButton;
-    public static int numberOfPlayers = 2;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
-
-        minutesEditText = (EditText) findViewById(R.id.minutes);
-        secondsEditText = (EditText) findViewById(R.id.seconds);
-        addedEditText = (EditText) findViewById(R.id.addSecondsEditText);
-
-        twoPlayersButton = findViewById(R.id.twoPlayersButton);
-        threePlayersButton = findViewById(R.id.threePlayersButton);
-        fourPlayersButton = findViewById(R.id.fourPlayersButton);
-
-
-        soundButton = findViewById(R.id.soundButton);
-        if(soundOn)
-            soundButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
-
-        vibeButton = findViewById(R.id.vibeButton);
-        if(vibeOn)
-            vibeButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
-
-        // Find the View that shows the start button
-        TextView start = (TextView) findViewById(R.id.start);
-
-        // Set a click listener on that View
-        if(start != null){
-            start.setOnClickListener(new View.OnClickListener() {
-                // The code in this method will be executed when the start button is clicked on.
-                @Override
-                public void onClick(View view) {
-
-                    minutes = Integer.parseInt("0" + minutesEditText.getText());
-                    seconds = Integer.parseInt("0" + secondsEditText.getText());
-                    addedSeconds = Integer.parseInt("0" + addedEditText.getText());
-
-                    // Create a new intent to open the {@link Timer}
-                    Intent timerIntent = new Intent(Settings.this, Timer.class);
-                    timerIntent.putExtra("MINUTES", minutes);
-                    timerIntent.putExtra("SECONDS", seconds);
-                    timerIntent.putExtra("ADDED_SECONDS", addedSeconds);
-                    // Start the new activity
-                    if(((minutes>0 && minutes < 240 && seconds>=0 && seconds <60) || minutes==0 && seconds>0) && addedSeconds>=0)
-                        startActivity(timerIntent);
-                }
-            });
-        }
-        // Find the View that shows the about button
-        TextView about = (TextView) findViewById(R.id.about);
-
-        // Set a click listener on that View
-        if(about != null){
-            about.setOnClickListener(new View.OnClickListener() {
-                // The code in this method will be executed when the start button is clicked on.
-                @Override
-                public void onClick(View view) {
-
-                // Create a new intent to open the {@link About}
-                Intent aboutIntent = new Intent(Settings.this, About.class);
-
-                // Start the new activity
-                    startActivity(aboutIntent);
-                }
-            });
-        }
+    public int getNumberOfPlayers() {
+        return numberOfPlayers;
     }
 
-    @Override
-    public void onStart(){
-        super.onStart();
-        if(numberOfPlayers == 2)
-            twoPlayersButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
-
-        if(numberOfPlayers == 3)
-            threePlayersButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
-
-        if(numberOfPlayers == 4)
-            fourPlayersButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
+    public void setNumberOfPlayers(int numberOfPlayers) {
+        this.numberOfPlayers = numberOfPlayers;
     }
 
-    public static boolean vibeOn = false;
 
-    public void viberToggle (View view) {
-        if(vibeOn){
-            vibeOn = false;
-            vibeButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle));
-        }
-        else{
-            vibeOn = true;
-            vibeButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
-        }
-
+    public void setAddedSeconds(int addedSeconds) {
+        this.addedSeconds = addedSeconds;
     }
 
-    public static boolean soundOn = false;
-    public void soundToggle (View view) {
-        if(soundOn){
-            soundOn = false;
-            soundButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle));
-        }
-        else{
-            soundOn = true;
-            soundButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
-        }
+    public void setVibeOn(boolean vibeOn) {
+        this.vibeOn = vibeOn;
     }
-    public void twoPlayers (View view){
-        if(numberOfPlayers != 2){
-            numberOfPlayers = 2;
-            twoPlayersButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
-            threePlayersButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle));
-            fourPlayersButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle));
-        }
+
+    public void setSoundOn(boolean soundOn) {
+        this.soundOn = soundOn;
     }
-    public void threePlayers (View view){
-        if(numberOfPlayers != 3){
-            numberOfPlayers = 3;
-            twoPlayersButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle));
-            threePlayersButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
-            fourPlayersButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle));
-        }
+
+    public void setMinutes(int minutes) {
+        this.minutes = minutes;
     }
-    public void fourPlayers (View view){
-        if(numberOfPlayers != 4){
-            numberOfPlayers = 4;
-            twoPlayersButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle));
-            threePlayersButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle));
-            fourPlayersButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
-        }
+
+    public void setSeconds(int seconds) {
+        this.seconds = seconds;
     }
+
+    public boolean isVibeOn() {
+        return vibeOn;
+    }
+
+    public boolean isSoundOn() {
+        return soundOn;
+    }
+
+    public int getMinutes() {
+        return minutes;
+    }
+
+    public int getSeconds() {
+        return seconds;
+    }
+
+    public int getAddedSeconds() {
+        return addedSeconds;
+    }
+
 }

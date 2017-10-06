@@ -27,6 +27,7 @@ public class Field {
     public static int colorText = Color.parseColor("#006600");
 
 
+
     long timeInMiliseconds = 0L;
     long timeSwapBuff;
     long updatedTime = 0L;
@@ -59,7 +60,7 @@ public class Field {
                     numberOfPlayersTimeUp++;
                     Log.d("timeLeftFieldThread", "goes");
                 }
-                if(numberOfPlayersTimeUp == Settings.numberOfPlayers - 1){
+                if(numberOfPlayersTimeUp == SettingsActivity.numberOfPlayers - 1){
                     allTimesUp = true;
                 }
             }

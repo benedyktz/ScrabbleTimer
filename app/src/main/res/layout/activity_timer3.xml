@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".Settings"
+        tools:context=".SettingsActivity"
         android:id="@+id/fullscreen_content">
 
         <LinearLayout
@@ -58,7 +58,7 @@
             android:layout_weight="1"
             android:gravity="center">
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:gravity="center">
@@ -66,7 +66,7 @@
                 <LinearLayout
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_margin="5dp"
+                    android:layout_margin="2dp"
                     android:onClick="gamePause"
                     android:orientation="horizontal"
                     android:background="@drawable/radius_rectangle"
@@ -82,17 +82,32 @@
                 <LinearLayout
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:onClick="reset"
+                    android:onClick="resetOnClick"
                     android:orientation="horizontal"
                     android:background="@drawable/radius_rectangle"
                     android:id="@+id/resetButtonTimer"
                     android:gravity="center"
-                    android:layout_margin="5dp">
+                    android:layout_margin="2dp">
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_replay_black_24dp"
                         android:contentDescription="pauseButton"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:onClick="settings"
+                    android:orientation="horizontal"
+                    android:background="@drawable/radius_rectangle"
+                    android:id="@+id/settingsButtonTimer"
+                    android:gravity="center"
+                    android:layout_margin="2dp">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_settings_black_24dp"
+                        android:contentDescription="resetButton"/>
                 </LinearLayout>
             </LinearLayout>
 
@@ -112,7 +127,7 @@
 
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:gravity="center">
@@ -124,7 +139,7 @@
                     android:background="@drawable/radius_rectangle"
                     android:id="@+id/soundButtonTimer"
                     android:gravity="center"
-                    android:layout_margin="5dp">
+                    android:layout_margin="2dp">
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -139,7 +154,7 @@
                     android:background="@drawable/radius_rectangle"
                     android:id="@+id/vibeButtonTimer"
                     android:gravity="center"
-                    android:layout_margin="5dp">
+                    android:layout_margin="2dp">
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

@@ -26,22 +26,18 @@ import java.util.List;
 public class Timer extends AppCompatActivity {
 
     List<Field> players = new ArrayList<>();
-    int numberOfPlayers = Settings.numberOfPlayers;
 
-    int addedSeconds;
-
+    static Settings settings = new Settings();
 
     public static Button startButton;
     View soundButton;
     View vibeButton;
     View pauseButton;
     View resetButton;
-//    View startButton;
-//    View resetButton;
 
     static boolean  gameStarted = false;
-    boolean gamePaused = false;
-    boolean gameStartedByField = false;
+    static boolean gamePaused = false;
+    static boolean gameStartedByField = false;
 
     Vibrator vibe;
 
@@ -103,86 +99,25 @@ public class Timer extends AppCompatActivity {
         }
     };
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        for (int i=0; i<numberOfPlayers; i++){
-            players.add(new Field());
-        }
-
-        switch (numberOfPlayers) {
-            case 2:
-                setContentView(R.layout.activity_timer2);
-                players.get(0).timerValue = (TextView) findViewById(R.id.timerValue);
-                players.get(1).timerValue = (TextView) findViewById(R.id.timerValue2);
-                break;
-            case 3:
-                setContentView(R.layout.activity_timer3);
-                players.get(0).timerValue = (TextView) findViewById(R.id.timerValue);
-                players.get(1).timerValue = (TextView) findViewById(R.id.timerValue2);
-                players.get(2).timerValue = (TextView) findViewById(R.id.timerValue3);
-                break;
-            case 4: default:
-                setContentView(R.layout.activity_timer4);
-                players.get(0).timerValue = (TextView) findViewById(R.id.timerValue);
-                players.get(1).timerValue = (TextView) findViewById(R.id.timerValue2);
-                players.get(2).timerValue = (TextView) findViewById(R.id.timerValue3);
-                players.get(3).timerValue = (TextView) findViewById(R.id.timerValue4);
-                break;
-        }
-
-        Intent intent = getIntent();
-
-        int defaultMinutes = 20;
-        int defaultSeconds = 0;
-        int defaultAdded = 0;
-
-        int minutes = intent.getIntExtra("MINUTES", defaultMinutes);
-        int seconds = intent.getIntExtra("SECONDS", defaultSeconds);
-        addedSeconds = intent.getIntExtra("ADDED_SECONDS", defaultAdded);
-        soundButton = findViewById(R.id.soundButtonTimer);
-        vibeButton = findViewById(R.id.vibeButtonTimer);
-        pauseButton = findViewById(R.id.pauseButtonTimer);
-        resetButton = findViewById(R.id.resetButtonTimer);
-
-        mContentView = findViewById(R.id.fullscreen_content);
-
-
-        // Set up the user interaction to manually show or hide the system UI.
-        mContentView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                hide();
-            }
-        });
-
-        // Upon interacting with UI controls, delay any scheduled hide()
-        // operations to prevent the jarring behavior of controls going away
-        // while interacting with the UI.
-
-        Field.fieldColor = getResources().getColor(R.color.fieldBackground);
-        Field.fieldColorActive = getResources().getColor(R.color.fieldBackgroundActive);
-        Field.fieldTextActive = getResources().getColor(R.color.fieldTextActive);
-        Field.colorText = getResources().getColor(R.color.colorText);
-        for (Field player: players) {
-            player.timerValue.setText(String.format("%02d", minutes) + ":" + String.format("%02d", seconds));
-            player.running = true;
-            player.setMinutes(minutes);
-            player.setSeconds(seconds);
-        }
-        Field.timeUpFlag = false;
-        Field.allTimesUp = false;
-        Field.numberOfPlayersTimeUp = 0;
-
-        startButton = (Button) findViewById(R.id.startButton);
-        startButton.setVisibility(View.VISIBLE);
-        vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        if(Settings.vibeOn)
-            vibeButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
-        if(Settings.soundOn)
-            soundButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
+        Log.d("a", "oncreate");
+        createGame();
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if(SettingsActivity.fromSettingsFlag){
+            createGame();
+            SettingsActivity.fromSettingsFlag = false;
+        }
+    }
+
+
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
@@ -218,13 +153,13 @@ public class Timer extends AppCompatActivity {
     public void change(View view) {
 
         if (gameStarted) {
-            if (i == numberOfPlayers - 1) {
+            if (i == settings.getNumberOfPlayers() - 1) {
                 if (players.get(i).timerValue.getId() == view.getId()) {
                     if (players.get(i).running && players.get(i).hasTimeLeft) {
                         players.get(i).stop();
                         players.get(0).start();
                         if(!gameStartedByField){
-                            players.get(i).addSeconds(addedSeconds);
+                            players.get(i).addSeconds(settings.getAddedSeconds());
                             gameStartedByField = false;
                         }
                         i = 0;
@@ -241,7 +176,7 @@ public class Timer extends AppCompatActivity {
                     players.get(i).stop();
                     players.get(i + 1).start();
                     if(!gameStartedByField){
-                        players.get(i).addSeconds(addedSeconds);
+                        players.get(i).addSeconds(settings.getAddedSeconds());
                     }
                     else{
                         gameStartedByField = false;
@@ -267,18 +202,18 @@ public class Timer extends AppCompatActivity {
     public void gameContinue() {
         if(!gamePaused && !Field.allTimesUp && !players.get(i).hasTimeLeft) {
             boolean flag = true;
-            while (flag && (i <= numberOfPlayers - 1)) {
-                if (i < numberOfPlayers - 1 && players.get(i + 1).hasTimeLeft && !players.get(i).hasTimeLeft) {
+            while (flag && (i <= settings.getNumberOfPlayers() - 1)) {
+                if (i < settings.getNumberOfPlayers() - 1 && players.get(i + 1).hasTimeLeft && !players.get(i).hasTimeLeft) {
                     players.get(i + 1).start();
                     flag = false;
                     Field.timeUpFlag = false;
                 }
-                if (i == numberOfPlayers - 1 && players.get(0).hasTimeLeft && !players.get(numberOfPlayers - 1).hasTimeLeft) {
+                if (i == settings.getNumberOfPlayers() - 1 && players.get(0).hasTimeLeft && !players.get(settings.getNumberOfPlayers() - 1).hasTimeLeft) {
                     players.get(0).start();
                     flag = false;
                     Field.timeUpFlag = false;
                 }
-                if (i < numberOfPlayers - 1) {
+                if (i < settings.getNumberOfPlayers() - 1) {
                     i++;
                 } else {
                     i = 0;
@@ -314,10 +249,10 @@ public class Timer extends AppCompatActivity {
 
     boolean doubleBackToSettingsPressedOnce = false;
 
-    public void reset(View view) {
+    public void settings(View view) {
 
             if (doubleBackToSettingsPressedOnce) {
-                Intent intent = new Intent(this, Settings.class);
+                Intent intent = new Intent(this, SettingsActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 for (Field player : players) {
@@ -339,16 +274,40 @@ public class Timer extends AppCompatActivity {
             }, 2000);
         }
 
+
+    boolean DoubleBackToResetPressedOnce = false;
+
+    public void resetOnClick (View view) {
+
+        if (DoubleBackToResetPressedOnce) {
+
+            reset();
+            return;
+        }
+
+        this.doubleBackToSettingsPressedOnce = true;
+        Toast.makeText(this, "This will restart timer. If you are sure, click twice", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToSettingsPressedOnce=false;
+            }
+        }, 2000);
+    }
+
     boolean doubleBackToExitPressedOnce = false;
 
     @Override
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
-            super.onBackPressed();
             for (Field player : players) {
                 player.stop();
             }
             gameStarted = false;
+            Log.d("a", "should finish");
+            super.onBackPressed();
             return;
         }
 
@@ -365,31 +324,31 @@ public class Timer extends AppCompatActivity {
     }
 
     public void viberToggle (View view) {
-        if(Settings.vibeOn){
-            Settings.vibeOn = false;
+        if(settings.isVibeOn()){
+            settings.setVibeOn(false);
             vibeButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle));
         }
         else{
-            Settings.vibeOn = true;
+            settings.setVibeOn(true);
             vibeButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
         }
 
     }
 
     public void soundToggle (View view) {
-        if(Settings.soundOn){
-            Settings.soundOn = false;
+        if(settings.isSoundOn()){
+            settings.setSoundOn(false);
             soundButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle));
         }
         else{
-            Settings.soundOn = true;
+            settings.setSoundOn(true);
             soundButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
         }
     }
 
     private void vibeAndSound() {
 
-        if(Settings.soundOn){
+        if(settings.isSoundOn()){
             MediaPlayer mp = MediaPlayer.create(this, R.raw.switch_sound);
             mp.start();
             mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
@@ -399,7 +358,7 @@ public class Timer extends AppCompatActivity {
             });
         }
 
-        if(Settings.vibeOn){
+        if(settings.isVibeOn()){
             vibe.vibrate(100);
         }
     }
@@ -409,7 +368,7 @@ public class Timer extends AppCompatActivity {
             change(view);
         }
         else{
-            for(int j=0; j<numberOfPlayers; j++){
+            for(int j=0; j < settings.getNumberOfPlayers(); j++){
                 if(players.get(j).timerValue.getId() == view.getId()){
                     i=j;
                     Log.d("aaa", "" + i);
@@ -421,5 +380,82 @@ public class Timer extends AppCompatActivity {
             change(view);
         }
     }
+
+    public void reset() {
+
+    }
+
+    void createGame(){
+        players.clear();
+        for (int i=0; i < settings.getNumberOfPlayers(); i++){
+            players.add(new Field());
+        }
+
+        switch (settings.getNumberOfPlayers()) {
+            case 2:
+                setContentView(R.layout.activity_timer2);
+                players.get(0).timerValue = (TextView) findViewById(R.id.timerValue);
+                players.get(1).timerValue = (TextView) findViewById(R.id.timerValue2);
+                break;
+            case 3:
+                setContentView(R.layout.activity_timer3);
+                players.get(0).timerValue = (TextView) findViewById(R.id.timerValue);
+                players.get(1).timerValue = (TextView) findViewById(R.id.timerValue2);
+                players.get(2).timerValue = (TextView) findViewById(R.id.timerValue3);
+                break;
+            case 4: default:
+                setContentView(R.layout.activity_timer4);
+                players.get(0).timerValue = (TextView) findViewById(R.id.timerValue);
+                players.get(1).timerValue = (TextView) findViewById(R.id.timerValue2);
+                players.get(2).timerValue = (TextView) findViewById(R.id.timerValue3);
+                players.get(3).timerValue = (TextView) findViewById(R.id.timerValue4);
+                break;
+        }
+
+
+        soundButton = findViewById(R.id.soundButtonTimer);
+        vibeButton = findViewById(R.id.vibeButtonTimer);
+        pauseButton = findViewById(R.id.pauseButtonTimer);
+        resetButton = findViewById(R.id.resetButtonTimer);
+
+        mContentView = findViewById(R.id.fullscreen_content);
+
+
+        // Set up the user interaction to manually show or hide the system UI.
+        mContentView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                hide();
+            }
+        });
+
+        // Upon interacting with UI controls, delay any scheduled hide()
+        // operations to prevent the jarring behavior of controls going away
+        // while interacting with the UI.
+
+        Field.fieldColor = getResources().getColor(R.color.fieldBackground);
+        Field.fieldColorActive = getResources().getColor(R.color.fieldBackgroundActive);
+        Field.fieldTextActive = getResources().getColor(R.color.fieldTextActive);
+        Field.colorText = getResources().getColor(R.color.colorText);
+        for (Field player: players) {
+            Log.d("a", "" + settings.getNumberOfPlayers());
+            player.timerValue.setText(String.format("%02d", settings.getMinutes()) + ":" + String.format("%02d", settings.getSeconds()));
+            player.running = true;
+            player.setMinutes(settings.getMinutes());
+            player.setSeconds(settings.getSeconds());
+        }
+        Field.timeUpFlag = false;
+        Field.allTimesUp = false;
+        Field.numberOfPlayersTimeUp = 0;
+
+        startButton = (Button) findViewById(R.id.startButton);
+        startButton.setVisibility(View.VISIBLE);
+        vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        if(settings.isVibeOn())
+            vibeButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
+        if(settings.isSoundOn())
+            soundButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
+    }
+
 
 }
