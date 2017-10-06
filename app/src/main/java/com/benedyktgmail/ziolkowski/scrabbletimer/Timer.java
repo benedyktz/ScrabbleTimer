@@ -12,6 +12,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -106,6 +107,7 @@ public class Timer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Log.d("a", "oncreate");
         createGame();
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
 
     @Override
@@ -115,6 +117,17 @@ public class Timer extends AppCompatActivity {
             createGame();
             SettingsActivity.fromSettingsFlag = false;
         }
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d("a", "onPause");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d("a", "ondestroy");
     }
 
 
