@@ -5,12 +5,14 @@ import android.graphics.Color;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.util.Log;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class Field {
 
     public TextView timerValue;
 
+    public RelativeLayout field;
     public long startTime = 0L;
 
     public Handler customHandler = new Handler();
@@ -71,6 +73,7 @@ public class Field {
         if(hasTimeLeft){
             startTime = SystemClock.uptimeMillis();
             customHandler.postDelayed(updateTimerThread, 0);
+            field.setBackgroundColor(fieldColorActive);
             timerValue.setBackgroundColor(fieldColorActive);
             timerValue.setTextColor(fieldTextActive);
             running = true;
@@ -81,6 +84,7 @@ public class Field {
     public void stop() {
         timeSwapBuff -= timeInMiliseconds;
         customHandler.removeCallbacks(updateTimerThread);
+        field.setBackgroundColor(fieldColor);
         timerValue.setBackgroundColor(fieldColor);
         timerValue.setTextColor(colorText);
         running = false;

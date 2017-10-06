@@ -21,35 +21,67 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="3">
-            <TextView
+            <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:text="@string/timerVal"
-                android:textAlignment="center"
-                android:textSize="60dp"
-                android:background="@color/fieldBackground"
-                android:id="@+id/timerValue"
-                android:onClick="fieldClick"
                 android:layout_weight="5"
+                android:onClick="fieldClick"
                 android:gravity="center"
-                android:rotation="180"/>
+                android:id="@+id/field1"
+                android:rotation="180">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/timerVal"
+                    android:textAlignment="center"
+                    android:textSize="60dp"
+                    android:background="@color/fieldBackground"
+                    android:id="@+id/timerValue"
+                    android:layout_weight="5"
+                    android:layout_centerHorizontal="true"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="player 1"
+                    android:textSize="40dp"
+                    android:textColor="#00ff00"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/timerValue"/>
+
+            </RelativeLayout>
             <!--<View-->
                 <!--android:layout_width="0dp"-->
                 <!--android:layout_height="match_parent"-->
                 <!--android:layout_weight="1"/>-->
 
-            <TextView
+            <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:text="@string/timerVal"
-                android:textAlignment="center"
-                android:textSize="60dp"
-                android:background="@color/fieldBackground"
-                android:id="@+id/timerValue2"
-                android:onClick="fieldClick"
                 android:layout_weight="5"
+                android:onClick="fieldClick"
                 android:gravity="center"
-                android:rotation="180"/>
+                android:id="@+id/field2"
+                android:rotation="180">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/timerVal"
+                    android:textAlignment="center"
+                    android:textSize="60dp"
+                    android:background="@color/fieldBackground"
+                    android:id="@+id/timerValue2"
+                    android:layout_weight="5"
+                    android:layout_centerHorizontal="true"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="player 2"
+                    android:textSize="40dp"
+                    android:textColor="#00ff00"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/timerValue2"/>
+
+            </RelativeLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -176,35 +208,66 @@
             android:layout_height="0dp"
             android:layout_weight="3">
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="5"
-                android:layout_height="match_parent"
-                android:text="@string/timerVal"
-                android:textAlignment="center"
-                android:textSize="60dp"
-                android:background="@color/fieldBackground"
-                android:id="@+id/timerValue4"
-                android:onClick="fieldClick"
-                android:gravity="center"/>
-
             <!--<View-->
                 <!--android:layout_width="0dp"-->
                 <!--android:layout_weight="1"-->
                 <!--android:layout_height="match_parent"/>-->
 
-            <TextView
+            <RelativeLayout
                 android:layout_width="0dp"
-                android:layout_weight="5"
                 android:layout_height="match_parent"
-                android:text="@string/timerVal"
-                android:textAlignment="center"
-                android:textSize="60dp"
-                android:background="@color/fieldBackground"
-                android:id="@+id/timerValue3"
+                android:layout_weight="5"
                 android:onClick="fieldClick"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:id="@+id/field4">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/timerVal"
+                    android:textAlignment="center"
+                    android:textSize="60dp"
+                    android:background="@color/fieldBackground"
+                    android:id="@+id/timerValue4"
+                    android:layout_weight="5"
+                    android:layout_centerHorizontal="true"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="player 4"
+                    android:textSize="40dp"
+                    android:textColor="#00ff00"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/timerValue4"/>
 
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:onClick="fieldClick"
+                android:gravity="center"
+                android:id="@+id/field3">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/timerVal"
+                    android:textAlignment="center"
+                    android:textSize="60dp"
+                    android:background="@color/fieldBackground"
+                    android:id="@+id/timerValue3"
+                    android:layout_weight="5"
+                    android:layout_centerHorizontal="true"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="player 3"
+                    android:textSize="40dp"
+                    android:textColor="#00ff00"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/timerValue3"/>
+
+            </RelativeLayout>
         </LinearLayout>
     </LinearLayout>
 

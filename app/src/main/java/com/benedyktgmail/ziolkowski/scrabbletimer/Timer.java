@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -166,7 +167,7 @@ public class Timer extends AppCompatActivity {
 
         if (gameStarted) {
             if (activePlayer == settings.getNumberOfPlayers() - 1) {
-                if (players.get(activePlayer).timerValue.getId() == view.getId()) {
+                if (players.get(activePlayer).field.getId() == view.getId()) {
                     if (players.get(activePlayer).running && players.get(activePlayer).hasTimeLeft) {
                         players.get(activePlayer).stop();
                         players.get(0).start();
@@ -183,7 +184,7 @@ public class Timer extends AppCompatActivity {
                 }
             }
 
-            if (players.get(activePlayer).timerValue.getId() == view.getId()) {
+            if (players.get(activePlayer).field.getId() == view.getId()) {
                 if (players.get(activePlayer).running && players.get(activePlayer).hasTimeLeft) {
                     players.get(activePlayer).stop();
                     players.get(activePlayer + 1).start();
@@ -234,6 +235,7 @@ public class Timer extends AppCompatActivity {
                     player.stop();
                 }
                 players.get(activePlayer).timerValue.setBackgroundColor(Field.fieldColor);
+                players.get(activePlayer).field.setBackgroundColor(Field.fieldColor);
                 pauseButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
                 vibeAndSound();
             }
@@ -245,9 +247,9 @@ public class Timer extends AppCompatActivity {
             pauseButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle));
             vibeAndSound();
             if(players.get(activePlayer).hasTimeLeft)
-                players.get(activePlayer).timerValue.setBackgroundColor(Field.fieldColorActive);
+                players.get(activePlayer).field.setBackgroundColor(Field.fieldColorActive);
             else
-                players.get(activePlayer).timerValue.setBackgroundColor(Field.fieldColor);
+                players.get(activePlayer).field.setBackgroundColor(Field.fieldColor);
         }
     }
 
@@ -367,14 +369,15 @@ public class Timer extends AppCompatActivity {
     }
 
     public void fieldClick (View view) {
+
         if(gameStarted){
             change(view);
         }
         else{
             for(int j=0; j < settings.getNumberOfPlayers(); j++){
-                if(players.get(j).timerValue.getId() == view.getId()){
+                Log.d("a", "" + j);
+                if(players.get(j).field.getId() == view.getId()){
                     activePlayer=j;
-                    Log.d("aaa", "" + activePlayer);
                 }
             }
             gameStarted = true;
@@ -403,12 +406,17 @@ public class Timer extends AppCompatActivity {
                 setContentView(R.layout.activity_timer2);
                 players.get(0).timerValue = (TextView) findViewById(R.id.timerValue);
                 players.get(1).timerValue = (TextView) findViewById(R.id.timerValue2);
+                players.get(0).field = (RelativeLayout) findViewById(R.id.field1);
+                players.get(1).field = (RelativeLayout) findViewById(R.id.field2);
                 break;
             case 3:
                 setContentView(R.layout.activity_timer3);
                 players.get(0).timerValue = (TextView) findViewById(R.id.timerValue);
                 players.get(1).timerValue = (TextView) findViewById(R.id.timerValue2);
-                players.get(2).timerValue = (TextView) findViewById(R.id.timerValue3);
+                players.get(2).timerValue = (TextView) findViewById(R.id.timerValue3);;
+                players.get(0).field = (RelativeLayout) findViewById(R.id.field1);
+                players.get(1).field = (RelativeLayout) findViewById(R.id.field2);
+                players.get(2).field = (RelativeLayout) findViewById(R.id.field3);
                 break;
             case 4: default:
                 setContentView(R.layout.activity_timer4);
@@ -416,6 +424,10 @@ public class Timer extends AppCompatActivity {
                 players.get(1).timerValue = (TextView) findViewById(R.id.timerValue2);
                 players.get(2).timerValue = (TextView) findViewById(R.id.timerValue3);
                 players.get(3).timerValue = (TextView) findViewById(R.id.timerValue4);
+                players.get(0).field = (RelativeLayout) findViewById(R.id.field1);
+                players.get(1).field = (RelativeLayout) findViewById(R.id.field2);
+                players.get(2).field = (RelativeLayout) findViewById(R.id.field3);
+                players.get(3).field = (RelativeLayout) findViewById(R.id.field4);
                 break;
         }
 
