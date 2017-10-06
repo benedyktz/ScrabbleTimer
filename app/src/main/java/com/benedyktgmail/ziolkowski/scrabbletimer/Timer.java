@@ -406,6 +406,8 @@ public class Timer extends AppCompatActivity {
                 setContentView(R.layout.activity_timer2);
                 players.get(0).timerValue = (TextView) findViewById(R.id.timerValue);
                 players.get(1).timerValue = (TextView) findViewById(R.id.timerValue2);
+                players.get(0).playerName = (TextView) findViewById(R.id.playerName1);
+                players.get(1).playerName = (TextView) findViewById(R.id.playerName2);
                 players.get(0).field = (RelativeLayout) findViewById(R.id.field1);
                 players.get(1).field = (RelativeLayout) findViewById(R.id.field2);
                 break;
@@ -413,7 +415,10 @@ public class Timer extends AppCompatActivity {
                 setContentView(R.layout.activity_timer3);
                 players.get(0).timerValue = (TextView) findViewById(R.id.timerValue);
                 players.get(1).timerValue = (TextView) findViewById(R.id.timerValue2);
-                players.get(2).timerValue = (TextView) findViewById(R.id.timerValue3);;
+                players.get(2).timerValue = (TextView) findViewById(R.id.timerValue3);
+                players.get(0).playerName = (TextView) findViewById(R.id.playerName1);
+                players.get(1).playerName = (TextView) findViewById(R.id.playerName2);
+                players.get(2).playerName = (TextView) findViewById(R.id.playerName3);
                 players.get(0).field = (RelativeLayout) findViewById(R.id.field1);
                 players.get(1).field = (RelativeLayout) findViewById(R.id.field2);
                 players.get(2).field = (RelativeLayout) findViewById(R.id.field3);
@@ -424,6 +429,10 @@ public class Timer extends AppCompatActivity {
                 players.get(1).timerValue = (TextView) findViewById(R.id.timerValue2);
                 players.get(2).timerValue = (TextView) findViewById(R.id.timerValue3);
                 players.get(3).timerValue = (TextView) findViewById(R.id.timerValue4);
+                players.get(0).playerName = (TextView) findViewById(R.id.playerName1);
+                players.get(1).playerName = (TextView) findViewById(R.id.playerName2);
+                players.get(2).playerName = (TextView) findViewById(R.id.playerName3);
+                players.get(3).playerName = (TextView) findViewById(R.id.playerName4);
                 players.get(0).field = (RelativeLayout) findViewById(R.id.field1);
                 players.get(1).field = (RelativeLayout) findViewById(R.id.field2);
                 players.get(2).field = (RelativeLayout) findViewById(R.id.field3);

@@ -11,7 +11,7 @@ import android.widget.TextView;
 public class Field {
 
     public TextView timerValue;
-
+    public TextView playerName;
     public RelativeLayout field;
     public long startTime = 0L;
 
@@ -76,6 +76,7 @@ public class Field {
             field.setBackgroundColor(fieldColorActive);
             timerValue.setBackgroundColor(fieldColorActive);
             timerValue.setTextColor(fieldTextActive);
+            playerName.setTextColor(fieldTextActive);
             running = true;
         }
     }
@@ -87,6 +88,7 @@ public class Field {
         field.setBackgroundColor(fieldColor);
         timerValue.setBackgroundColor(fieldColor);
         timerValue.setTextColor(colorText);
+        playerName.setTextColor(colorText);
         running = false;
     }
 
