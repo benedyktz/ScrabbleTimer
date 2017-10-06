@@ -67,24 +67,6 @@ public class SettingsActivity extends AppCompatActivity {
                 }
             });
         }
-        // Find the View that shows the about button
-        TextView about = (TextView) findViewById(R.id.about);
-
-        // Set a click listener on that View
-        if(about != null){
-            about.setOnClickListener(new View.OnClickListener() {
-                // The code in this method will be executed when the start button is clicked on.
-                @Override
-                public void onClick(View view) {
-
-                // Create a new intent to open the {@link About}
-                Intent aboutIntent = new Intent(SettingsActivity.this, About.class);
-
-                // Start the new activity
-                    startActivity(aboutIntent);
-                }
-            });
-        }
     }
 
     @Override

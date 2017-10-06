@@ -30,7 +30,6 @@ public class Timer extends AppCompatActivity {
 
     static Settings settings = new Settings();
 
-    public static Button startButton;
     View soundButton;
     View vibeButton;
     View pauseButton;
@@ -202,14 +201,6 @@ public class Timer extends AppCompatActivity {
                 }
             }
         }
-    }
-
-    public void gameStart(View view) {
-        if(!gameStarted && !gamePaused) {
-            gameStarted = true;
-            players.get(0).start();
-        }
-        startButton.setVisibility(View.GONE);
     }
 
     public void gameContinue() {
@@ -389,7 +380,6 @@ public class Timer extends AppCompatActivity {
             }
             gameStarted = true;
             gameStartedByField = true;
-            startButton.setVisibility(View.GONE);
             change(view);
         }
     }
@@ -461,8 +451,6 @@ public class Timer extends AppCompatActivity {
         Field.allTimesUp = false;
         Field.numberOfPlayersTimeUp = 0;
 
-        startButton = (Button) findViewById(R.id.startButton);
-        startButton.setVisibility(View.VISIBLE);
         vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         if(settings.isVibeOn())
             vibeButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
@@ -470,5 +458,12 @@ public class Timer extends AppCompatActivity {
             soundButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
     }
 
+    public void info (View view) {
+        // Create a new intent to open the {@link About}
+        Intent aboutIntent = new Intent(Timer.this, About.class);
+
+        // Start the new activity
+        startActivity(aboutIntent);
+    }
 
 }
