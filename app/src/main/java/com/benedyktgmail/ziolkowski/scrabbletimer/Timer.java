@@ -13,7 +13,6 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,7 +44,7 @@ public class Timer extends AppCompatActivity {
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
      */
-    private static final boolean AUTO_HIDE = true;
+    private static final boolean AUTO_HIDE = false;
 
     /**
      * If {@link #AUTO_HIDE} is set, the number of milliseconds to wait after
@@ -160,21 +159,22 @@ public class Timer extends AppCompatActivity {
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
     }
 
-    int i = 0;
+    int activePlayer = 0;
+
 
     public void change(View view) {
 
         if (gameStarted) {
-            if (i == settings.getNumberOfPlayers() - 1) {
-                if (players.get(i).timerValue.getId() == view.getId()) {
-                    if (players.get(i).running && players.get(i).hasTimeLeft) {
-                        players.get(i).stop();
+            if (activePlayer == settings.getNumberOfPlayers() - 1) {
+                if (players.get(activePlayer).timerValue.getId() == view.getId()) {
+                    if (players.get(activePlayer).running && players.get(activePlayer).hasTimeLeft) {
+                        players.get(activePlayer).stop();
                         players.get(0).start();
                         if(!gameStartedByField){
-                            players.get(i).addSeconds(settings.getAddedSeconds());
+                            players.get(activePlayer).addSeconds(settings.getAddedSeconds());
                             gameStartedByField = false;
                         }
-                        i = 0;
+                        activePlayer = 0;
                         vibeAndSound();
                     }
                     if (!players.get(0).hasTimeLeft) {
@@ -183,20 +183,20 @@ public class Timer extends AppCompatActivity {
                 }
             }
 
-            if (players.get(i).timerValue.getId() == view.getId()) {
-                if (players.get(i).running && players.get(i).hasTimeLeft) {
-                    players.get(i).stop();
-                    players.get(i + 1).start();
+            if (players.get(activePlayer).timerValue.getId() == view.getId()) {
+                if (players.get(activePlayer).running && players.get(activePlayer).hasTimeLeft) {
+                    players.get(activePlayer).stop();
+                    players.get(activePlayer + 1).start();
                     if(!gameStartedByField){
-                        players.get(i).addSeconds(settings.getAddedSeconds());
+                        players.get(activePlayer).addSeconds(settings.getAddedSeconds());
                     }
                     else{
                         gameStartedByField = false;
                     }
-                    i++;
+                    activePlayer++;
                     vibeAndSound();
                 }
-                if (!players.get(i).hasTimeLeft) {
+                if (!players.get(activePlayer).hasTimeLeft) {
                     gameContinue();
                 }
             }
@@ -204,23 +204,23 @@ public class Timer extends AppCompatActivity {
     }
 
     public void gameContinue() {
-        if(!gamePaused && !Field.allTimesUp && !players.get(i).hasTimeLeft) {
+        if(!gamePaused && !Field.allTimesUp && !players.get(activePlayer).hasTimeLeft) {
             boolean flag = true;
-            while (flag && (i <= settings.getNumberOfPlayers() - 1)) {
-                if (i < settings.getNumberOfPlayers() - 1 && players.get(i + 1).hasTimeLeft && !players.get(i).hasTimeLeft) {
-                    players.get(i + 1).start();
+            while (flag && (activePlayer <= settings.getNumberOfPlayers() - 1)) {
+                if (activePlayer < settings.getNumberOfPlayers() - 1 && players.get(activePlayer + 1).hasTimeLeft && !players.get(activePlayer).hasTimeLeft) {
+                    players.get(activePlayer + 1).start();
                     flag = false;
                     Field.timeUpFlag = false;
                 }
-                if (i == settings.getNumberOfPlayers() - 1 && players.get(0).hasTimeLeft && !players.get(settings.getNumberOfPlayers() - 1).hasTimeLeft) {
+                if (activePlayer == settings.getNumberOfPlayers() - 1 && players.get(0).hasTimeLeft && !players.get(settings.getNumberOfPlayers() - 1).hasTimeLeft) {
                     players.get(0).start();
                     flag = false;
                     Field.timeUpFlag = false;
                 }
-                if (i < settings.getNumberOfPlayers() - 1) {
-                    i++;
+                if (activePlayer < settings.getNumberOfPlayers() - 1) {
+                    activePlayer++;
                 } else {
-                    i = 0;
+                    activePlayer = 0;
                 }
             }
         }
@@ -233,21 +233,21 @@ public class Timer extends AppCompatActivity {
                 for (Field player : players) {
                     player.stop();
                 }
-                players.get(i).timerValue.setBackgroundColor(Field.fieldColor);
+                players.get(activePlayer).timerValue.setBackgroundColor(Field.fieldColor);
                 pauseButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
                 vibeAndSound();
             }
         }
         else{
             gamePaused = false;
-            players.get(i).start();
-            players.get(i).running = true;
+            players.get(activePlayer).start();
+            players.get(activePlayer).running = true;
             pauseButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle));
             vibeAndSound();
-            if(players.get(i).hasTimeLeft)
-                players.get(i).timerValue.setBackgroundColor(Field.fieldColorActive);
+            if(players.get(activePlayer).hasTimeLeft)
+                players.get(activePlayer).timerValue.setBackgroundColor(Field.fieldColorActive);
             else
-                players.get(i).timerValue.setBackgroundColor(Field.fieldColor);
+                players.get(activePlayer).timerValue.setBackgroundColor(Field.fieldColor);
         }
     }
 
@@ -279,24 +279,23 @@ public class Timer extends AppCompatActivity {
         }
 
 
-    boolean DoubleBackToResetPressedOnce = false;
+    boolean doubleBackToResetPressedOnce = false;
 
     public void resetOnClick (View view) {
 
-        if (DoubleBackToResetPressedOnce) {
-
+        if (doubleBackToResetPressedOnce) {
             reset();
             return;
         }
 
-        this.doubleBackToSettingsPressedOnce = true;
+        this.doubleBackToResetPressedOnce = true;
         Toast.makeText(this, "This will restart timer. If you are sure, click twice", Toast.LENGTH_SHORT).show();
 
         new Handler().postDelayed(new Runnable() {
 
             @Override
             public void run() {
-                doubleBackToSettingsPressedOnce=false;
+                doubleBackToResetPressedOnce=false;
             }
         }, 2000);
     }
@@ -374,8 +373,8 @@ public class Timer extends AppCompatActivity {
         else{
             for(int j=0; j < settings.getNumberOfPlayers(); j++){
                 if(players.get(j).timerValue.getId() == view.getId()){
-                    i=j;
-                    Log.d("aaa", "" + i);
+                    activePlayer=j;
+                    Log.d("aaa", "" + activePlayer);
                 }
             }
             gameStarted = true;
@@ -385,10 +384,15 @@ public class Timer extends AppCompatActivity {
     }
 
     public void reset() {
-
+        gameStarted = false;
+        gameStartedByField = false;
+        gamePaused = false;
+        activePlayer = 0;
+        createGame();
     }
 
     void createGame(){
+
         players.clear();
         for (int i=0; i < settings.getNumberOfPlayers(); i++){
             players.add(new Field());

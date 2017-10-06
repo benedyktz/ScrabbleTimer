@@ -5,9 +5,6 @@
     android:background="@color/background"
     tools:context="com.benedyktgmail.ziolkowski.scrabbletimer.Timer">
 
-    <!-- The primary full-screen view. This can be replaced with whatever view
-         is needed to present your content, e.g. VideoView, SurfaceView,
-         TextureView, etc. -->
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -33,11 +30,6 @@
                 android:layout_weight="5"
                 android:gravity="center"
                 android:rotation="180"/>
-            <!--<View-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:layout_weight="1"/>-->
-
         </LinearLayout>
 
 

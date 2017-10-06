@@ -194,17 +194,6 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_vibration_black_24dp"/>
         </LinearLayout>
-
     </LinearLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="about"
-        android:gravity="center"
-        android:id="@+id/about"
-        android:textAlignment="center"
-        android:textSize="24sp"/>
 
 </LinearLayout>

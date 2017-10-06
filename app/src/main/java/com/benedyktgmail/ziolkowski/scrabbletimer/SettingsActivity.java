@@ -82,6 +82,15 @@ public class SettingsActivity extends AppCompatActivity {
             fourPlayersButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Timer.gameStarted = false;
+        Timer.gameStartedByField = false;
+        Timer.gamePaused = false;
+        fromSettingsFlag = true;
+    }
+
     public void viberToggle (View view) {
         if(Timer.settings.isVibeOn()){
             Timer.settings.setVibeOn(false);
