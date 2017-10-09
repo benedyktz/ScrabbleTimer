@@ -42,7 +42,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="40dp"
+                    android:textSize="24dp"
                     android:layout_centerHorizontal="true"
                     android:layout_below="@id/timerValue"
                     android:id="@id/playerName1"/>
@@ -74,7 +74,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="40dp"
+                    android:textSize="24dp"
                     android:layout_centerHorizontal="true"
                     android:layout_below="@id/timerValue2"
                     android:id="@id/playerName2"/>
@@ -233,7 +233,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="40dp"
+                    android:textSize="24dp"
                     android:layout_centerHorizontal="true"
                     android:layout_below="@id/timerValue3"
                     android:id="@+id/playerName3"/>

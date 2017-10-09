@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -15,6 +16,10 @@ public class SettingsActivity extends AppCompatActivity {
     EditText minutesEditText;
     EditText secondsEditText;
     EditText addedEditText;
+    EditText pl1EditText;
+    EditText pl2EditText;
+    EditText pl3EditText;
+    EditText pl4EditText;
 
     public static View soundButton;
     public static View vibeButton;
@@ -32,6 +37,10 @@ public class SettingsActivity extends AppCompatActivity {
         minutesEditText = (EditText) findViewById(R.id.minutes);
         secondsEditText = (EditText) findViewById(R.id.seconds);
         addedEditText = (EditText) findViewById(R.id.addSecondsEditText);
+        pl1EditText = (EditText) findViewById(R.id.pl1EditText);
+        pl2EditText = (EditText) findViewById(R.id.pl2EditText);
+        pl3EditText = (EditText) findViewById(R.id.pl3EditText);
+        pl4EditText = (EditText) findViewById(R.id.pl4EditText);
 
         twoPlayersButton = findViewById(R.id.twoPlayersButton);
         threePlayersButton = findViewById(R.id.threePlayersButton);
@@ -47,7 +56,7 @@ public class SettingsActivity extends AppCompatActivity {
             vibeButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
 
         // Find the View that shows the start button
-        TextView start = (TextView) findViewById(R.id.start);
+        Button start = (Button) findViewById(R.id.start);
 
         // Set a click listener on that View
         if(start != null){
@@ -59,6 +68,10 @@ public class SettingsActivity extends AppCompatActivity {
                     Timer.settings.setMinutes(Integer.parseInt("0" + minutesEditText.getText()));
                     Timer.settings.setSeconds(Integer.parseInt("0" + secondsEditText.getText()));
                     Timer.settings.setAddedSeconds(Integer.parseInt("0" + addedEditText.getText()));
+                    Timer.settings.setPlayer1(pl1EditText.getText().toString());
+                    Timer.settings.setPlayer2(pl2EditText.getText().toString());
+                    Timer.settings.setPlayer3(pl3EditText.getText().toString());
+                    Timer.settings.setPlayer4(pl4EditText.getText().toString());
                     Timer.gameStarted = false;
                     Timer.gameStartedByField = false;
                     Timer.gamePaused = false;
@@ -80,6 +93,11 @@ public class SettingsActivity extends AppCompatActivity {
 
         if(Timer.settings.getNumberOfPlayers() == 4)
             fourPlayersButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
+
+        pl1EditText.setText(Timer.settings.getPlayer1());
+        pl2EditText.setText(Timer.settings.getPlayer2());
+        pl3EditText.setText(Timer.settings.getPlayer3());
+        pl4EditText.setText(Timer.settings.getPlayer4());
     }
 
 
