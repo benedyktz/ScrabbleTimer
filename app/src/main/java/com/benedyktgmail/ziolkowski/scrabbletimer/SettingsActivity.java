@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.sql.Time;
 
 
 public class SettingsActivity extends AppCompatActivity {
@@ -26,7 +27,6 @@ public class SettingsActivity extends AppCompatActivity {
     public View twoPlayersButton;
     public View threePlayersButton;
     public View fourPlayersButton;
-    public static int numberOfPlayers = 2;
     static boolean fromSettingsFlag = false;
 
     @Override
@@ -68,10 +68,14 @@ public class SettingsActivity extends AppCompatActivity {
                     Timer.settings.setMinutes(Integer.parseInt("0" + minutesEditText.getText()));
                     Timer.settings.setSeconds(Integer.parseInt("0" + secondsEditText.getText()));
                     Timer.settings.setAddedSeconds(Integer.parseInt("0" + addedEditText.getText()));
-                    Timer.settings.setPlayer1(pl1EditText.getText().toString());
-                    Timer.settings.setPlayer2(pl2EditText.getText().toString());
-                    Timer.settings.setPlayer3(pl3EditText.getText().toString());
-                    Timer.settings.setPlayer4(pl4EditText.getText().toString());
+                    if(!pl1EditText.getText().toString().equals(""))
+                        Timer.settings.setPlayer1(pl1EditText.getText().toString());
+                    if(!pl2EditText.getText().toString().equals(""))
+                        Timer.settings.setPlayer2(pl2EditText.getText().toString());
+                    if(!pl3EditText.getText().toString().equals(""))
+                        Timer.settings.setPlayer3(pl3EditText.getText().toString());
+                    if(!pl4EditText.getText().toString().equals(""))
+                        Timer.settings.setPlayer4(pl4EditText.getText().toString());
                     Timer.gameStarted = false;
                     Timer.gameStartedByField = false;
                     Timer.gamePaused = false;
@@ -94,10 +98,13 @@ public class SettingsActivity extends AppCompatActivity {
         if(Timer.settings.getNumberOfPlayers() == 4)
             fourPlayersButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
 
-        pl1EditText.setText(Timer.settings.getPlayer1());
-        pl2EditText.setText(Timer.settings.getPlayer2());
-        pl3EditText.setText(Timer.settings.getPlayer3());
-        pl4EditText.setText(Timer.settings.getPlayer4());
+        pl1EditText.setHint(Timer.settings.getPlayer1());
+        pl2EditText.setHint(Timer.settings.getPlayer2());
+        pl3EditText.setHint(Timer.settings.getPlayer3());
+        pl4EditText.setHint(Timer.settings.getPlayer4());
+        minutesEditText.setHint(String.format("%02d", Timer.settings.getMinutes()));
+        secondsEditText.setHint(String.format("%02d", Timer.settings.getSeconds()));
+        addedEditText.setHint(String.format("%02d", Timer.settings.getAddedSeconds()));
     }
 
 

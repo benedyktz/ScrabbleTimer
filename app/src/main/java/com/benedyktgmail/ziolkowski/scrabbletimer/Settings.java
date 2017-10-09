@@ -10,10 +10,10 @@ public class Settings implements Serializable{
     private int seconds = 0;
     private int addedSeconds = 0;
     private int numberOfPlayers = 4;
-    private String player1 = "player1";
-    private String player2 = "player2";
-    private String player3 = "player3";
-    private String player4 = "player4";
+    private String player1 = "Player 1";
+    private String player2 = "Player 2";
+    private String player3 = "Player 3";
+    private String player4 = "Player 4";
 
     public String getPlayer1() {
         return player1;
