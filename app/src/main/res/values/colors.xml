@@ -7,13 +7,9 @@
     <color name="black_overlay">#424242</color>
 
     <color name="background">#424242</color>
-
     <color name="fieldBackground">#424242</color>
     <color name="fieldBackgroundActive">#DCEDC8</color>
     <color name="fieldTextActive">#424242</color>
-
-    <color name="green">#13e810</color>
-
     <color name="colorText">#EEEEEE</color>
     <color name="colorEditText">#DCEDC8</color>
 </resources>

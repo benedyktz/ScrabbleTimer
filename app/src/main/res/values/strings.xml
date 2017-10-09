@@ -1,8 +1,6 @@
 <resources>
-    <string name="app_name">ScrabbleTimer</string>
+    <string name="app_name">Game Timer 4 Players</string>
     <string name="actionSettings">Settings</string>
-    <string name="startButtonLabel">Start</string>
-    <string name="stopButtonLabel">Stop</string>
 
     <string name="title_activity_timer">Timer</string>
 
@@ -19,4 +17,6 @@
     <string name="about_playerNames">&#8227; You can set players\' names</string>
     <string name="about_vibeAndSound">&#8227; You can turn on and turn off vibration and sound effects</string>
     <string name="about_contact">&#8227; If you see any bug or error please contact by e-mail</string>
+
+    <string name="author">\u00a9 Benedykt Ziółkowski ziolkowski.benedykt@gmail.com</string>
 </resources>
