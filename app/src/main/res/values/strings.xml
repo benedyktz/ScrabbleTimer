@@ -26,6 +26,11 @@
     <string name="player_4">Player 4</string>
     <string name="save_and_start">Save and start</string>
 
+    <string name="reset_button">reset</string>
+    <string name="info_button">info</string>
+    <string name="pause_button">pause</string>
+    <string name="reset_button">reset</string>
+
 
     <string name="about">&#8227; Game clock for chess, scrabble etc.</string>
     <string name="about_players">&#8227; 2&#8211;4 players</string>
