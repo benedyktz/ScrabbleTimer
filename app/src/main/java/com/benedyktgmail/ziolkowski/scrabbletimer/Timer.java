@@ -3,6 +3,7 @@ package com.benedyktgmail.ziolkowski.scrabbletimer;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Vibrator;
 import android.support.v7.app.ActionBar;
@@ -112,10 +113,26 @@ public class Timer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Log.d("a", "oncreate");
         loadSettings();
-        loadSettings();
-        loadSettings();
         createGame();
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        setVolumeControlStream(AudioManager.STREAM_MUSIC);
+        Settings ustawienia = new Settings();
+        ObjectInputStream ois;
+        try {
+            FileInputStream fis = openFileInput(FILENAME);
+            ois = new ObjectInputStream(fis);
+            ustawienia = (Settings) ois.readObject();
+            ois.close();
+        } catch (StreamCorruptedException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        Log.d("a", "" + ustawienia.isSoundOn());
     }
 
     @Override
@@ -516,12 +533,13 @@ public class Timer extends AppCompatActivity {
         startActivity(aboutIntent);
     }
 
-    String fileName = "settings.s";
+    String FILENAME = "settings.s";
 
     public void saveSettings(Settings settingsObject) {
         ObjectOutput out;
         try{
-            out = new ObjectOutputStream(new FileOutputStream(new File(getFilesDir(),"")+File.separator+fileName));
+            FileOutputStream fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
+            out = new ObjectOutputStream(fos);
             out.writeObject(settingsObject);
             out.close();
         } catch (FileNotFoundException e) {
@@ -534,7 +552,8 @@ public class Timer extends AppCompatActivity {
     public void loadSettings() {
         ObjectInputStream in;
         try {
-            in = new ObjectInputStream(new FileInputStream(new File(getFilesDir(),"")+File.separator+fileName));
+            FileInputStream fis = openFileInput(FILENAME);
+            in = new ObjectInputStream(fis);
             settings = (Settings) in.readObject();
             in.close();
         } catch (StreamCorruptedException e) {
