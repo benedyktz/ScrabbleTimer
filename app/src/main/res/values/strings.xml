@@ -9,6 +9,24 @@
     <string name="timerVal">00:00</string>
     <string name="startGame">START GAME</string>
 
+    <string name="number_of_players">Number of players:</string>
+    <string name="two">2</string>
+    <string name="three">3</string>
+    <string name="four">4</string>
+    <string name="twenty">20</string>
+    <string name="zero">00</string>
+    <string name="semicolon">:</string>
+    <string name="added_time">Added time (seconds): </string>
+    <string name="sound_effects">Sound effects </string>
+    <string name="vibration_effects">Vibration effects</string>
+    <string name="player_names">Player names:</string>
+    <string name="player_1">Player 1</string>
+    <string name="player_2">Player 2</string>
+    <string name="player_3">Player 3</string>
+    <string name="player_4">Player 4</string>
+    <string name="save_and_start">Save and start</string>
+
+
     <string name="about">&#8227; Game clock for chess, scrabble etc.</string>
     <string name="about_players">&#8227; 2&#8211;4 players</string>
     <string name="about_start">&#8227; To start a game tap a player\'s timer</string>

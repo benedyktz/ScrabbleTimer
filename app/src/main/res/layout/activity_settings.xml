@@ -3,274 +3,279 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android">
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".SettingsActivity"
-    android:background="@color/background"
-    android:orientation="vertical"
-    android:descendantFocusability="beforeDescendants"
-    android:focusableInTouchMode="true">
-
-    <LinearLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        tools:context=".SettingsActivity"
+        android:background="@color/background"
         android:orientation="vertical"
-        android:padding="4dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Number of players:"
-            android:textSize="@dimen/font_size"/>
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true">
+
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp">
+            android:orientation="vertical"
+            android:padding="4dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/number_of_players"
+                android:textSize="@dimen/font_size"/>
             <LinearLayout
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:onClick="twoPlayers"
-                android:orientation="horizontal"
-                android:background="@drawable/radius_rectangle"
-                android:id="@+id/twoPlayersButton"
-                android:gravity="center"
-                android:layout_margin="2dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="2"
-                    android:textSize="@dimen/font_size"
-                    android:textColor="#000000"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:onClick="threePlayers"
-                android:orientation="horizontal"
-                android:background="@drawable/radius_rectangle"
-                android:id="@+id/threePlayersButton"
-                android:gravity="center"
-                android:layout_margin="2dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="3"
-                    android:textSize="@dimen/font_size"
-                    android:textColor="#000000"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:onClick="fourPlayers"
-                android:orientation="horizontal"
-                android:background="@drawable/radius_rectangle"
-                android:id="@+id/fourPlayersButton"
-                android:gravity="center"
-                android:layout_margin="2dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="4"
-                    android:textSize="@dimen/font_size"
-                    android:textColor="#000000"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp">
+                <LinearLayout
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:onClick="twoPlayers"
+                    android:orientation="horizontal"
+                    android:background="@drawable/radius_rectangle"
+                    android:id="@+id/twoPlayersButton"
+                    android:gravity="center"
+                    android:layout_margin="2dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/two"
+                        android:textSize="@dimen/font_size"
+                        android:textColor="#000000"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:onClick="threePlayers"
+                    android:orientation="horizontal"
+                    android:background="@drawable/radius_rectangle"
+                    android:id="@+id/threePlayersButton"
+                    android:gravity="center"
+                    android:layout_margin="2dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/three"
+                        android:textSize="@dimen/font_size"
+                        android:textColor="#000000"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:onClick="fourPlayers"
+                    android:orientation="horizontal"
+                    android:background="@drawable/radius_rectangle"
+                    android:id="@+id/fourPlayersButton"
+                    android:gravity="center"
+                    android:layout_margin="2dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/four"
+                        android:textSize="@dimen/font_size"
+                        android:textColor="#000000"/>
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-
-   <LinearLayout
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:padding="4dp">
-       <TextView
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:text="@string/askForMinutes"
-           android:textSize="@dimen/font_size"
-           android:layout_gravity="center"/>
 
        <LinearLayout
-           android:layout_width="wrap_content"
+           android:layout_width="match_parent"
            android:layout_height="wrap_content"
-           android:layout_gravity="center">
-           <EditText
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:hint="20"
-               android:textSize="@dimen/font_size"
-               android:inputType="number"
-               android:id="@+id/minutesEditText"
-               android:maxLength="2"
-               android:imeOptions="actionNext"
-               android:textColorHint="@color/colorEditText"
-               android:textColor="@color/colorEditText"/>
+           android:padding="4dp">
            <TextView
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
+               android:text="@string/askForMinutes"
                android:textSize="@dimen/font_size"
-               android:text=":"
-               android:textColorHint="@color/colorEditText"
-               android:textColor="@color/colorEditText"/>
-           <EditText
+               android:layout_gravity="center"/>
+
+           <LinearLayout
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
-               android:textSize="@dimen/font_size"
-               android:hint="00"
-               android:inputType="number"
-               android:id="@+id/secondsEditText"
-               android:maxLength="2"
-               android:imeOptions="actionDone"
-               android:textColorHint="@color/colorEditText"
-               android:textColor="@color/colorEditText"/>
+               android:layout_gravity="center">
+               <EditText
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:hint="@string/twenty"
+                   android:textSize="@dimen/font_size"
+                   android:inputType="number"
+                   android:id="@+id/minutesEditText"
+                   android:maxLength="2"
+                   android:imeOptions="actionNext"
+                   android:textColorHint="@color/colorEditText"
+                   android:textColor="@color/colorEditText"/>
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:textSize="@dimen/font_size"
+                   android:text="@string/semicolon"
+                   android:textColorHint="@color/colorEditText"
+                   android:textColor="@color/colorEditText"/>
+               <EditText
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:textSize="@dimen/font_size"
+                   android:hint="@string/zero"
+                   android:inputType="number"
+                   android:id="@+id/secondsEditText"
+                   android:maxLength="2"
+                   android:imeOptions="actionDone"
+                   android:textColorHint="@color/colorEditText"
+                   android:textColor="@color/colorEditText"/>
+           </LinearLayout>
+
        </LinearLayout>
 
-   </LinearLayout>
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="4dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Added time (seconds):"
-            android:textSize="@dimen/font_size"/>
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/font_size"
-            android:hint="00"
-            android:inputType="number"
-            android:id="@+id/addSecondsEditText"
-            android:maxLength="2"
-            android:imeOptions="actionDone"
-            android:textColorHint="@color/colorEditText"
-            android:textColor="@color/colorEditText"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="4dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Sound effects"
-            android:textSize="@dimen/font_size"/>
         <LinearLayout
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:onClick="soundToggle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:background="@drawable/radius_rectangle"
-            android:id="@+id/soundButton"
-            android:gravity="center"
-            android:layout_marginLeft="4dp">
-            <ImageView
+            android:padding="4dp">
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_volume_up_black_24dp"/>
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="4dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Vibration effects"
-            android:textSize="@dimen/font_size"/>
-        <LinearLayout
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:onClick="viberToggle"
-            android:orientation="horizontal"
-            android:background="@drawable/radius_rectangle"
-            android:id="@+id/vibeButton"
-            android:gravity="center"
-            android:layout_marginLeft="4dp">
-            <ImageView
+                android:text="@string/added_time"
+                android:textSize="@dimen/font_size"/>
+            <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_vibration_black_24dp"/>
+                android:textSize="@dimen/font_size"
+                android:hint="@string/zero"
+                android:inputType="number"
+                android:id="@+id/addSecondsEditText"
+                android:maxLength="2"
+                android:imeOptions="actionDone"
+                android:textColorHint="@color/colorEditText"
+                android:textColor="@color/colorEditText"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="4dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sound_effects"
+                android:textSize="@dimen/font_size"/>
+            <LinearLayout
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:onClick="soundToggle"
+                android:orientation="horizontal"
+                android:background="@drawable/radius_rectangle"
+                android:id="@+id/soundButton"
+                android:gravity="center"
+                android:layout_marginStart="4dp"
+                android:layout_marginLeft="4dp">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_volume_up_black_24dp"
+                    android:contentDescription="@string/sound_effects"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="4dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/vibration_effects"
+                android:textSize="@dimen/font_size"/>
+            <LinearLayout
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:onClick="viberToggle"
+                android:orientation="horizontal"
+                android:background="@drawable/radius_rectangle"
+                android:id="@+id/vibeButton"
+                android:gravity="center"
+                android:layout_marginLeft="4dp"
+                android:layout_marginStart="4dp">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_vibration_black_24dp"
+                    android:contentDescription="@string/vibration_effects"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="4dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/player_names"
+                android:textSize="@dimen/font_size"/>
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/player_1"
+                android:id="@+id/pl1EditText"
+                android:imeOptions="actionDone"
+                android:inputType="textCapWords"
+                android:singleLine="true"
+                android:textSize="@dimen/font_size"
+                android:textColorHint="@color/colorEditText"
+                android:textColor="@color/colorEditText"/>
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/player_2"
+                android:id="@+id/pl2EditText"
+                android:imeOptions="actionDone"
+                android:inputType="textCapWords"
+                android:singleLine="true"
+                android:textSize="@dimen/font_size"
+                android:textColorHint="@color/colorEditText"
+                android:textColor="@color/colorEditText"/>
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/player_3"
+                android:id="@+id/pl3EditText"
+                android:imeOptions="actionDone"
+                android:inputType="textCapWords"
+                android:singleLine="true"
+                android:textSize="@dimen/font_size"
+                android:textColorHint="@color/colorEditText"
+                android:textColor="@color/colorEditText"/>
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/player_4"
+                android:id="@+id/pl4EditText"
+                android:imeOptions="actionDone"
+                android:inputType="textCapWords"
+                android:singleLine="true"
+                android:textSize="@dimen/font_size"
+                android:textColorHint="@color/colorEditText"
+                android:textColor="@color/colorEditText"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="4dp">
+            <Button
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="@string/save_and_start"
+                android:textSize="@dimen/font_size"
+                android:id="@+id/start"
+                android:textColor="@color/fieldBackground"/>
         </LinearLayout>
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="4dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Player names:"
-            android:textSize="@dimen/font_size"/>
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="Player 1"
-            android:id="@+id/pl1EditText"
-            android:imeOptions="actionDone"
-            android:inputType="textCapWords"
-            android:singleLine="true"
-            android:textSize="@dimen/font_size"
-            android:textColorHint="@color/colorEditText"
-            android:textColor="@color/colorEditText"/>
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="Player 2"
-            android:id="@+id/pl2EditText"
-            android:imeOptions="actionDone"
-            android:inputType="textCapWords"
-            android:singleLine="true"
-            android:textSize="@dimen/font_size"
-            android:textColorHint="@color/colorEditText"
-            android:textColor="@color/colorEditText"/>
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="Player 3"
-            android:id="@+id/pl3EditText"
-            android:imeOptions="actionDone"
-            android:inputType="textCapWords"
-            android:singleLine="true"
-            android:textSize="@dimen/font_size"
-            android:textColorHint="@color/colorEditText"
-            android:textColor="@color/colorEditText"/>
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="Player 4"
-            android:id="@+id/pl4EditText"
-            android:imeOptions="actionDone"
-            android:inputType="textCapWords"
-            android:singleLine="true"
-            android:textSize="@dimen/font_size"
-            android:textColorHint="@color/colorEditText"
-            android:textColor="@color/colorEditText"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="4dp">
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="save and start"
-            android:textSize="@dimen/font_size"
-            android:id="@+id/start"
-            android:textColor="@color/fieldBackground"/>
-    </LinearLayout>
-</LinearLayout>
 
 </ScrollView>
 
