@@ -29,7 +29,6 @@
     <string name="reset_button">reset</string>
     <string name="info_button">info</string>
     <string name="pause_button">pause</string>
-    <string name="reset_button">reset</string>
 
 
     <string name="about">&#8227; Game clock for chess, scrabble etc.</string>
