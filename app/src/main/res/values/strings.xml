@@ -10,4 +10,13 @@
 
     <string name="timerVal">00:00</string>
     <string name="startGame">START GAME</string>
+
+    <string name="about">&#8227; Game clock for chess, scrabble etc.</string>
+    <string name="about_players">&#8227; 2&#8211;4 players</string>
+    <string name="about_start">&#8227; To start a game tap a player\'s timer</string>
+    <string name="about_setTime">&#8227; You can set minutes and seconds for a player</string>
+    <string name="about_addedSeconds">&#8227; You can set if and how many seconds are added to a player\'s timer each round</string>
+    <string name="about_playerNames">&#8227; You can set players\' names</string>
+    <string name="about_vibeAndSound">&#8227; You can turn on and turn off vibration and sound effects</string>
+    <string name="about_contact">&#8227; If you see any bug or error please contact by e-mail</string>
 </resources>

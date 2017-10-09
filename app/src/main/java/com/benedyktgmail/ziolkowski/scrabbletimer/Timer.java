@@ -304,6 +304,7 @@ public class Timer extends AppCompatActivity {
                 doubleBackToResetPressedOnce=false;
             }
         }, 2000);
+
     }
 
     boolean doubleBackToExitPressedOnce = false;
@@ -400,6 +401,7 @@ public class Timer extends AppCompatActivity {
         gamePaused = false;
         activePlayer = 0;
         createGame();
+        hide();
     }
 
     void createGame(){

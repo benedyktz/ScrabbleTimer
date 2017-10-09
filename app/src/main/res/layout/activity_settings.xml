@@ -265,7 +265,7 @@
             android:layout_width="wrap_content"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="Start game"
+            android:text="save and start"
             android:textSize="@dimen/font_size"
             android:id="@+id/start"
             android:textColor="@color/fieldBackground"/>
