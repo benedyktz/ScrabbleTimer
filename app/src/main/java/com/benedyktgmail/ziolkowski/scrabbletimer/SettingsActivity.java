@@ -1,14 +1,12 @@
 package com.benedyktgmail.ziolkowski.scrabbletimer;
 
-import android.content.Intent;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
-
-import java.sql.Time;
 
 
 public class SettingsActivity extends AppCompatActivity {
@@ -34,8 +32,8 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        minutesEditText = (EditText) findViewById(R.id.minutes);
-        secondsEditText = (EditText) findViewById(R.id.seconds);
+        minutesEditText = (EditText) findViewById(R.id.minutesEditText);
+        secondsEditText = (EditText) findViewById(R.id.secondsEditText);
         addedEditText = (EditText) findViewById(R.id.addSecondsEditText);
         pl1EditText = (EditText) findViewById(R.id.pl1EditText);
         pl2EditText = (EditText) findViewById(R.id.pl2EditText);
@@ -65,8 +63,10 @@ public class SettingsActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
 
-                    Timer.settings.setMinutes(Integer.parseInt("0" + minutesEditText.getText()));
-                    Timer.settings.setSeconds(Integer.parseInt("0" + secondsEditText.getText()));
+                    if(!(Integer.parseInt("0" + minutesEditText.getText()) == 0 && Integer.parseInt("0" + secondsEditText.getText()) == 0)){
+                        Timer.settings.setMinutes(Integer.parseInt("0" + minutesEditText.getText()));
+                        Timer.settings.setSeconds(Integer.parseInt("0" + secondsEditText.getText()));
+                    }
                     Timer.settings.setAddedSeconds(Integer.parseInt("0" + addedEditText.getText()));
                     if(!pl1EditText.getText().toString().equals(""))
                         Timer.settings.setPlayer1(pl1EditText.getText().toString());

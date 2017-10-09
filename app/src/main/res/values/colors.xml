@@ -15,4 +15,5 @@
     <color name="green">#13e810</color>
 
     <color name="colorText">#EEEEEE</color>
+    <color name="colorEditText">#DCEDC8</color>
 </resources>

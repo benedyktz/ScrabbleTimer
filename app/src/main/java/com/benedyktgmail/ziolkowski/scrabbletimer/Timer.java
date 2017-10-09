@@ -18,7 +18,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -116,23 +115,7 @@ public class Timer extends AppCompatActivity {
         createGame();
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
-        Settings ustawienia = new Settings();
-        ObjectInputStream ois;
-        try {
-            FileInputStream fis = openFileInput(FILENAME);
-            ois = new ObjectInputStream(fis);
-            ustawienia = (Settings) ois.readObject();
-            ois.close();
-        } catch (StreamCorruptedException e) {
-            e.printStackTrace();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        Log.d("a", "" + ustawienia.isSoundOn());
+        hide();
     }
 
     @Override
@@ -142,6 +125,7 @@ public class Timer extends AppCompatActivity {
             createGame();
             SettingsActivity.fromSettingsFlag = false;
         }
+        hide();
     }
 
     @Override
@@ -332,6 +316,7 @@ public class Timer extends AppCompatActivity {
             }
             gameStarted = false;
             Log.d("a", "should finish");
+            saveSettings(settings);
             super.onBackPressed();
             return;
         }
@@ -406,7 +391,6 @@ public class Timer extends AppCompatActivity {
             gameStarted = true;
             gameStartedByField = true;
             change(view);
-            saveSettings(settings);
         }
     }
 
@@ -505,7 +489,6 @@ public class Timer extends AppCompatActivity {
         Field.fieldTextActive = getResources().getColor(R.color.fieldTextActive);
         Field.colorText = getResources().getColor(R.color.colorText);
         for (Field player: players) {
-            Log.d("a", "" + settings.getNumberOfPlayers());
             player.timerValue.setText(String.format("%02d", settings.getMinutes()) + ":" + String.format("%02d", settings.getSeconds()));
             player.running = true;
             player.setMinutes(settings.getMinutes());

@@ -16,13 +16,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:padding="4dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Number of players:"
-            android:textSize="24dp"/>
+            android:textSize="@dimen/font_size"/>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -34,13 +34,13 @@
                 android:orientation="horizontal"
                 android:background="@drawable/radius_rectangle"
                 android:id="@+id/twoPlayersButton"
-                android:gravity="center">
+                android:gravity="center"
+                android:layout_margin="2dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="2"
-                    android:gravity="center"
-                    android:textSize="34dp"
+                    android:textSize="@dimen/font_size"
                     android:textColor="#000000"/>
             </LinearLayout>
             <LinearLayout
@@ -50,13 +50,13 @@
                 android:orientation="horizontal"
                 android:background="@drawable/radius_rectangle"
                 android:id="@+id/threePlayersButton"
-                android:gravity="center">
+                android:gravity="center"
+                android:layout_margin="2dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="3"
-                    android:gravity="center"
-                    android:textSize="34dp"
+                    android:textSize="@dimen/font_size"
                     android:textColor="#000000"/>
             </LinearLayout>
             <LinearLayout
@@ -66,13 +66,13 @@
                 android:orientation="horizontal"
                 android:background="@drawable/radius_rectangle"
                 android:id="@+id/fourPlayersButton"
-                android:gravity="center">
+                android:gravity="center"
+                android:layout_margin="2dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="4"
-                    android:gravity="center"
-                    android:textSize="34dp"
+                    android:textSize="@dimen/font_size"
                     android:textColor="#000000"/>
             </LinearLayout>
         </LinearLayout>
@@ -86,7 +86,7 @@
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:text="@string/askForMinutes"
-           android:textSize="24sp"
+           android:textSize="@dimen/font_size"
            android:layout_gravity="center"/>
 
        <LinearLayout
@@ -97,25 +97,31 @@
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
                android:hint="20"
-               android:textSize="34sp"
+               android:textSize="@dimen/font_size"
                android:inputType="number"
-               android:id="@+id/minutes"
+               android:id="@+id/minutesEditText"
                android:maxLength="2"
-               android:imeOptions="actionNext"/>
+               android:imeOptions="actionNext"
+               android:textColorHint="@color/colorEditText"
+               android:textColor="@color/colorEditText"/>
            <TextView
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
-               android:textSize="34sp"
-               android:text=":"/>
+               android:textSize="@dimen/font_size"
+               android:text=":"
+               android:textColorHint="@color/colorEditText"
+               android:textColor="@color/colorEditText"/>
            <EditText
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
-               android:textSize="34sp"
+               android:textSize="@dimen/font_size"
                android:hint="00"
                android:inputType="number"
-               android:id="@+id/seconds"
+               android:id="@+id/secondsEditText"
                android:maxLength="2"
-               android:imeOptions="actionDone"/>
+               android:imeOptions="actionDone"
+               android:textColorHint="@color/colorEditText"
+               android:textColor="@color/colorEditText"/>
        </LinearLayout>
 
    </LinearLayout>
@@ -130,16 +136,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Added time (seconds):"
-            android:textSize="24sp"/>
+            android:textSize="@dimen/font_size"/>
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="34sp"
+            android:textSize="@dimen/font_size"
             android:hint="00"
             android:inputType="number"
             android:id="@+id/addSecondsEditText"
             android:maxLength="2"
-            android:imeOptions="actionDone"/>
+            android:imeOptions="actionDone"
+            android:textColorHint="@color/colorEditText"
+            android:textColor="@color/colorEditText"/>
     </LinearLayout>
 
     <LinearLayout
@@ -149,7 +157,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="soundON"/>
+            android:text="Sound effects"
+            android:textSize="@dimen/font_size"/>
         <LinearLayout
             android:layout_width="40dp"
             android:layout_height="40dp"
@@ -157,7 +166,8 @@
             android:orientation="horizontal"
             android:background="@drawable/radius_rectangle"
             android:id="@+id/soundButton"
-            android:gravity="center">
+            android:gravity="center"
+            android:layout_marginLeft="4dp">
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -172,7 +182,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="vibeOn"/>
+            android:text="Vibration effects"
+            android:textSize="@dimen/font_size"/>
         <LinearLayout
             android:layout_width="40dp"
             android:layout_height="40dp"
@@ -180,7 +191,8 @@
             android:orientation="horizontal"
             android:background="@drawable/radius_rectangle"
             android:id="@+id/vibeButton"
-            android:gravity="center">
+            android:gravity="center"
+            android:layout_marginLeft="4dp">
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -191,11 +203,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="4dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Player names:"/>
+            android:text="Player names:"
+            android:textSize="@dimen/font_size"/>
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -203,7 +217,10 @@
             android:id="@+id/pl1EditText"
             android:imeOptions="actionDone"
             android:inputType="textCapWords"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:textSize="@dimen/font_size"
+            android:textColorHint="@color/colorEditText"
+            android:textColor="@color/colorEditText"/>
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -211,7 +228,10 @@
             android:id="@+id/pl2EditText"
             android:imeOptions="actionDone"
             android:inputType="textCapWords"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:textSize="@dimen/font_size"
+            android:textColorHint="@color/colorEditText"
+            android:textColor="@color/colorEditText"/>
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -219,7 +239,10 @@
             android:id="@+id/pl3EditText"
             android:imeOptions="actionDone"
             android:inputType="textCapWords"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:textSize="@dimen/font_size"
+            android:textColorHint="@color/colorEditText"
+            android:textColor="@color/colorEditText"/>
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -227,7 +250,10 @@
             android:id="@+id/pl4EditText"
             android:imeOptions="actionDone"
             android:inputType="textCapWords"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:textSize="@dimen/font_size"
+            android:textColorHint="@color/colorEditText"
+            android:textColor="@color/colorEditText"/>
 
     </LinearLayout>
 
@@ -240,7 +266,9 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="Start game"
-            android:id="@+id/start"/>
+            android:textSize="@dimen/font_size"
+            android:id="@+id/start"
+            android:textColor="@color/fieldBackground"/>
     </LinearLayout>
 </LinearLayout>
 
