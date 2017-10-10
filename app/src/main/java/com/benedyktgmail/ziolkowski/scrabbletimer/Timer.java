@@ -10,7 +10,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -105,17 +104,13 @@ public class Timer extends AppCompatActivity {
         }
     };
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d("a", "oncreate");
         loadSettings();
         createGame();
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
-        hide();
     }
 
     @Override
@@ -134,8 +129,6 @@ public class Timer extends AppCompatActivity {
         super.onDestroy();
     }
 
-
-
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
@@ -152,7 +145,6 @@ public class Timer extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.hide();
         }
-
         mHideHandler.postDelayed(mHidePart2Runnable, UI_ANIMATION_DELAY);
     }
 
@@ -167,32 +159,41 @@ public class Timer extends AppCompatActivity {
 
     int activePlayer = 0;
 
-
+    //stops one player and starts next player
     public void change(View view) {
-
         if (gameStarted) {
+            //check if running player is the last one in ArrayList
             if (activePlayer == settings.getNumberOfPlayers() - 1) {
+                //check if clicked field is active player's
                 if (players.get(activePlayer).playerField.getId() == view.getId()) {
+                    //check if active player is not paused and next player has time left
                     if (players.get(activePlayer).running && players.get(activePlayer).hasTimeLeft) {
                         players.get(activePlayer).stop();
                         players.get(0).start();
+                        //this is only for the first move to not add seconds to player who have not move already
                         if(!gameStartedByField){
                             players.get(activePlayer).addSeconds(settings.getAddedSeconds());
+                            gameStartedByField = false;
+                        }
+                        else{
                             gameStartedByField = false;
                         }
                         activePlayer = 0;
                         vibeAndSound();
                     }
                     if (!players.get(0).hasTimeLeft) {
-                        gameContinue();
+                        skipPlayer();
                     }
                 }
             }
 
+            //check if clicked field is active player's
             if (players.get(activePlayer).playerField.getId() == view.getId()) {
+                //check if active player is not paused and next player has time left
                 if (players.get(activePlayer).running && players.get(activePlayer).hasTimeLeft) {
                     players.get(activePlayer).stop();
                     players.get(activePlayer + 1).start();
+                    //this is only for the first move to not add seconds to player who have not move already
                     if(!gameStartedByField){
                         players.get(activePlayer).addSeconds(settings.getAddedSeconds());
                     }
@@ -204,12 +205,13 @@ public class Timer extends AppCompatActivity {
                 }
             }
             if (!players.get(activePlayer).hasTimeLeft) {
-                gameContinue();
+                skipPlayer();
             }
         }
     }
 
-    public void gameContinue() {
+    //skip player if the player has not time left
+    public void skipPlayer() {
         if(!gamePaused && !Player.allTimesUp && !players.get(activePlayer).hasTimeLeft) {
             boolean flag = true;
             while (flag && (activePlayer <= settings.getNumberOfPlayers() - 1)) {
@@ -316,7 +318,6 @@ public class Timer extends AppCompatActivity {
                 player.stop();
             }
             gameStarted = false;
-            Log.d("a", "should finish");
             saveSettings(settings);
             super.onBackPressed();
             return;
@@ -384,7 +385,6 @@ public class Timer extends AppCompatActivity {
         }
         else{
             for(int j=0; j < settings.getNumberOfPlayers(); j++){
-                Log.d("a", "" + j);
                 if(players.get(j).playerField.getId() == view.getId()){
                     activePlayer=j;
                 }

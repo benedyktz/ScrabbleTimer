@@ -102,7 +102,7 @@ public class SettingsActivity extends AppCompatActivity {
         pl4EditText.setHint(Timer.settings.getPlayer4());
         minutesEditText.setHint(String.format(Locale.US, "%02d", Timer.settings.getMinutes()));
         secondsEditText.setHint(String.format(Locale.US, "%02d", Timer.settings.getSeconds()));
-        addedEditText.setHint(String.format(Locale.US, "%02d", Timer.settings.getAddedSeconds()));
+        addedEditText.setText(String.format(Locale.US, "%02d", Timer.settings.getAddedSeconds()));
     }
 
     @Override
@@ -135,7 +135,7 @@ public class SettingsActivity extends AppCompatActivity {
             soundButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
         }
     }
-    
+
     public void twoPlayers (View view){
         if(Timer.settings.getNumberOfPlayers() != 2){
             Timer.settings.setNumberOfPlayers(2);
