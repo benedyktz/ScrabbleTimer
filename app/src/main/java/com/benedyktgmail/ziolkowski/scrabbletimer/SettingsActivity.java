@@ -3,7 +3,6 @@ package com.benedyktgmail.ziolkowski.scrabbletimer;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,6 +24,7 @@ public class SettingsActivity extends AppCompatActivity {
     public View twoPlayersButton;
     public View threePlayersButton;
     public View fourPlayersButton;
+
     static boolean fromSettingsFlag = false;
 
     @Override
@@ -43,26 +43,21 @@ public class SettingsActivity extends AppCompatActivity {
         twoPlayersButton = findViewById(R.id.twoPlayersButton);
         threePlayersButton = findViewById(R.id.threePlayersButton);
         fourPlayersButton = findViewById(R.id.fourPlayersButton);
-
-
+        vibeButton = findViewById(R.id.vibeButton);
         soundButton = findViewById(R.id.soundButton);
+
         if(Timer.settings.isSoundOn())
             soundButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
-
-        vibeButton = findViewById(R.id.vibeButton);
         if(Timer.settings.isVibeOn())
             vibeButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
 
-        // Find the View that shows the start button
-        Button start = (Button) findViewById(R.id.start);
-
-        // Set a click listener on that View
-        if(start != null){
-            start.setOnClickListener(new View.OnClickListener() {
+        Button startButton = (Button) findViewById(R.id.start);
+        if(startButton != null){
+            startButton.setOnClickListener(new View.OnClickListener() {
                 // The code in this method will be executed when the start button is clicked on.
                 @Override
                 public void onClick(View view) {
-
+                    //check if user didn't set timer to 00:00
                     if(!(Integer.parseInt("0" + minutesEditText.getText()) == 0 && Integer.parseInt("0" + secondsEditText.getText()) == 0)){
                         Timer.settings.setMinutes(Integer.parseInt("0" + minutesEditText.getText()));
                         Timer.settings.setSeconds(Integer.parseInt("0" + secondsEditText.getText()));
