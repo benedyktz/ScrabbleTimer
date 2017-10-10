@@ -9,12 +9,14 @@ import android.os.Vibrator;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-public class Field {
+import java.util.Locale;
+
+public class Player {
 
     public TextView timerValue;
     public TextView playerName;
-    public RelativeLayout field;
-    public long startTime = 0L;
+    public RelativeLayout playerField;
+
     public static Vibrator vibe;
     public static MediaPlayer soundPlayer;
 
@@ -31,11 +33,10 @@ public class Field {
     public static int fieldTextActive = Color.parseColor("#111111");
     public static int colorText = Color.parseColor("#006600");
 
-
-
-    long timeInMiliseconds = 0L;
-    long timeSwapBuff;
-    long updatedTime = 0L;
+    public long startMoveTime = 0L;
+    long milisecondsThisMove = 0L;
+    long timeLeftAtBeginingOfTheMove;
+    long actualTimeDisplay = 0L;
 
     int secs, mins;
 
@@ -43,17 +44,17 @@ public class Field {
         @Override
         public void run() {
 
-            timeInMiliseconds = SystemClock.uptimeMillis() - startTime;
+            milisecondsThisMove = SystemClock.uptimeMillis() - startMoveTime;
 
-            updatedTime = timeSwapBuff - timeInMiliseconds;
+            actualTimeDisplay = timeLeftAtBeginingOfTheMove - milisecondsThisMove;
 
             if(hasTimeLeft && running){
-                if(updatedTime > 0){
-                    secs = (int) (updatedTime / 1000);
+                if(actualTimeDisplay > 0){
+                    secs = (int) (actualTimeDisplay / 1000);
                     mins = secs / 60;
                     secs = secs % 60;
-                    timerValue.setText("" + String.format("%02d", mins) + ":"
-                            + String.format("%02d", secs));
+                    String timer = String.format(Locale.US, "%02d", mins) + ":" + String.format(Locale.US, "%02d", secs);
+                    timerValue.setText(timer);
                     customHandler.postDelayed(this, 10);
                 }
                 else {
@@ -79,9 +80,9 @@ public class Field {
 
     public void start() {
         if(hasTimeLeft){
-            startTime = SystemClock.uptimeMillis();
+            startMoveTime = SystemClock.uptimeMillis();
             customHandler.postDelayed(updateTimerThread, 0);
-            field.setBackgroundColor(fieldColorActive);
+            playerField.setBackgroundColor(fieldColorActive);
             timerValue.setBackgroundColor(fieldColorActive);
             timerValue.setTextColor(fieldTextActive);
             playerName.setTextColor(fieldTextActive);
@@ -89,12 +90,11 @@ public class Field {
         }
     }
 
-
     public void stop() {
-        timeSwapBuff -= timeInMiliseconds;
+        timeLeftAtBeginingOfTheMove -= milisecondsThisMove;
         customHandler.removeCallbacks(updateTimerThread);
         if(!Timer.gamePaused){
-            field.setBackgroundColor(fieldColor);
+            playerField.setBackgroundColor(fieldColor);
             timerValue.setBackgroundColor(fieldColor);
             timerValue.setTextColor(colorText);
             playerName.setTextColor(colorText);
@@ -103,23 +103,22 @@ public class Field {
     }
 
     public void setMinutes(int minutes){
-
-        timeSwapBuff = minutes * 60 * 1000L;
+        timeLeftAtBeginingOfTheMove = minutes * 60 * 1000L;
     }
-    public void setSeconds(int seconds) {
 
-        timeSwapBuff = timeSwapBuff + seconds * 1000;
+    public void setSeconds(int seconds) {
+        timeLeftAtBeginingOfTheMove = timeLeftAtBeginingOfTheMove + seconds * 1000;
     }
 
     public void addSeconds(int seconds) {
         if(Timer.gameStarted){
-            timeSwapBuff+=seconds*1000;
-            updatedTime = timeSwapBuff;
-            secs = (int) (updatedTime / 1000);
+            timeLeftAtBeginingOfTheMove +=seconds*1000;
+            actualTimeDisplay = timeLeftAtBeginingOfTheMove;
+            secs = (int) (actualTimeDisplay / 1000);
             mins = secs / 60;
             secs = secs % 60;
-            timerValue.setText("" + String.format("%02d", mins) + ":"
-                    + String.format("%02d", secs));
+            String timer = String.format(Locale.US, "%02d", mins) + ":" + String.format(Locale.US, "%02d", secs);
+            timerValue.setText(timer);
         }
     }
 }
