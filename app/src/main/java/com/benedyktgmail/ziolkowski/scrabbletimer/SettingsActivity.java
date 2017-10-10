@@ -1,15 +1,14 @@
 package com.benedyktgmail.ziolkowski.scrabbletimer;
 
-
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.util.Locale;
 
 public class SettingsActivity extends AppCompatActivity {
-
 
     EditText minutesEditText;
     EditText secondsEditText;
@@ -63,6 +62,7 @@ public class SettingsActivity extends AppCompatActivity {
                         Timer.settings.setSeconds(Integer.parseInt("0" + secondsEditText.getText()));
                     }
                     Timer.settings.setAddedSeconds(Integer.parseInt("0" + addedEditText.getText()));
+                    //check if user didn't set blank player's name
                     if(!pl1EditText.getText().toString().equals(""))
                         Timer.settings.setPlayer1(pl1EditText.getText().toString());
                     if(!pl2EditText.getText().toString().equals(""))
@@ -71,6 +71,7 @@ public class SettingsActivity extends AppCompatActivity {
                         Timer.settings.setPlayer3(pl3EditText.getText().toString());
                     if(!pl4EditText.getText().toString().equals(""))
                         Timer.settings.setPlayer4(pl4EditText.getText().toString());
+
                     Timer.gameStarted = false;
                     Timer.gameStartedByField = false;
                     Timer.gamePaused = false;
@@ -84,6 +85,7 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     public void onStart(){
         super.onStart();
+
         if(Timer.settings.getNumberOfPlayers() == 2)
             twoPlayersButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
 
@@ -93,16 +95,15 @@ public class SettingsActivity extends AppCompatActivity {
         if(Timer.settings.getNumberOfPlayers() == 4)
             fourPlayersButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
 
+        //set hints to EditText from settings
         pl1EditText.setHint(Timer.settings.getPlayer1());
         pl2EditText.setHint(Timer.settings.getPlayer2());
         pl3EditText.setHint(Timer.settings.getPlayer3());
         pl4EditText.setHint(Timer.settings.getPlayer4());
-        minutesEditText.setHint(String.format("%02d", Timer.settings.getMinutes()));
-        secondsEditText.setHint(String.format("%02d", Timer.settings.getSeconds()));
-        addedEditText.setHint(String.format("%02d", Timer.settings.getAddedSeconds()));
+        minutesEditText.setHint(String.format(Locale.US, "%02d", Timer.settings.getMinutes()));
+        secondsEditText.setHint(String.format(Locale.US, "%02d", Timer.settings.getSeconds()));
+        addedEditText.setHint(String.format(Locale.US, "%02d", Timer.settings.getAddedSeconds()));
     }
-
-
 
     @Override
     public void onBackPressed() {
@@ -122,7 +123,6 @@ public class SettingsActivity extends AppCompatActivity {
             Timer.settings.setVibeOn(true);
             vibeButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
         }
-
     }
 
     public void soundToggle (View view) {
@@ -135,6 +135,7 @@ public class SettingsActivity extends AppCompatActivity {
             soundButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
         }
     }
+    
     public void twoPlayers (View view){
         if(Timer.settings.getNumberOfPlayers() != 2){
             Timer.settings.setNumberOfPlayers(2);
