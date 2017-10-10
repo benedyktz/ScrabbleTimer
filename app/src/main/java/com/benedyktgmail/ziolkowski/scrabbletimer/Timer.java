@@ -27,6 +27,7 @@ import java.io.ObjectOutputStream;
 import java.io.StreamCorruptedException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 
 public class Timer extends AppCompatActivity {
@@ -215,16 +216,19 @@ public class Timer extends AppCompatActivity {
         if(!gamePaused && !Player.allTimesUp && !players.get(activePlayer).hasTimeLeft) {
             boolean flag = true;
             while (flag && (activePlayer <= settings.getNumberOfPlayers() - 1)) {
+                //check if actual player has not time left, but next player has time left
                 if (activePlayer < settings.getNumberOfPlayers() - 1 && players.get(activePlayer + 1).hasTimeLeft && !players.get(activePlayer).hasTimeLeft) {
                     players.get(activePlayer + 1).start();
                     flag = false;
                     Player.timeUpFlag = false;
                 }
+                //check if actual player has not time left, but next player has time left (at the end of ArrayList (player 0 next))
                 if (activePlayer == settings.getNumberOfPlayers() - 1 && players.get(0).hasTimeLeft && !players.get(settings.getNumberOfPlayers() - 1).hasTimeLeft) {
                     players.get(0).start();
                     flag = false;
                     Player.timeUpFlag = false;
                 }
+                //iterate the loop
                 if (activePlayer < settings.getNumberOfPlayers() - 1) {
                     activePlayer++;
                 } else {
@@ -259,9 +263,7 @@ public class Timer extends AppCompatActivity {
     }
 
     boolean doubleBackToSettingsPressedOnce = false;
-
     public void settings(View view) {
-
             saveSettings(settings);
             if (doubleBackToSettingsPressedOnce || !gameStarted) {
                 Intent intent = new Intent(this, SettingsActivity.class);
@@ -288,7 +290,6 @@ public class Timer extends AppCompatActivity {
 
 
     boolean doubleBackToResetPressedOnce = false;
-
     public void resetOnClick (View view) {
 
         if (doubleBackToResetPressedOnce) {
@@ -310,7 +311,6 @@ public class Timer extends AppCompatActivity {
     }
 
     boolean doubleBackToExitPressedOnce = false;
-
     @Override
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
@@ -344,7 +344,6 @@ public class Timer extends AppCompatActivity {
             settings.setVibeOn(true);
             vibeButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.radius_rectangle_clicked));
         }
-
     }
 
     public void soundToggle (View view) {
@@ -358,10 +357,7 @@ public class Timer extends AppCompatActivity {
         }
     }
 
-
-
     private void vibeAndSound() {
-
         if(settings.isSoundOn()){
             MediaPlayer mp = MediaPlayer.create(this, R.raw.switch_sound);
             mp.start();
@@ -371,18 +367,18 @@ public class Timer extends AppCompatActivity {
                 }
             });
         }
-
         if(settings.isVibeOn()){
             vibe.vibrate(100);
         }
     }
 
-
+    //this method is called when a player's field is clicked
     public void fieldClick (View view) {
-
+        //when game is stared just change the player
         if(gameStarted){
             change(view);
         }
+        //when game is not started find ID of player who was clicked
         else{
             for(int j=0; j < settings.getNumberOfPlayers(); j++){
                 if(players.get(j).playerField.getId() == view.getId()){
@@ -482,16 +478,13 @@ public class Timer extends AppCompatActivity {
             }
         });
 
-        // Upon interacting with UI controls, delay any scheduled hide()
-        // operations to prevent the jarring behavior of controls going away
-        // while interacting with the UI.
-
         Player.fieldColor = getResources().getColor(R.color.fieldBackground);
         Player.fieldColorActive = getResources().getColor(R.color.fieldBackgroundActive);
         Player.fieldTextActive = getResources().getColor(R.color.fieldTextActive);
         Player.colorText = getResources().getColor(R.color.colorText);
+        String timer = String.format(Locale.US, "%02d", settings.getMinutes()) + ":" + String.format(Locale.US, "%02d", settings.getSeconds());
         for (Player player: players) {
-            player.timerValue.setText(String.format("%02d", settings.getMinutes()) + ":" + String.format("%02d", settings.getSeconds()));
+            player.timerValue.setText(timer);
             player.running = true;
             player.setMinutes(settings.getMinutes());
             player.setSeconds(settings.getSeconds());
