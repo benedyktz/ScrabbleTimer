@@ -2,7 +2,7 @@
     <string name="app_name">Game Timer 4 Players</string>
     <string name="actionSettings">Settings</string>
 
-    <string name="title_activity_timer">Timer</string>
+    <string name="title_activity_timer">4 Players Game Clock</string>
 
     <string name="askForMinutes">Time per player: </string>
 
