@@ -213,7 +213,7 @@ public class Timer extends AppCompatActivity {
 
     //skip player if the player has not time left
     public void skipPlayer() {
-        if(!gamePaused && !Player.allTimesUp && !players.get(activePlayer).hasTimeLeft) {
+        if(!gamePaused && !Player.allPlayersHasNotTimeLeft && !players.get(activePlayer).hasTimeLeft) {
             boolean flag = true;
             while (flag && (activePlayer <= settings.getNumberOfPlayers() - 1)) {
                 //check if actual player has not time left, but next player has time left
@@ -240,7 +240,7 @@ public class Timer extends AppCompatActivity {
 
     public void gamePause (View view) {
         if(!gamePaused) {
-            if (gameStarted && !Player.allTimesUp) {
+            if (gameStarted && !Player.allPlayersHasNotTimeLeft) {
                 gamePaused = true;
                 for (Player player : players) {
                     player.stop();
@@ -414,10 +414,10 @@ public class Timer extends AppCompatActivity {
                 Player.soundPlayer = MediaPlayer.create(this, R.raw.time_up);
                 players.get(0).timerValue = (TextView) findViewById(R.id.timerValue);
                 players.get(1).timerValue = (TextView) findViewById(R.id.timerValue2);
-                players.get(0).playerName = (TextView) findViewById(R.id.playerName1);
-                players.get(1).playerName = (TextView) findViewById(R.id.playerName2);
-                players.get(0).playerName.setText(Timer.settings.getPlayer1());
-                players.get(1).playerName.setText(Timer.settings.getPlayer2());
+                players.get(0).displayedPlayerName = (TextView) findViewById(R.id.playerName1);
+                players.get(1).displayedPlayerName = (TextView) findViewById(R.id.playerName2);
+                players.get(0).displayedPlayerName.setText(Timer.settings.getPlayer1());
+                players.get(1).displayedPlayerName.setText(Timer.settings.getPlayer2());
                 players.get(0).playerField = (RelativeLayout) findViewById(R.id.field1);
                 players.get(1).playerField = (RelativeLayout) findViewById(R.id.field2);
                 break;
@@ -428,12 +428,12 @@ public class Timer extends AppCompatActivity {
                 players.get(0).timerValue = (TextView) findViewById(R.id.timerValue);
                 players.get(1).timerValue = (TextView) findViewById(R.id.timerValue2);
                 players.get(2).timerValue = (TextView) findViewById(R.id.timerValue3);
-                players.get(0).playerName = (TextView) findViewById(R.id.playerName1);
-                players.get(1).playerName = (TextView) findViewById(R.id.playerName2);
-                players.get(2).playerName = (TextView) findViewById(R.id.playerName3);
-                players.get(0).playerName.setText(Timer.settings.getPlayer1());
-                players.get(1).playerName.setText(Timer.settings.getPlayer2());
-                players.get(2).playerName.setText(Timer.settings.getPlayer3());
+                players.get(0).displayedPlayerName = (TextView) findViewById(R.id.playerName1);
+                players.get(1).displayedPlayerName = (TextView) findViewById(R.id.playerName2);
+                players.get(2).displayedPlayerName = (TextView) findViewById(R.id.playerName3);
+                players.get(0).displayedPlayerName.setText(Timer.settings.getPlayer1());
+                players.get(1).displayedPlayerName.setText(Timer.settings.getPlayer2());
+                players.get(2).displayedPlayerName.setText(Timer.settings.getPlayer3());
                 players.get(0).playerField = (RelativeLayout) findViewById(R.id.field1);
                 players.get(1).playerField = (RelativeLayout) findViewById(R.id.field2);
                 players.get(2).playerField = (RelativeLayout) findViewById(R.id.field3);
@@ -446,14 +446,14 @@ public class Timer extends AppCompatActivity {
                 players.get(1).timerValue = (TextView) findViewById(R.id.timerValue2);
                 players.get(2).timerValue = (TextView) findViewById(R.id.timerValue3);
                 players.get(3).timerValue = (TextView) findViewById(R.id.timerValue4);
-                players.get(0).playerName = (TextView) findViewById(R.id.playerName1);
-                players.get(1).playerName = (TextView) findViewById(R.id.playerName2);
-                players.get(2).playerName = (TextView) findViewById(R.id.playerName3);
-                players.get(3).playerName = (TextView) findViewById(R.id.playerName4);
-                players.get(0).playerName.setText(Timer.settings.getPlayer1());
-                players.get(1).playerName.setText(Timer.settings.getPlayer2());
-                players.get(2).playerName.setText(Timer.settings.getPlayer3());
-                players.get(3).playerName.setText(Timer.settings.getPlayer4());
+                players.get(0).displayedPlayerName = (TextView) findViewById(R.id.playerName1);
+                players.get(1).displayedPlayerName = (TextView) findViewById(R.id.playerName2);
+                players.get(2).displayedPlayerName = (TextView) findViewById(R.id.playerName3);
+                players.get(3).displayedPlayerName = (TextView) findViewById(R.id.playerName4);
+                players.get(0).displayedPlayerName.setText(Timer.settings.getPlayer1());
+                players.get(1).displayedPlayerName.setText(Timer.settings.getPlayer2());
+                players.get(2).displayedPlayerName.setText(Timer.settings.getPlayer3());
+                players.get(3).displayedPlayerName.setText(Timer.settings.getPlayer4());
                 players.get(0).playerField = (RelativeLayout) findViewById(R.id.field1);
                 players.get(1).playerField = (RelativeLayout) findViewById(R.id.field2);
                 players.get(2).playerField = (RelativeLayout) findViewById(R.id.field3);
@@ -490,11 +490,11 @@ public class Timer extends AppCompatActivity {
             player.setSeconds(settings.getSeconds());
         }
         Player.timeUpFlag = false;
-        Player.allTimesUp = false;
+        Player.allPlayersHasNotTimeLeft = false;
         gamePaused = false;
         gameStarted = false;
         gameStartedByField = false;
-        Player.numberOfPlayersTimeUp = 0;
+        Player.numberOfPlayersWithoutTimeLeft = 0;
 
         vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         if(settings.isVibeOn())
