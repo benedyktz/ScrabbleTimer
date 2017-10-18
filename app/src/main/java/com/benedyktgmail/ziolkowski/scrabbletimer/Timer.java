@@ -61,7 +61,7 @@ public class Timer extends AppCompatActivity {
 
     /**
      * Some older devices needs a small delay between UI widget updates
-     * and a change of the status and navigation bar.
+     * and a changePlayer of the status and navigation bar.
      */
     private static final int UI_ANIMATION_DELAY = 300;
     private final Handler mHideHandler = new Handler();
@@ -160,80 +160,63 @@ public class Timer extends AppCompatActivity {
 
     int activePlayer = 0;
 
-    //stops one player and starts next player
-    public void change(View view) {
-        if (gameStarted) {
-            //check if running player is the last one in ArrayList
-            if (activePlayer == settings.getNumberOfPlayers() - 1) {
-                //check if clicked field is active player's
-                if (players.get(activePlayer).playerField.getId() == view.getId()) {
-                    //check if active player is not paused and next player has time left
-                    if (players.get(activePlayer).running && players.get(activePlayer).hasTimeLeft) {
-                        players.get(activePlayer).stop();
-                        players.get(0).start();
-                        //this is only for the first move to not add seconds to player who have not move already
-                        if(!gameStartedByField){
-                            players.get(activePlayer).addSeconds(settings.getAddedSeconds());
-                            gameStartedByField = false;
-                        }
-                        else{
-                            gameStartedByField = false;
-                        }
-                        activePlayer = 0;
-                        vibeAndSound();
-                    }
-                    if (!players.get(0).hasTimeLeft) {
-                        skipPlayer();
-                    }
-                }
-            }
+    private int getNextPlayerNumber(){
+        if(activePlayer == Timer.settings.getNumberOfPlayers() - 1){
+            return 0;
+        }
+        else{
+            return activePlayer + 1;
+        }
+    }
 
+    private void setNextPlayerNumberAsActivePlayer(){
+        if(activePlayer == Timer.settings.getNumberOfPlayers() - 1){
+            activePlayer = 0;
+        }
+        else{
+            activePlayer++;
+        }
+    }
+
+    //stops one player and starts next player
+    public void changePlayer(View view) {
             //check if clicked field is active player's
             if (players.get(activePlayer).playerField.getId() == view.getId()) {
                 //check if active player is not paused and next player has time left
                 if (players.get(activePlayer).running && players.get(activePlayer).hasTimeLeft) {
                     players.get(activePlayer).stop();
-                    players.get(activePlayer + 1).start();
+                    players.get(getNextPlayerNumber()).start();
                     //this is only for the first move to not add seconds to player who have not move already
                     if(!gameStartedByField){
                         players.get(activePlayer).addSeconds(settings.getAddedSeconds());
+                        gameStartedByField = false;
                     }
                     else{
                         gameStartedByField = false;
                     }
-                    activePlayer++;
+                    setNextPlayerNumberAsActivePlayer();
                     vibeAndSound();
                 }
             }
+
             if (!players.get(activePlayer).hasTimeLeft) {
                 skipPlayer();
             }
-        }
     }
 
     //skip player if the player has not time left
     public void skipPlayer() {
         if(!gamePaused && !Player.allPlayersHasNotTimeLeft && !players.get(activePlayer).hasTimeLeft) {
+
             boolean flag = true;
-            while (flag && (activePlayer <= settings.getNumberOfPlayers() - 1)) {
-                //check if actual player has not time left, but next player has time left
-                if (activePlayer < settings.getNumberOfPlayers() - 1 && players.get(activePlayer + 1).hasTimeLeft && !players.get(activePlayer).hasTimeLeft) {
-                    players.get(activePlayer + 1).start();
+
+            while(flag){
+                if (players.get(getNextPlayerNumber()).hasTimeLeft && !players.get(activePlayer).hasTimeLeft) {
+                    players.get(getNextPlayerNumber()).start();
                     flag = false;
                     Player.timeUpFlag = false;
                 }
-                //check if actual player has not time left, but next player has time left (at the end of ArrayList (player 0 next))
-                if (activePlayer == settings.getNumberOfPlayers() - 1 && players.get(0).hasTimeLeft && !players.get(settings.getNumberOfPlayers() - 1).hasTimeLeft) {
-                    players.get(0).start();
-                    flag = false;
-                    Player.timeUpFlag = false;
-                }
-                //iterate the loop
-                if (activePlayer < settings.getNumberOfPlayers() - 1) {
-                    activePlayer++;
-                } else {
-                    activePlayer = 0;
-                }
+                setNextPlayerNumberAsActivePlayer();
             }
         }
     }
@@ -376,7 +359,7 @@ public class Timer extends AppCompatActivity {
     public void fieldClick (View view) {
         //when game is stared just change the player
         if(gameStarted){
-            change(view);
+            changePlayer(view);
         }
         //when game is not started find ID of player who was clicked
         else{
@@ -387,7 +370,7 @@ public class Timer extends AppCompatActivity {
             }
             gameStarted = true;
             gameStartedByField = true;
-            change(view);
+            changePlayer(view);
         }
     }
 
